@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BizPoint | Dubai Company Formation, Legal Consulting &amp; Legal Translation</title>
+<meta name="description" content="Dubai-based legal and company formation consultancy. Mainland, free zone, and offshore business setup, legal consulting, and MOJ-certified legal translation." />
+<link rel="icon" type="image/png" href="bizpoint/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafaf7; --bg-raised:#f2f1ea; --fg:#1d1c1a; --fg-muted:#5c584f; --border:#e6e3d9;
+    --brand:#125c3d; --brand-strong:#0c4530; --brand-tint:#e1ece5;
+    --accent:#c79a44; --accent-strong:#a97e33; --accent-tint:#f2e6c9; --accent-on:#19140a;
+    --display:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --max:1800px; --maxc:1400px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  /* scroll-behavior:smooth removed deliberately — Lenis owns smoothed scroll
+     when JS runs; when it doesn't (reduced motion / no-JS), plain instant
+     native scroll is the correct, more accessible fallback rather than a
+     second, competing smoothing system. Anchor nav links (#formation etc.)
+     therefore jump instantly instead of CSS-easing to their target; general
+     wheel/trackpad scroll is what Lenis smooths. */
+  body{background:var(--bg); color:var(--fg); font-family:var(--body); -webkit-font-smoothing:antialiased; line-height:1.5; overflow-x:hidden;}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .display{font-family:var(--display); font-weight:600; letter-spacing:-0.02em;}
+  .accent{color:var(--accent);}
+  .muted{color:var(--fg-muted);}
+  .wrap{max-width:var(--max); margin:0 auto; padding-left:20px; padding-right:20px;}
+  .wrapc{max-width:var(--maxc); margin:0 auto; padding-left:24px; padding-right:24px;}
+  @media(min-width:1024px){ .wrap{padding-left:32px; padding-right:32px;} .wrapc{padding-left:40px; padding-right:40px;} }
+  section{border-top:1px solid var(--border);}
+
+  /* ---------- NAV ---------- */
+  header.nav{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--border);
+    background:rgba(250,250,247,.85); backdrop-filter:blur(8px); color:var(--fg);
+    transition:background-color .5s ease, color .5s ease, border-color .5s ease;}
+  header.nav.scrolled{background:var(--brand); color:var(--bg); border-color:transparent;}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  @media(min-width:1024px){ .nav-inner{height:78px;} }
+  .brand{display:flex; align-items:center;}
+  .brand .logo{height:40px; width:auto; transition:filter .5s ease;}
+  /* Raster logo, so the scrolled-nav "recolour to cream" trick from the old
+     inline-SVG version is done with a filter instead of fill/stroke: at
+     brightness 0 every colour in the PNG collapses to black while alpha is
+     preserved, then invert(1) flips that black silhouette to white — same
+     visual result as the old per-path fill swap, works on any raster logo
+     regardless of its original colours. */
+  header.nav.scrolled .brand .logo{filter:brightness(0) invert(1);}
+  nav.links{display:none; gap:36px;}
+  @media(min-width:1024px){ nav.links{display:flex; align-items:center;} }
+  nav.links a{font-size:14.5px; color:var(--fg-muted); transition:color .4s;}
+  nav.links a:hover{color:var(--fg);}
+  header.nav.scrolled nav.links a{color:rgba(250,250,247,.8);}
+  header.nav.scrolled nav.links a:hover{color:var(--bg);}
+  .nav-cta{display:none;}
+  @media(min-width:1024px){ .nav-cta{display:inline-flex;} }
+
+  /* ---------- BUTTON ---------- */
+  .btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    overflow:hidden; border-radius:6px; padding:14px 28px; font-size:15px; font-weight:500; white-space:nowrap;
+    background:var(--brand); color:var(--bg); cursor:pointer; border:none;}
+  .btn::before{content:""; position:absolute; inset:0; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .35s cubic-bezier(.16,1,.3,1);}
+  .btn:hover::before{transform:scaleX(1);}
+  .btn span{position:relative; z-index:1; transition:color .2s;}
+  .btn:hover span{color:var(--accent-on);}
+  .btn.sm{padding:10px 20px; font-size:13.5px;}
+  .btn.outline{background:transparent; color:var(--fg); border:1px solid var(--border);}
+  .btn.outline:hover span{color:var(--accent-on);}
+  .btn.on-brand{background:var(--accent); color:var(--accent-on);}
+  .btn.on-brand::before{background:var(--accent-strong);}
+  .btn.on-brand span{color:var(--accent-on);}
+  .btn.on-brand:hover span{color:var(--bg);}
+  .btn.outline-light{background:transparent; color:var(--bg); border:1px solid rgba(250,250,247,.35);}
+  .btn.outline-light:hover span{color:var(--accent-on);}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; overflow:hidden; background:var(--bg-raised); border-top:none;}
+  .hero-grid{position:relative; display:grid; grid-template-columns:1fr; gap:48px; align-items:center;
+    min-height:calc(100svh - 64px); padding-top:64px; padding-bottom:56px;}
+  @media(min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr; gap:40px; min-height:calc(100svh - 78px); padding-top:80px; padding-bottom:80px;} }
+  .hero h1{max-width:44rem; padding-bottom:4px; font-size:3rem; line-height:.95; font-weight:500;}
+  @media(min-width:640px){ .hero h1{font-size:4.25rem;} }
+  @media(min-width:1024px){ .hero h1{font-size:5.5rem;} }
+  .hero h1 .line{display:block;}
+  .hero-right{display:flex; flex-direction:column; gap:20px;}
+  .tiles{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .tile{position:relative; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden;
+    border-radius:16px; padding:24px; aspect-ratio:5/4; color:var(--bg);}
+  .tile.brand{background:var(--brand);} .tile.dark{background:var(--fg);}
+  .tile .label{font-family:var(--display); font-weight:600; font-size:22px; letter-spacing:-.02em;}
+  @media(min-width:1024px){ .tile .label{font-size:26px;} }
+  .tile .badge{position:absolute; right:20px; top:20px; width:44px; height:44px; border-radius:50%;
+    background:var(--bg); color:var(--fg); display:flex; align-items:center; justify-content:center; transition:transform .3s cubic-bezier(.16,1,.3,1);}
+  .tile:hover .badge{transform:rotate(45deg);}
+  .hero-card{position:relative; display:flex; flex-direction:column; overflow:hidden; border-radius:16px; border:1px solid var(--border); background:var(--bg);}
+  @media(min-width:640px){ .hero-card{flex-direction:row;} }
+  .hero-card .img{position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;}
+  @media(min-width:640px){ .hero-card .img{width:46%; aspect-ratio:auto;} }
+  .hero-card img{width:100%; height:100%; object-fit:cover; transition:transform .5s;}
+  .hero-card:hover img{transform:scale(1.04);}
+  .hero-card .txt{flex:1; display:flex; align-items:center; padding:24px;}
+  @media(min-width:1024px){ .hero-card .txt{padding:32px;} }
+  .hero-card .txt p{font-family:var(--display); font-weight:600; font-size:22px; line-height:1.2; letter-spacing:-.02em;}
+
+  /* floating stat chips on the hero-card photo. No animation of their own —
+     the hero-card curtain wipe (z-index:5, explicit) already paints above
+     this element (.img has no explicit z-index) and uncovers them along
+     with the photo in the same motion, so they stay inside the existing
+     1.2s hero budget instead of adding a second reveal beat. Real content
+     (real numbers), so never pre-hidden in CSS. */
+  .hero-stat-chip{position:absolute; z-index:2; display:flex; flex-direction:column; gap:2px;
+    padding:10px 14px; border-radius:10px; background:rgba(250,250,247,.95); box-shadow:0 8px 20px -8px rgba(29,28,26,.35);}
+  .hero-stat-chip strong{font-family:var(--display); font-weight:600; font-size:18px; letter-spacing:-.02em; color:var(--fg);}
+  .hero-stat-chip span{font-size:11px; color:var(--fg-muted); white-space:nowrap;}
+  .hero-stat-chip--a{top:12px; right:12px;}
+  .hero-stat-chip--b{bottom:12px; left:12px;}
+
+  /* eyebrow badge above the H1 — keyword-carrying, real content, so (per
+     the pattern used throughout) never pre-hidden in CSS. */
+  .hero-kicker{display:inline-flex; align-items:center; gap:8px; padding:8px 16px 8px 14px;
+    border-radius:999px; background:var(--accent-tint); color:var(--accent-strong);
+    font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px;}
+  .hero-kicker .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); flex:none;}
+
+  .hero-cta{margin-top:28px;}
+
+  .hero-trust-row{display:flex; align-items:center; gap:14px; margin-top:20px;}
+  .hero-trust-row .hero-trust{margin-top:0;}
+  .hero-avatars{display:flex; flex:none;}
+  .hero-avatars span{width:32px; height:32px; border-radius:50%; margin-left:-8px;
+    display:flex; align-items:center; justify-content:center; font-size:10.5px; font-weight:600;
+    color:var(--bg); background:var(--brand); border:2px solid var(--bg-raised);}
+  .hero-avatars span:first-child{margin-left:0;}
+  .hero-avatars span:nth-child(2){background:var(--accent-strong);}
+  .hero-avatars span:nth-child(3){background:var(--fg);}
+  .hero-avatars span:nth-child(4){background:var(--brand-strong);}
+  .hero-avatars span:nth-child(5){background:var(--accent);}
+
+  /* ground line — the single hero beat borrowed from the "Structural Grid"
+     direction. Pure decoration (no informational content), so it's safe to
+     default to invisible (scaleX 0) in CSS before JS ever runs. */
+  .hero-groundline{position:absolute; left:0; right:0; top:38%; height:1px;
+    background:rgba(29,28,26,.18); transform:scaleX(0); transform-origin:left center; pointer-events:none;}
+
+  /* faint vertical hairlines extending the groundline into a sparse
+     blueprint-style grid — fills the hero's empty background with texture
+     instead of clutter. Same "pure decoration, safe to default-hidden"
+     reasoning as the groundline above. */
+  .hero-grid-lines{position:absolute; inset:0; pointer-events:none;}
+  .hero-grid-lines .v{position:absolute; top:0; bottom:0; width:1px;
+    background:rgba(29,28,26,.08); transform:scaleY(0); transform-origin:top;}
+
+  /* short supporting line under the H1 — real content, so (per the no-JS
+     rule used throughout) it is never pre-hidden in CSS, only animated by
+     JS once this script is confirmed running. */
+  .hero-left{max-width:44rem;}
+  .hero-trust{margin-top:20px; max-width:36ch; font-size:15px; line-height:1.55; color:var(--fg-muted);}
+  @media(min-width:1024px){ .hero-trust{font-size:16px;} }
+
+  /* curtain wipes — created by JS only, never present without it, so a
+     no-JS visitor can never end up with content stuck under a curtain. */
+  .wipe-overlay{position:absolute; inset:0; pointer-events:none; z-index:5;}
+  .wipe-overlay--card{background:var(--bg-raised);}
+  .wipe-overlay--caption{background:#0c0b09;}
+
+  /* ---------- generic section heading ---------- */
+  .sec-pad{padding-top:80px; padding-bottom:80px;}
+  @media(min-width:1024px){ .sec-pad{padding-top:112px; padding-bottom:112px;} }
+  .h-sec{font-family:var(--display); font-weight:600; font-size:1.875rem; line-height:1.15; letter-spacing:-.02em;}
+  @media(min-width:1024px){ .h-sec{font-size:2.25rem;} }
+  .kicker{font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);}
+
+  /* ---------- MANIFESTO ---------- */
+  .manifesto{padding:96px 0;}
+  @media(min-width:1024px){ .manifesto{padding:160px 0;} }
+  .manifesto p{max-width:64rem; padding-bottom:4px; font-family:var(--display); font-weight:500; font-size:1.9rem; line-height:1.05; letter-spacing:-.02em;}
+  @media(min-width:640px){ .manifesto p{font-size:2.75rem;} }
+  @media(min-width:1024px){ .manifesto p{font-size:3.75rem;} }
+  .manifesto em{font-style:italic; color:var(--accent);}
+
+  /* ---------- SHOWCASE ---------- */
+  .showcase{position:relative; height:78vh; overflow:hidden;}
+  @media(min-width:1024px){ .showcase{height:100vh;} }
+  .showcase .bg{position:absolute; inset:-10% 0; width:100%; height:120%; object-fit:cover;}
+  .showcase .overlay{position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.25) 55%, rgba(0,0,0,.2));}
+  .showcase .cap{position:absolute; inset:0; display:flex; align-items:flex-end;}
+  .showcase .cap h2{max-width:48rem; padding-bottom:4px; font-family:var(--display); font-weight:500; color:#fff; font-size:2.25rem; line-height:.98; letter-spacing:-.02em;}
+  @media(min-width:640px){ .showcase .cap h2{font-size:3rem;} }
+  @media(min-width:1024px){ .showcase .cap h2{font-size:4.5rem;} }
+  .showcase .cap .inner{position:relative; width:100%; max-width:var(--max); margin:0 auto; padding:0 20px 64px;}
+  @media(min-width:1024px){ .showcase .cap .inner{padding:0 32px 96px;} }
+
+  /* ---------- SERVICES ---------- */
+  .svc-intro{display:grid; grid-template-columns:1fr; align-items:center; gap:32px;}
+  @media(min-width:1024px){ .svc-intro{grid-template-columns:1fr auto 1fr; gap:48px;} }
+  .svc-side{display:none;}
+  @media(min-width:1024px){ .svc-side{display:block;} }
+  .svc-side .box{aspect-ratio:4/5; overflow:hidden; border-radius:16px;}
+  .svc-side img{width:100%; height:100%; object-fit:cover;}
+  .svc-center{margin:0 auto; max-width:22ch; text-align:center;}
+  .svc-center h2{padding-bottom:4px; font-family:var(--display); font-weight:500; font-size:2.25rem; line-height:.98; letter-spacing:-.02em;}
+  @media(min-width:1024px){ .svc-center h2{font-size:3.75rem;} }
+  .svc-center p{margin:20px auto 0; max-width:34ch; font-size:15px; color:var(--fg-muted);}
+  .svc-cards{margin-top:64px; display:grid; grid-template-columns:1fr; gap:24px;}
+  @media(min-width:640px){ .svc-cards{grid-template-columns:1fr 1fr;} }
+  @media(min-width:1024px){ .svc-cards{margin-top:96px; grid-template-columns:repeat(3,1fr);} }
+  .card{position:relative; display:block; aspect-ratio:4/5; overflow:hidden; border-radius:16px;}
+  .card img{width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.16,1,.3,1);}
+  .card:hover img{transform:scale(1.06);}
+  .card .grad{position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.25) 45%, transparent);}
+  .card .body{position:absolute; inset:auto 0 0 0; padding:28px; color:#fff;}
+  .card .body h3{font-family:var(--display); font-weight:600; font-size:20px; letter-spacing:-.02em;}
+  .card .body p{margin-top:8px; max-width:30ch; font-size:13.5px; line-height:1.5; color:rgba(255,255,255,.8);}
+  .card .body .more{margin-top:20px; display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500;}
+  .card .body .more .ul{position:relative;}
+  .card .body .more .ul::after{content:""; position:absolute; left:0; bottom:-2px; width:100%; height:1px; background:rgba(255,255,255,.4);}
+
+  /* ---------- ABOUT ---------- */
+  .about-checklist{margin-top:40px; display:grid; grid-template-columns:1fr; gap:16px 32px;}
+  @media(min-width:640px){ .about-checklist{grid-template-columns:1fr 1fr;} }
+  .about-checklist div{display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:var(--fg-muted);}
+  .about-checklist .check{flex:none; margin-top:1px; width:20px; height:20px; border-radius:50%;
+    background:var(--brand-tint); color:var(--brand-strong); font-size:11px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;}
+
+  /* ---------- WHY CHOOSE US ---------- */
+  .why-grid{margin-top:56px; display:grid; grid-template-columns:1fr; gap:40px 32px;}
+  @media(min-width:640px){ .why-grid{grid-template-columns:1fr 1fr;} }
+  @media(min-width:1024px){ .why-grid{grid-template-columns:repeat(3,1fr);} }
+  .why-card{border-top:1px solid var(--border); padding-top:24px;}
+  .why-card .n{font-family:var(--display); font-weight:600; font-size:13px; color:var(--accent); letter-spacing:.04em;}
+  .why-card h3{margin-top:10px; font-family:var(--display); font-weight:600; font-size:1.375rem; letter-spacing:-.02em;}
+  .why-card p{margin-top:12px; font-size:14.5px; line-height:1.55; color:var(--fg-muted);}
+
+  /* ---------- FAQ ---------- */
+  /* Uses native <details>/<summary> rather than a JS-driven accordion — free
+     keyboard access and no-JS support, and the open/close itself is instant
+     (a direct user click, not scroll-linked motion), so it sits outside the
+     reduced-motion/scrub rules entirely. Only the chevron rotation and the
+     hover nudge are transform-only, click/hover-triggered CSS transitions —
+     same reasoning as the tile badge rotate elsewhere on the page: direct
+     interaction feedback, not automatic motion, so it's left ungated by
+     prefers-reduced-motion like the rest of the page's hover states.
+     The rows themselves are deliberately NOT in the universal .reveal batch
+     — they get their own drop-from-above entrance (see script), rather than
+     rising from below like everything else on the page. */
+  .faq-list{margin-top:40px; display:flex; flex-direction:column;}
+  .faq-item{border-top:1px solid var(--border); padding:28px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--border);}
+  .faq-item summary{display:flex; align-items:center; justify-content:space-between; gap:20px;
+    cursor:pointer; list-style:none; transition:transform .3s cubic-bezier(.16,1,.3,1);}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item:hover summary{transform:translateX(10px);}
+  .faq-left{display:flex; align-items:baseline; gap:24px;}
+  .faq-num{flex:none; font-family:var(--display); font-weight:500; font-size:15px; color:var(--fg-muted); min-width:24px;}
+  .faq-q{font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:-.02em;}
+  @media(min-width:1024px){ .faq-q{font-size:19px;} }
+  .faq-item .faq-icon{flex:none; width:28px; height:28px; border-radius:50%; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-size:15px; color:var(--fg-muted);
+    transition:transform .3s cubic-bezier(.16,1,.3,1);}
+  .faq-item[open] .faq-icon{transform:rotate(45deg);}
+  .faq-item p{margin-top:16px; margin-left:48px; max-width:66ch; font-size:14.5px; line-height:1.6; color:var(--fg-muted);}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{background:var(--brand); border-top:none;}
+
+  /* ---------- STATS ---------- */
+  .stats-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px 0;}
+  @media(min-width:640px){ .stats-grid{grid-template-columns:repeat(3,1fr);} }
+  @media(min-width:1024px){ .stats-grid{grid-template-columns:repeat(5,1fr);} }
+  .stat{padding:0;}
+  @media(min-width:1024px){ .stat{padding:0 32px; border-left:1px solid var(--border);} .stat:first-child{border-left:none; padding-left:0;} .stat:last-child{padding-right:0;} }
+  .stat .num{font-family:var(--display); font-weight:600; font-size:2.25rem; letter-spacing:-.02em; color:var(--accent);}
+  @media(min-width:1024px){ .stat .num{font-size:3rem;} }
+  .stat p{margin-top:8px; max-width:20ch; font-size:13.5px; line-height:1.3; color:var(--fg-muted);}
+
+  /* ---------- JURISDICTIONS ---------- */
+  .jur-list{margin-top:48px; display:flex; flex-wrap:wrap; gap:8px 12px; border-top:1px solid var(--border); padding-top:40px;}
+  .jur-list a{font-family:var(--display); font-weight:600; font-size:1.5rem; letter-spacing:-.02em; color:var(--fg-muted); transition:color .3s;}
+  @media(min-width:1024px){ .jur-list a{font-size:2.25rem;} }
+  .jur-list a:hover{color:var(--accent);}
+  .jur-list a .comma{color:var(--border);}
+
+  /* ---------- PROCESS ---------- */
+  .proc-grid{margin-top:56px; display:grid; grid-template-columns:1fr; gap:48px 32px;}
+  @media(min-width:640px){ .proc-grid{grid-template-columns:1fr 1fr;} }
+  @media(min-width:1024px){ .proc-grid{grid-template-columns:repeat(4,1fr);} }
+  .proc{border-top:1px solid var(--border); padding-top:24px;}
+  .proc h3{font-family:var(--display); font-weight:600; font-size:1.5rem; letter-spacing:-.02em;}
+  .proc p{margin-top:12px; font-size:14.5px; line-height:1.55; color:var(--fg-muted);}
+
+  /* ---------- TEAM ---------- */
+  .team{background:var(--accent-tint);}
+  .team-grid{margin-top:56px; display:grid; grid-template-columns:1fr 1fr; gap:40px 20px;}
+  @media(min-width:640px){ .team-grid{grid-template-columns:repeat(3,1fr);} }
+  @media(min-width:1024px){ .team-grid{grid-template-columns:repeat(6,1fr);} }
+  .member .ph{aspect-ratio:4/5; overflow:hidden; border-radius:2px;}
+  .member img{width:100%; height:100%; object-fit:cover;}
+  .member .nm{margin-top:12px; font-family:var(--display); font-weight:600; font-size:16px; letter-spacing:-.02em;}
+  @media(min-width:1024px){ .member .nm{font-size:18px;} }
+  .member .ro{margin-top:2px; font-size:12.5px; color:var(--fg-muted);}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{overflow:hidden; background:var(--bg-raised); padding:40px 0;}
+  @media(min-width:1024px){ .marquee{padding:56px 0;} }
+  /* no CSS keyframe here any more — the track's motion is a GSAP tween so
+     scroll velocity can drive its speed and skew (see script). */
+  .marquee-track{display:flex; width:max-content; gap:20px;}
+  .marquee-track .cell{width:256px; height:160px; flex:none; overflow:hidden; border-radius:12px; border:1px solid var(--border);}
+  @media(min-width:1024px){ .marquee-track .cell{width:320px; height:192px;} }
+  .marquee-track img{width:100%; height:100%; object-fit:cover;}
+
+  /* ---------- BLOG ---------- */
+  .blog-grid{margin-top:56px; display:grid; grid-template-columns:1fr; gap:40px;}
+  @media(min-width:1024px){ .blog-grid{grid-template-columns:1fr 1fr; gap:48px;} }
+  .blog-feat .img{aspect-ratio:4/3; overflow:hidden;}
+  .blog-feat img,.blog-sec img{width:100%; height:100%; object-fit:cover;}
+  .meta{margin-top:20px; font-size:13px; color:var(--fg-muted);}
+  .meta .sep{color:var(--border);}
+  .blog-feat h3{margin-top:8px; font-family:var(--display); font-weight:600; font-size:1.5rem; letter-spacing:-.02em;}
+  @media(min-width:1024px){ .blog-feat h3{font-size:1.75rem;} }
+  .blog-feat p{margin-top:12px; max-width:52ch; font-size:14.5px; line-height:1.55; color:var(--fg-muted);}
+  .blog-col{display:flex; flex-direction:column; gap:40px;}
+  .blog-sec{display:grid; grid-template-columns:1fr 1.3fr; gap:20px; border-top:1px solid var(--border); padding-top:24px;}
+  .blog-sec .img{aspect-ratio:4/3; overflow:hidden;}
+  .blog-sec h3{margin-top:8px; font-family:var(--display); font-weight:600; font-size:1.125rem; letter-spacing:-.02em;}
+  @media(min-width:1024px){ .blog-sec h3{font-size:1.25rem;} }
+  .blog-sec .ex{margin-top:10px; font-size:13.5px; line-height:1.5; color:var(--fg-muted); display:none;}
+  @media(min-width:640px){ .blog-sec .ex{display:block;} }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quotes{max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:48px;}
+  .quote{border-top:1px solid var(--border); padding-top:40px;}
+  .quote:first-child{border-top:none; padding-top:0;}
+  .quote p.q{font-family:var(--display); font-weight:500; font-style:italic; font-size:1.25rem; line-height:1.5; letter-spacing:-.02em; padding-bottom:4px;}
+  @media(min-width:1024px){ .quote p.q{font-size:1.5rem;} }
+  .quote .by{margin-top:20px; font-size:14px; color:var(--fg-muted);}
+  .quote .by .sep{color:var(--border);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr; gap:56px;}
+  @media(min-width:1024px){ .contact-grid{grid-template-columns:.85fr 1fr; gap:80px;} }
+  .contact p.lead{margin-top:16px; max-width:46ch; font-size:15.5px; line-height:1.55; color:var(--fg-muted);}
+  .contact-info{margin-top:40px; display:flex; flex-direction:column; gap:20px; border-top:1px solid var(--border); padding-top:32px;}
+  .contact-info a,.contact-info div{display:flex; gap:14px; font-size:14.5px; color:var(--fg-muted); transition:color .2s;}
+  .contact-info a:hover{color:var(--fg);}
+  .contact-info .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); margin-top:7px; flex:none;}
+  form{display:flex; flex-direction:column; gap:20px;}
+  .frow{display:grid; grid-template-columns:1fr; gap:20px;}
+  @media(min-width:640px){ .frow{grid-template-columns:1fr 1fr;} }
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field label{font-size:13.5px; color:var(--fg-muted);}
+  .field input,.field textarea{width:100%; border-radius:2px; border:1px solid var(--border); background:var(--bg-raised); padding:12px 16px; font-size:15px; color:var(--fg); font-family:var(--body); outline:none;}
+  .field input:focus,.field textarea:focus{border-color:var(--accent);}
+  .thanks{display:flex; flex-direction:column; justify-content:center; min-height:320px; border:1px solid var(--border); padding:40px;}
+  .thanks h3{font-family:var(--display); font-weight:600; font-size:1.5rem; letter-spacing:-.02em;}
+  .thanks p{margin-top:12px; max-width:40ch; font-size:14.5px; line-height:1.55; color:var(--fg-muted);}
+
+  /* ---------- FOOTER ---------- */
+  /* Deliberately un-animated throughout — the footer is a filing cabinet,
+     not a stage. No .reveal classes appear anywhere below. */
+  footer{border-top:1px solid var(--border);}
+  .foot-top{display:flex; flex-direction:column; gap:40px; padding-top:56px; padding-bottom:56px;}
+  @media(min-width:1024px){ .foot-top{flex-direction:row; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;} }
+  .foot-brand{max-width:280px;}
+  .foot-brand .logo{height:64px; width:auto;}
+  .foot-brand p{margin-top:16px; max-width:32ch; font-size:13.5px; line-height:1.5; color:var(--fg-muted);}
+  .foot-col{min-width:160px;}
+  .foot-h{font-family:var(--display); font-weight:600; font-size:14px; letter-spacing:-.01em; margin-bottom:16px;}
+  .foot-nav{display:flex; flex-wrap:wrap; gap:12px 32px;}
+  .foot-nav a{font-size:13.5px; color:var(--fg-muted); transition:color .2s;}
+  .foot-nav a:hover{color:var(--fg);}
+  .foot-col .foot-nav{flex-direction:column; flex-wrap:nowrap; gap:10px;}
+  .foot-contact{display:flex; flex-direction:column; gap:10px;}
+  .foot-contact a,.foot-contact div{display:flex; gap:10px; font-size:13.5px; color:var(--fg-muted); transition:color .2s;}
+  .foot-contact a:hover{color:var(--fg);}
+  .foot-hours{margin-top:8px; font-size:13.5px; color:var(--fg-muted);}
+  .foot-bot{border-top:1px solid var(--border);}
+  .foot-bot .in{padding-top:24px; padding-bottom:24px; font-size:12.5px; color:var(--fg-muted); display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:space-between;}
+  .foot-bot .in a{color:var(--fg-muted); transition:color .2s;}
+  .foot-bot .in a:hover{color:var(--fg);}
+
+  /* ---------- CUSTOM CURSOR + JURISDICTION PREVIEW ---------- */
+  /* Both are pure UI chrome with no unique content — safe to default to
+     opacity:0 in CSS. Only ever made visible by the desktop-only JS layer. */
+  #cursor{position:fixed; top:0; left:0; width:56px; height:56px; margin:-28px 0 0 -28px;
+    border-radius:50%; background:var(--brand); color:var(--bg); display:flex; align-items:center;
+    justify-content:center; font-size:12px; font-weight:600; letter-spacing:.02em;
+    pointer-events:none; z-index:999; opacity:0;}
+  #cursor span{opacity:0; text-align:center; line-height:1.2;}
+  .has-custom-cursor, .has-custom-cursor a, .has-custom-cursor button{cursor:none;}
+  #jur-preview{position:fixed; top:0; left:0; width:220px; height:160px; border-radius:10px;
+    overflow:hidden; pointer-events:none; z-index:998; opacity:0;
+    box-shadow:0 20px 40px -14px rgba(29,28,26,.35);}
+  #jur-preview img{width:100%; height:100%; object-fit:cover;}
+
+  @media(prefers-reduced-motion:reduce){
+    /* Defensive fallback only — nothing in this page is hidden by default
+       CSS, and the script's own top-level reduced-motion check means none
+       of the JS-authored hidden states below are ever created in the first
+       place. This exists purely as a belt-and-suspenders safety net. */
+    .reveal,.reveal-x{opacity:1!important; transform:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <img class="logo" src="bizpoint/assets/logo-nav.png" alt="BizPoint Prime">
+    </a>
+    <nav class="links">
+      <a href="#formation">Business Setup</a>
+      <a href="#legal">Legal Services</a>
+      <a href="#translation">Legal Translation</a>
+    </nav>
+    <a href="#contact" class="btn sm nav-cta"><span>Book a Consultation</span></a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <div class="hero-groundline" aria-hidden="true"></div>
+  <div class="hero-grid-lines" aria-hidden="true">
+    <span class="v" style="left:20%"></span>
+    <span class="v" style="left:50%"></span>
+    <span class="v" style="left:80%"></span>
+  </div>
+  <div class="wrap hero-grid">
+    <div class="hero-left">
+      <span class="hero-kicker"><span class="dot" aria-hidden="true"></span>MOJ-Certified Translation &amp; Company Formation</span>
+      <h1 class="display">
+        <span class="line">Built on</span>
+        <span class="line accent">solid ground.</span>
+      </h1>
+      <div class="hero-cta"><a href="#contact" class="btn"><span>Book a Consultation</span></a></div>
+      <div class="hero-trust-row">
+        <div class="hero-avatars" aria-hidden="true"><span>UF</span><span>AS</span><span>MK</span><span>AA</span><span>AM</span></div>
+        <p class="hero-trust">Trusted by 300+ businesses across the UAE, from first licence to MOJ-certified translation.</p>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="tiles">
+        <a href="#formation" class="tile brand">
+          <span class="badge">↗</span>
+          <span class="label">Company Formation</span>
+        </a>
+        <a href="#legal" class="tile dark">
+          <span class="badge">↗</span>
+          <span class="label">Legal Services</span>
+        </a>
+      </div>
+      <a href="#formation" class="hero-card">
+        <div class="img">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80&fm=jpg&fit=crop&auto=format" alt="BizPoint advisors with a client">
+          <div class="hero-stat-chip hero-stat-chip--a"><strong>24h</strong><span>Standard turnaround</span></div>
+          <div class="hero-stat-chip hero-stat-chip--b"><strong>120+</strong><span>Companies set up</span></div>
+        </div>
+        <div class="txt"><p>Company formation is where we start, not where we stop.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="wrapc" style="padding-top:64px;padding-bottom:64px;">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="num" data-count="120" data-suffix="+">0+</div><p>Company formations completed</p></div>
+      <div class="stat reveal"><div class="num" data-count="300" data-suffix="+">0+</div><p>Clients served across the UAE</p></div>
+      <div class="stat reveal"><div class="num" data-count="50" data-suffix="+">0+</div><p>Language pairs translated</p></div>
+      <div class="stat reveal"><div class="num" data-count="24" data-suffix="h">0h</div><p>Standard document turnaround</p></div>
+      <div class="stat reveal"><div class="num" data-count="5" data-suffix="+">0+</div><p>Years operating in Dubai</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="wrap">
+    <p>Most consultancies stop at the licence. We stay long enough to understand what you&rsquo;re building, and <em>make sure the paperwork holds when it matters.</em></p>
+    <div class="reveal" style="margin-top:40px;"><a href="#formation" class="btn"><span>See how we work</span></a></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="legal" style="overflow:hidden;">
+  <div class="wrapc sec-pad">
+    <div class="svc-intro" id="svc-intro">
+      <div class="svc-side" id="svc-left"><div class="box"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&fm=jpg&fit=crop&auto=format" alt=""></div></div>
+      <div class="svc-center reveal">
+        <h2 class="display">Where we <span class="accent">help most</span></h2>
+        <p>Translation, attestation, notary, PRO services, and business setup, handled from one Dubai office.</p>
+      </div>
+      <div class="svc-side" id="svc-right"><div class="box"><img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80&fm=jpg&fit=crop&auto=format" alt=""></div></div>
+    </div>
+    <div class="svc-cards">
+      <a href="#translation" id="translation" class="card reveal">
+        <img src="https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=900&q=80&fm=jpg&fit=crop&auto=format" alt="Legal Translation">
+        <div class="grad"></div>
+        <div class="body"><h3>Legal Translation</h3><p>MOJ-approved translation for contracts, court documents, and certificates — Arabic to English and 50+ language pairs.</p><span class="more"><span class="ul">View details</span> ↗</span></div>
+      </a>
+      <a href="#attestation" id="attestation" class="card reveal">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&fm=jpg&fit=crop&auto=format" alt="Document Attestation">
+        <div class="grad"></div>
+        <div class="body"><h3>Document Attestation</h3><p>MOFA and embassy attestation for personal and corporate documents, handled UAE-wide.</p><span class="more"><span class="ul">View details</span> ↗</span></div>
+      </a>
+      <a href="#pro-services" id="pro-services" class="card reveal">
+        <img src="https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=900&q=80&fm=jpg&fit=crop&auto=format" alt="PRO Services">
+        <div class="grad"></div>
+        <div class="body"><h3>PRO Services</h3><p>Visa processing, labour cards, and licence renewals — all government liaison handled for you.</p><span class="more"><span class="ul">View details</span> ↗</span></div>
+      </a>
+      <a href="#notary" id="notary" class="card reveal">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fm=jpg&fit=crop&auto=format" alt="Notary Services">
+        <div class="grad"></div>
+        <div class="body"><h3>Notary Services</h3><p>Notarisation of agreements, power of attorney, and corporate documents, recognised across UAE authorities.</p><span class="more"><span class="ul">View details</span> ↗</span></div>
+      </a>
+      <a href="#formation" id="formation" class="card reveal">
+        <img src="https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=1200&q=80&fm=jpg&fit=crop&auto=format" alt="Business Setup">
+        <div class="grad"></div>
+        <div class="body"><h3>Business Setup</h3><p>Mainland, free zone, and offshore company formation — from trade name to licence issuance.</p><span class="more"><span class="ul">View details</span> ↗</span></div>
+      </a>
+      <a href="#typing" id="typing" class="card reveal">
+        <img src="https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=900&q=80&fm=jpg&fit=crop&auto=format" alt="Typing Services">
+        <div class="grad"></div>
+        <div class="body"><h3>Typing Services</h3><p>Professional typing for government forms, immigration applications, and legal filings.</p><span class="more"><span class="ul">View details</span> ↗</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="showcase" id="showcase">
+  <img class="bg" id="showcase-bg" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&q=80&fm=jpg&fit=crop&auto=format" alt="BizPoint advisors in conversation">
+  <div class="overlay"></div>
+  <div class="cap"><div class="inner"><h2>Real advisors. In Dubai. <span class="accent">On your side.</span></h2></div></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:112px;">
+    <p class="kicker reveal">About BizPoint</p>
+    <h2 class="h-sec reveal" style="margin-top:12px;max-width:44ch;">Built by people who&rsquo;ve done this before.</h2>
+    <p class="reveal" style="margin-top:20px;max-width:60ch;font-size:15.5px;line-height:1.6;color:var(--fg-muted);">BizPoint is a Dubai-based consultancy covering company formation, legal consulting, and MOJ-certified translation. Our team brings years of combined experience across UAE company law, government liaison, and certified document translation, so the details are handled right the first time.</p>
+    <div class="about-checklist">
+      <div class="reveal"><span class="check" aria-hidden="true">✓</span>MOJ-certified translators on every project</div>
+      <div class="reveal"><span class="check" aria-hidden="true">✓</span>Documents accepted by Dubai Courts, MOFA, and all UAE embassies</div>
+      <div class="reveal"><span class="check" aria-hidden="true">✓</span>50+ language pairs, including Arabic, English, and Urdu</div>
+      <div class="reveal"><span class="check" aria-hidden="true">✓</span>Full business setup support, from registration to licence</div>
+    </div>
+    <div class="reveal" style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#contact" class="btn"><span>Book a Consultation</span></a>
+      <a href="#legal" class="btn outline"><span>See our services</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section style="background:var(--bg-raised);">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:128px;">
+    <p class="kicker reveal">Why BizPoint</p>
+    <h2 class="h-sec reveal" style="margin-top:12px;max-width:52ch;">Why choose BizPoint for legal translation in Dubai?</h2>
+    <div class="why-grid">
+      <div class="why-card reveal"><p class="n">01</p><h3>MOJ-Certified Translators</h3><p>Every translator holds official Ministry of Justice certification, so documents are accepted without question.</p></div>
+      <div class="why-card reveal"><p class="n">02</p><h3>One-Stop Shop</h3><p>Translation, attestation, notary, PRO services, and business setup, all handled from one Dubai office.</p></div>
+      <div class="why-card reveal"><p class="n">03</p><h3>Fast Turnaround</h3><p>Standard delivery in 24–48 hours, with same-day service available for urgent documents.</p></div>
+      <div class="why-card reveal"><p class="n">04</p><h3>50+ Language Pairs</h3><p>Arabic, English, French, German, Chinese, Hindi, Urdu, and more, across legal, medical, and commercial documents.</p></div>
+      <div class="why-card reveal"><p class="n">05</p><h3>Transparent Pricing</h3><p>Fixed quotes with no hidden fees, confirmed before any work begins.</p></div>
+      <div class="why-card reveal"><p class="n">06</p><h3>300+ Satisfied Clients</h3><p>Businesses, law firms, embassies, and individuals across Dubai trust BizPoint with their documents.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- JURISDICTIONS -->
+<section id="jurisdictions">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:128px;">
+    <p class="kicker reveal">Where we operate</p>
+    <h2 class="h-sec reveal" style="margin-top:12px;max-width:46ch;">Licensed to set up your business across Dubai&rsquo;s jurisdictions.</h2>
+    <div class="jur-list">
+      <a href="#contact" class="reveal" data-preview="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80&fm=jpg&fit=crop&auto=format">Dubai Mainland (DED)<span class="comma">,</span></a>
+      <a href="#contact" class="reveal" data-preview="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&fm=jpg&fit=crop&auto=format">DIFC<span class="comma">,</span></a>
+      <a href="#contact" class="reveal" data-preview="https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=600&q=80&fm=jpg&fit=crop&auto=format">DMCC<span class="comma">,</span></a>
+      <a href="#contact" class="reveal" data-preview="https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=600&q=80&fm=jpg&fit=crop&auto=format">JAFZA<span class="comma">,</span></a>
+      <a href="#contact" class="reveal" data-preview="https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=600&q=80&fm=jpg&fit=crop&auto=format">Dubai South<span class="comma">,</span></a>
+      <a href="#contact" class="reveal" data-preview="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&fm=jpg&fit=crop&auto=format">Abu Dhabi<span class="comma">,</span></a>
+      <a href="#contact" class="reveal" data-preview="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&q=80&fm=jpg&fit=crop&auto=format">Sharjah<span class="comma">,</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="border-top:none;">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:128px;">
+    <h2 class="h-sec reveal" style="max-width:52ch;">How an engagement with BizPoint runs.</h2>
+    <div class="proc-grid">
+      <div class="proc reveal"><h3>Consult</h3><p>A free consultation to understand your business, jurisdiction options, and documentation needs.</p></div>
+      <div class="proc reveal"><h3>Structure</h3><p>We recommend the right license type, mainland, free zone, or offshore, and map out the full requirement list.</p></div>
+      <div class="proc reveal"><h3>Prepare</h3><p>Documents drafted, translated, and formatted to the exact standard Dubai Courts, MOFA, and licensing authorities require.</p></div>
+      <div class="proc reveal"><h3>Launch</h3><p>Applications submitted, government liaison handled, and your license issued and ready to operate.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="wrapc" style="padding-top:80px;padding-bottom:112px;">
+    <p class="kicker reveal">Team</p>
+    <h2 class="h-sec reveal" style="margin-top:12px;max-width:52ch;">The people handling your <span class="accent" style="font-style:italic;">business setup.</span></h2>
+    <div class="team-grid">
+      <div class="member reveal"><div class="ph"><img src="https://i.pravatar.cc/700?img=12" alt="Rashid Al Marzooqi"></div><p class="nm">Rashid Al Marzooqi</p><p class="ro">Managing Partner</p></div>
+      <div class="member reveal"><div class="ph"><img src="https://i.pravatar.cc/700?img=47" alt="Priya Nair"></div><p class="nm">Priya Nair</p><p class="ro">Head of Company Formation</p></div>
+      <div class="member reveal"><div class="ph"><img src="https://i.pravatar.cc/700?img=32" alt="Omar Haddad"></div><p class="nm">Omar Haddad</p><p class="ro">Senior Legal Consultant</p></div>
+      <div class="member reveal"><div class="ph"><img src="https://i.pravatar.cc/700?img=45" alt="Fatima El-Sayed"></div><p class="nm">Fatima El-Sayed</p><p class="ro">Certified Legal Translator</p></div>
+      <div class="member reveal"><div class="ph"><img src="https://i.pravatar.cc/700?img=65" alt="Arjun Mehta"></div><p class="nm">Arjun Mehta</p><p class="ro">PRO Services Manager</p></div>
+      <div class="member reveal"><div class="ph"><img src="https://i.pravatar.cc/700?img=44" alt="Sana Qureshi"></div><p class="nm">Sana Qureshi</p><p class="ro">Business Setup Advisor</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:128px;">
+    <p class="kicker reveal">FAQs</p>
+    <h2 class="h-sec reveal" style="margin-top:12px;max-width:44ch;">Frequently asked questions.</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary><span class="faq-left"><span class="faq-num">01</span><span class="faq-q">Is BizPoint&rsquo;s legal translation MOJ-approved?</span></span><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <p>Yes. All BizPoint translators hold Ministry of Justice certification, and every legal translation we produce is recognised by Dubai Courts, MOFA, and UAE embassies.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-left"><span class="faq-num">02</span><span class="faq-q">What documents can BizPoint translate legally?</span></span><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <p>Contracts, court documents, certificates, powers of attorney, corporate documents, visa applications, and more — translated to the standard UAE authorities require.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-left"><span class="faq-num">03</span><span class="faq-q">How much does legal translation cost?</span></span><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <p>Pricing depends on language pair, document type, and turnaround. Share your documents and we&rsquo;ll confirm a fixed quote before any work begins &mdash; no hidden fees.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-left"><span class="faq-num">04</span><span class="faq-q">How long does legal translation take?</span></span><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <p>Standard turnaround is 24&ndash;48 hours. Same-day service is available for most documents, with an express option for urgent requirements.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-left"><span class="faq-num">05</span><span class="faq-q">Do you offer business setup services in Dubai?</span></span><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <p>Yes &mdash; mainland, free zone, and offshore company formation, from trade name registration through to licence issuance.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="marquee">
+  <div class="marquee-track">
+    <div class="cell"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+    <div class="cell"><img src="https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=600&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="insights">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:128px;">
+    <h2 class="h-sec reveal" style="max-width:52ch;">Recent insights for businesses setting up in Dubai.</h2>
+    <div class="blog-grid">
+      <article class="blog-feat reveal">
+        <div class="img"><img src="https://images.unsplash.com/photo-1768069794826-a31af289449f?w=1200&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+        <p class="meta">June 2026 <span class="sep">/</span> 7 min read</p>
+        <h3>UAE Corporate Tax: What New Businesses Need to Register For</h3>
+        <p>A practical breakdown of registration deadlines, exemptions, and what free zone entities specifically need to file in their first year.</p>
+      </article>
+      <div class="blog-col">
+        <article class="blog-sec reveal">
+          <div class="img"><img src="https://images.unsplash.com/photo-1523270918669-1fd17ac1742d?w=900&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+          <div>
+            <p class="meta">May 2026 <span class="sep">/</span> 5 min read</p>
+            <h3>Mainland or Free Zone: How to Choose the Right Licence</h3>
+            <p class="ex">Ownership rules, visa quotas, and cost differences that actually decide the right structure for your business.</p>
+          </div>
+        </article>
+        <article class="blog-sec reveal">
+          <div class="img"><img src="https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=900&q=80&fm=jpg&fit=crop&auto=format" alt=""></div>
+          <div>
+            <p class="meta">April 2026 <span class="sep">/</span> 4 min read</p>
+            <h3>Why Court-Ready Translation Is Different From Standard Translation</h3>
+            <p class="ex">What MOJ certification actually checks for, and why an uncertified translation gets rejected at the counter.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="wrapc" style="padding-top:96px;padding-bottom:128px;">
+    <div class="quotes">
+      <div class="quote reveal"><p class="q">&ldquo;BizPoint handled our free zone license and the translation of every contract in under three weeks. Nothing got lost between English and Arabic.&rdquo;</p><p class="by">Layla Haddad <span class="sep">/</span> Founder, Haddad Consulting</p></div>
+      <div class="quote reveal"><p class="q">&ldquo;We refer clients to BizPoint whenever a translation has to hold up in court. Their MOJ certification has never once been questioned.&rdquo;</p><p class="by">Marco Bellini <span class="sep">/</span> Partner, Bellini &amp; Reyes Law</p></div>
+      <div class="quote reveal"><p class="q">&ldquo;Mainland setup, trade licence, and PRO services all moved in parallel instead of one after another. That alone saved us a month.&rdquo;</p><p class="by">Rohan Sethi <span class="sep">/</span> Director, Sethi Freight Holdings</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:96px;text-align:center;">
+    <p class="kicker reveal">Get Started</p>
+    <h2 class="reveal display" style="margin-top:12px;max-width:32ch;margin-left:auto;margin-right:auto;font-weight:500;font-size:2.5rem;line-height:1.05;color:var(--bg);">Ready to start your business journey in Dubai?</h2>
+    <p class="reveal" style="margin-top:16px;max-width:46ch;margin-left:auto;margin-right:auto;font-size:15.5px;color:rgba(250,250,247,.75);">Book a free consultation and our team will guide you through every step, from translation to business setup.</p>
+    <div class="reveal" style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="#contact" class="btn on-brand"><span>Book a Consultation</span></a>
+      <a href="https://wa.me/97140000000" target="_blank" rel="noopener" class="btn outline-light"><span>WhatsApp Us</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrapc" style="padding-top:96px;padding-bottom:128px;">
+    <div class="contact-grid">
+      <div class="reveal">
+        <h2 class="h-sec">Tell us what you are setting up.</h2>
+        <p class="lead">Share a few details and a consultant will get back to you within one business day with next steps.</p>
+        <div class="contact-info">
+          <div><span class="dot"></span>Office 1402, Latifa Tower, Sheikh Zayed Road, Dubai, UAE</div>
+          <a href="tel:+97140000000"><span class="dot"></span>+971 4 000 0000</a>
+          <a href="mailto:hello@bizpoint.ae"><span class="dot"></span>hello@bizpoint.ae</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <form id="contact-form">
+          <div class="frow">
+            <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" required></div>
+            <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" required></div>
+          </div>
+          <div class="field"><label for="service">What do you need help with</label><input id="service" name="service" type="text"></div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Mainland setup, contract translation, PRO services..."></textarea></div>
+          <button type="submit" class="btn" style="align-self:flex-start;margin-top:8px;"><span>Book a Consultation</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrapc foot-top">
+    <div class="foot-brand">
+      <img class="logo" src="bizpoint/assets/logo-footer.png" alt="BizPoint Prime Business Solutions L.L.C S.O.C">
+      <p>Dubai&rsquo;s trusted MOJ-approved legal translation and business services agency &mdash; certified documents accepted by all UAE courts, MOFA, and embassies.</p>
+    </div>
+    <div class="foot-col">
+      <p class="foot-h">Quick Links</p>
+      <nav class="foot-nav">
+        <a href="#top">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#legal">Services</a>
+        <a href="#insights">Insights</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+    </div>
+    <div class="foot-col">
+      <p class="foot-h">Our Services</p>
+      <nav class="foot-nav">
+        <a href="#translation">Legal Translation</a>
+        <a href="#attestation">Document Attestation</a>
+        <a href="#pro-services">PRO Services</a>
+        <a href="#notary">Notary Services</a>
+        <a href="#formation">Business Setup</a>
+        <a href="#typing">Typing Services</a>
+      </nav>
+    </div>
+    <div class="foot-col">
+      <p class="foot-h">Contact Us</p>
+      <div class="foot-contact">
+        <div><span class="dot"></span>Dubai, United Arab Emirates</div>
+        <a href="tel:+97140000000">+971 4 000 0000</a>
+        <a href="tel:+971500000000">+971 50 000 0000</a>
+        <a href="mailto:hello@bizpoint.ae">hello@bizpoint.ae</a>
+      </div>
+      <p class="foot-h" style="margin-top:24px;">Business Hours</p>
+      <p class="foot-hours">Monday &ndash; Saturday: 9:00AM &ndash; 7:30PM</p>
+    </div>
+  </div>
+  <div class="foot-bot"><div class="wrapc in"><span>&copy; <span id="year"></span> BizPoint. All rights reserved.</span><span><a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Service</a></span></div></div>
+</footer>
+
+<!-- Desktop-only UI chrome — inert, empty of unique content, until the
+     desktop-only script layer below activates it. -->
+<div id="cursor" aria-hidden="true"><span>View ↗</span></div>
+<div id="jur-preview" aria-hidden="true"><img src="" alt=""></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(function(){
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---- Nav fill on scroll ----
+     A discrete colour-state toggle (CSS transition already on the class),
+     not scroll-driven motion — kept independent of the GSAP system and of
+     the reduced-motion branch below, same as the original build. */
+  var nav = document.getElementById('nav');
+  function onNavScroll(){ nav.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.55); }
+  window.addEventListener('scroll', onNavScroll, {passive:true}); onNavScroll();
+
+  /* ---- Contact form (functional, not motion) ---- */
+  var form = document.getElementById('contact-form');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var wrap = form.parentNode;
+      wrap.innerHTML = '<div class="thanks"><h3>Request received.</h3><p>A consultant will reach out within one business day. Thank you for getting in touch with BizPoint.</p></div>';
+    });
+  }
+
+  /* ASSUMPTION: prefers-reduced-motion is read once at load rather than
+     tracked live. The only things it gates are a one-shot load-in timeline
+     and the scroll-wiring setup; a user flipping the OS setting mid-session
+     would need a reload for it to take effect, which matches how most
+     production sites treat this media feature. */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(reduceMotion){
+    /* Nothing further to do. No element on this page is hidden by default
+       CSS — every "hidden" starting state below is applied by GSAP only
+       once this script is already running — so skipping Lenis, GSAP,
+       SplitText and every ScrollTrigger entirely IS the final-state-
+       instantly requirement: the natural DOM/CSS state already is the
+       finished state. */
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+
+  /* =================================================================
+     MOTION TOKENS — the only place these values live. Adjust here.
+  ================================================================= */
+  var EASE_OUT    = 'power3.out';   // entrances
+  var EASE_INOUT  = 'power2.inOut'; // discrete state toggles (cursor, preview)
+  var EASE_FOLLOW = 'power3.out';   // quickTo cursor/magnet/preview follow-smoothing
+  var DUR = { micro: 0.2, standard: 0.6, statement: 0.9 };
+  var STAGGER = { min: 0.06, max: 0.09 };
+  var REVEAL_Y = 32; // px — within the 24-40 reveal-distance budget
+
+  /* =================================================================
+     LENIS — smoothed scroll, synced to ScrollTrigger + gsap.ticker.
+     Touch input is left at Lenis's default (native, unsmoothed) so
+     mobile scrolling stays fast and familiar; only wheel/trackpad
+     input on desktop gets the smoothed feel.
+  ================================================================= */
+  var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  /* =================================================================
+     HERO — one timeline, fires on load, ~1.2s total. Runs identically
+     on mobile and desktop; only the later desktop-only layer (magnetic
+     buttons, custom cursor) differs by breakpoint. The H1's real text
+     sits in the DOM from first paint — SplitText only wraps it after
+     this script is already executing, so a no-JS visitor sees the
+     finished, un-split headline immediately, never a hidden one.
+  ================================================================= */
+  var heroEntered = false;
+  SplitText.create('.hero h1 .line', {
+    type: 'lines',
+    mask: 'lines',
+    autoSplit: true,
+    onSplit: function(self){
+      if(!heroEntered){
+        heroEntered = true;
+        /* Deliberately NOT returning the timeline here. SplitText auto-kills
+           any tween/timeline returned from onSplit the next time it resplits
+           (autoSplit does an internal corrective resplit almost immediately
+           after the first pass, even with fonts already loaded) — that was
+           silently wiping the groundline/tiles/card portion of the entrance
+           timeline mid-flight while the from(lines,...) tween looked fine
+           only because the resplit's fallback branch below force-settles it.
+           Keeping this un-returned hands the whole timeline's lifecycle to
+           the heroEntered guard alone, which is what's actually intended. */
+        buildHeroTimeline(self.lines);
+        return;
+      }
+      /* A resplit fires on resize/font-swap after the entrance already
+         played (e.g. rotating a tablet) — snap to settled, don't replay. */
+      gsap.set(self.lines, { yPercent: 0 });
+    }
+  });
+
+  function buildHeroTimeline(lines){
+    var groundline = document.querySelector('.hero-groundline');
+    var gridLines = gsap.utils.toArray('.hero-grid-lines .v');
+    var heroKicker = document.querySelector('.hero-kicker');
+    var heroCta = document.querySelector('.hero-cta');
+    var heroTrustRow = document.querySelector('.hero-trust-row');
+    var tiles = gsap.utils.toArray('.tile');
+    var heroCard = document.querySelector('.hero-card');
+    var navEl = document.getElementById('nav');
+
+    /* ASSUMPTION: the spec's "clip-path wipe" is built here as a
+       transform-only curtain (a JS-created panel that scaleY's away)
+       rather than an actual animated clip-path, because the hard
+       constraint "animate transform and opacity only" outranks the
+       section spec's literal wording. Same substitution is used on the
+       showcase caption below. */
+    var curtain = document.createElement('div');
+    curtain.className = 'wipe-overlay wipe-overlay--card';
+    curtain.setAttribute('aria-hidden', 'true');
+    heroCard.appendChild(curtain);
+
+    gsap.set([groundline, heroCard, gridLines], { willChange: 'transform' });
+
+    var tl = gsap.timeline({
+      defaults: { ease: EASE_OUT },
+      onComplete: function(){
+        curtain.remove();
+        gsap.set([groundline, heroCard, gridLines], { willChange: 'auto' });
+      }
+    });
+
+    tl.from(navEl, { opacity: 0, y: -8, duration: DUR.micro }, 0)
+      .fromTo(groundline, { scaleX: 0 }, { scaleX: 1, duration: DUR.standard, transformOrigin: 'left center' }, 0)
+      .fromTo(gridLines, { scaleY: 0 }, { scaleY: 1, duration: DUR.standard, stagger: STAGGER.min, transformOrigin: 'top' }, 0)
+      .from(heroKicker, { opacity: 0, y: 24, duration: DUR.standard }, 0)
+      .from(lines, { yPercent: 110, duration: DUR.statement, stagger: STAGGER.max }, 0.15)
+      .from(tiles, { opacity: 0, scale: 0.96, duration: DUR.standard, stagger: STAGGER.max }, 0.45)
+      .from(heroCta, { opacity: 0, y: 24, duration: DUR.standard }, 0.5)
+      .from(heroTrustRow, { opacity: 0, y: 24, duration: DUR.standard }, 0.55)
+      .fromTo(curtain, { scaleY: 1 }, { scaleY: 0, duration: DUR.standard, transformOrigin: 'top' }, 0.60);
+
+    /* Subtle multi-layer depth parallax as the hero scrolls away — each
+       layer moves at a different, small rate (grid slowest, text a little
+       more, tiles/photo a little more again) so leaving the hero reads as
+       depth rather than everything scrolling in lockstep. Kept to a few
+       percent so it stays felt, not seen — pushed further this starts to
+       read as a parallax demo, which is the wrong note here. */
+    [
+      { sel: '.hero-grid-lines', y: -6 },
+      { sel: '.hero-left', y: -4 },
+      { sel: '.hero-right', y: -10 }
+    ].forEach(function(layer){
+      gsap.to(layer.sel, {
+        yPercent: layer.y, ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1,
+          onToggle: function(self){ gsap.set(layer.sel, { willChange: self.isActive ? 'transform' : 'auto' }); }
+        }
+      });
+    });
+
+    return tl;
+  }
+
+  /* =================================================================
+     MANIFESTO — word-by-word opacity scrub across the section.
+     ease:'none' is deliberate: scrub:1 already supplies its own lag,
+     so a second easing curve on top would double the smoothing and
+     read as sluggish rather than weighted.
+  ================================================================= */
+  var manifestoTrigger = null;
+  SplitText.create('.manifesto p', {
+    type: 'words',
+    autoSplit: true,
+    onSplit: function(self){
+      if(manifestoTrigger) manifestoTrigger.scrollTrigger.kill();
+      gsap.set(self.words, { opacity: 0.15 });
+      manifestoTrigger = gsap.to(self.words, {
+        opacity: 1,
+        ease: 'none',
+        stagger: { each: 0.02 },
+        scrollTrigger: {
+          trigger: '.manifesto',
+          start: 'top 75%',
+          end: 'bottom 60%',
+          scrub: 1
+        }
+      });
+    }
+  });
+
+  /* =================================================================
+     GLOBAL REVEALS — replaces the old IntersectionObserver fade-up.
+     .reveal-x is gone as a separate treatment: its old 70px horizontal
+     slide broke the 24-40px reveal-distance budget and read louder
+     than anything else on the page, on the section (services) that
+     most needed to feel calm. Every .reveal now gets the same 32px
+     vertical rise.
+  ================================================================= */
+  var revealEls = gsap.utils.toArray('.reveal');
+  gsap.set(revealEls, { opacity: 0, y: REVEAL_Y });
+
+  /* =================================================================
+     FAQ ROWS — deliberately excluded from the batch above. These drop
+     in from above (negative y) instead of rising from below, so the
+     list reads like rows settling into a numbered document rather than
+     the page's usual "weighted paper" rise. The hover shift-right is a
+     plain CSS transition on the row itself (see .faq-item summary),
+     not part of this scroll-triggered entrance.
+  ================================================================= */
+  var faqItems = gsap.utils.toArray('.faq-item');
+  gsap.set(faqItems, { opacity: 0, y: -REVEAL_Y });
+
+  /* Both batches above are hidden immediately (no flash of visible
+     content), but the ScrollTrigger.batch() calls that ARM them are
+     deliberately deferred to window 'load' rather than created here
+     inline. With ~40 images still loading, the document's height at
+     this point in the script is a serious underestimate — "top 87%"
+     for content far down the page (the FAQ rows especially, since
+     they're clustered together rather than spread through the page)
+     can already be satisfied against that shrunken document, so the
+     batch fires immediately at page load, before the visitor has
+     scrolled anywhere near it. Because these use once:true, a later
+     ScrollTrigger.refresh() (see window load below) corrects pixel
+     start/end values for everything else but can't "un-fire" a batch
+     that already completed — so the fix has to be not firing early in
+     the first place, not correcting after the fact. */
+  function wireOnceBatches(){
+    ScrollTrigger.batch(revealEls, {
+      start: 'top 87%',
+      once: true,
+      onEnter: function(batch){
+        gsap.to(batch, { opacity: 1, y: 0, duration: DUR.standard, ease: EASE_OUT, stagger: STAGGER.max });
+      }
+    });
+    ScrollTrigger.batch(faqItems, {
+      start: 'top 87%',
+      once: true,
+      onEnter: function(batch){
+        gsap.to(batch, { opacity: 1, y: 0, duration: DUR.standard, ease: EASE_OUT, stagger: STAGGER.max });
+      }
+    });
+  }
+  if(document.readyState === 'complete'){ wireOnceBatches(); }
+  else { window.addEventListener('load', wireOnceBatches); }
+
+  /* =================================================================
+     SHOWCASE — parallax scrub + a curtain wipe on the caption, the
+     section's signature moment (see hero's curtain note above for why
+     this is a transform-based panel rather than literal clip-path).
+  ================================================================= */
+  gsap.fromTo('#showcase-bg',
+    { yPercent: -9, scale: 1.18 },
+    {
+      yPercent: 9, scale: 1, ease: 'none',
+      scrollTrigger: {
+        trigger: '.showcase', start: 'top bottom', end: 'bottom top', scrub: 1,
+        onToggle: function(self){ gsap.set('#showcase-bg', { willChange: self.isActive ? 'transform' : 'auto' }); }
+      }
+    }
+  );
+
+  var capInner = document.querySelector('.showcase .cap .inner');
+  if(capInner){
+    var capCurtain = document.createElement('div');
+    capCurtain.className = 'wipe-overlay wipe-overlay--caption';
+    capCurtain.setAttribute('aria-hidden', 'true');
+    capInner.appendChild(capCurtain);
+    gsap.fromTo(capCurtain, { scaleY: 1 }, {
+      scaleY: 0, duration: DUR.statement, ease: EASE_OUT, transformOrigin: 'bottom',
+      scrollTrigger: { trigger: '.showcase', start: 'top 70%', toggleActions: 'play none none none' },
+      onComplete: function(){ capCurtain.remove(); }
+    });
+  }
+
+  /* =================================================================
+     STATS — count driven directly by scroll position (scrub), not a
+     fixed-duration count-up. Reverses cleanly on scroll-up.
+  ================================================================= */
+  gsap.utils.toArray('.stat').forEach(function(stat){
+    var numEl = stat.querySelector('.num');
+    if(!numEl) return;
+    var target = parseInt(numEl.getAttribute('data-count'), 10);
+    var suffix = numEl.getAttribute('data-suffix') || '';
+    var proxy = { val: 0 };
+    gsap.to(proxy, {
+      val: target,
+      ease: 'none',
+      onUpdate: function(){ numEl.textContent = Math.round(proxy.val) + suffix; },
+      scrollTrigger: { trigger: stat, start: 'top 85%', end: 'top 40%', scrub: 1 }
+    });
+  });
+
+  /* =================================================================
+     MARQUEE — converted from a CSS @keyframes track to a GSAP tween
+     (needed so scroll velocity can drive its timeScale/skew — a CSS
+     animation can't be modulated at runtime). Clamped so a fast flick
+     never inverts direction or over-skews the track.
+  ================================================================= */
+  var marqueeTrack = document.querySelector('.marquee-track');
+  if(marqueeTrack){
+    var marqueeTween = gsap.to(marqueeTrack, { xPercent: -50, duration: 45, ease: 'none', repeat: -1 });
+    var skewTo = gsap.quickTo(marqueeTrack, 'skewX', { duration: 0.5, ease: EASE_FOLLOW });
+    ScrollTrigger.create({
+      trigger: '.marquee', start: 'top bottom', end: 'bottom top',
+      onUpdate: function(self){
+        var v = gsap.utils.clamp(-1.5, 1.5, self.getVelocity() / -1000);
+        marqueeTween.timeScale(1 + v * 0.6);
+        skewTo(gsap.utils.clamp(-6, 6, v * 6));
+      },
+      onLeave: function(){ marqueeTween.timeScale(1); skewTo(0); },
+      onLeaveBack: function(){ marqueeTween.timeScale(1); skewTo(0); }
+    });
+  }
+
+  /* =================================================================
+     DESKTOP-ONLY LAYER — services converge, magnetic buttons, custom
+     cursor, jurisdiction hover preview. gsap.matchMedia() both gates
+     this to fine-pointer/hover-capable/>=1024px viewports AND handles
+     killing + rebuilding every ScrollTrigger inside it correctly on
+     resize (its whole reason for existing here). Manually-attached DOM
+     listeners are torn down explicitly in the returned cleanup fn,
+     since matchMedia only auto-reverts GSAP-native objects.
+  ================================================================= */
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 1024px) and (hover: hover) and (pointer: fine)', function(){
+
+    /* Services intro converge — same logic as the original hand-rolled
+       version, now scrub-driven instead of a raw scroll-event handler. */
+    var svcTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#svc-intro', start: 'top 80%', end: 'top 30%', scrub: 1,
+        onToggle: function(self){ gsap.set(['#svc-left', '#svc-right'], { willChange: self.isActive ? 'transform' : 'auto' }); }
+      }
+    });
+    svcTl.fromTo('#svc-left', { xPercent: -42, opacity: 0 }, { xPercent: 0, opacity: 1, ease: 'none' }, 0)
+         .fromTo('#svc-right', { xPercent: 42, opacity: 0 }, { xPercent: 0, opacity: 1, ease: 'none' }, 0);
+
+    /* Magnetic buttons — .btn covers both regular buttons and the nav
+       CTA (already class="btn sm nav-cta"), so no separate selector
+       is needed for "and nav CTA" from the spec. */
+    var magnetHandlers = gsap.utils.toArray('.btn').map(function(btn){
+      var qx = gsap.quickTo(btn, 'x', { duration: 0.4, ease: EASE_FOLLOW });
+      var qy = gsap.quickTo(btn, 'y', { duration: 0.4, ease: EASE_FOLLOW });
+      function move(e){
+        var r = btn.getBoundingClientRect();
+        qx((e.clientX - r.left - r.width / 2) * 0.35);
+        qy((e.clientY - r.top - r.height / 2) * 0.35);
+      }
+      function leave(){ qx(0); qy(0); }
+      btn.addEventListener('mousemove', move);
+      btn.addEventListener('mouseleave', leave);
+      return { btn: btn, move: move, leave: leave };
+    });
+
+    /* Custom cursor with a shared "View ↗" state over cards and tiles. */
+    var cursor = document.getElementById('cursor');
+    document.body.classList.add('has-custom-cursor');
+    gsap.set(cursor, { scale: 0.14, opacity: 1 });
+    var cx = gsap.quickTo(cursor, 'x', { duration: 0.2, ease: EASE_FOLLOW });
+    var cy = gsap.quickTo(cursor, 'y', { duration: 0.2, ease: EASE_FOLLOW });
+    function cursorMove(e){ cx(e.clientX); cy(e.clientY); }
+    window.addEventListener('mousemove', cursorMove);
+
+    var cursorTargets = gsap.utils.toArray('.card, .tile');
+    function cursorEnter(){
+      gsap.to(cursor, { scale: 1, duration: DUR.micro, ease: EASE_INOUT });
+      gsap.to(cursor.querySelector('span'), { opacity: 1, duration: DUR.micro, ease: EASE_INOUT });
+    }
+    function cursorLeave(){
+      gsap.to(cursor, { scale: 0.14, duration: DUR.micro, ease: EASE_INOUT });
+      gsap.to(cursor.querySelector('span'), { opacity: 0, duration: DUR.micro, ease: EASE_INOUT });
+    }
+    cursorTargets.forEach(function(el){
+      el.addEventListener('mouseenter', cursorEnter);
+      el.addEventListener('mouseleave', cursorLeave);
+    });
+
+    /* Jurisdiction hover preview. ASSUMPTION: preview images reuse URLs
+       already loaded elsewhere on the page (hero/showcase/service card
+       photography) rather than sourcing seven new external assets —
+       see data-preview attributes on the jurisdiction links. */
+    var preview = document.getElementById('jur-preview');
+    var previewImg = preview.querySelector('img');
+    gsap.set(preview, { scale: 0.96 });
+    var px = gsap.quickTo(preview, 'x', { duration: 0.5, ease: EASE_FOLLOW });
+    var py = gsap.quickTo(preview, 'y', { duration: 0.5, ease: EASE_FOLLOW });
+    function previewMove(e){ px(e.clientX + 24); py(e.clientY - 90); }
+    window.addEventListener('mousemove', previewMove);
+
+    var jurLinks = gsap.utils.toArray('.jur-list a');
+    function jurEnter(e){
+      var src = e.currentTarget.getAttribute('data-preview');
+      if(src) previewImg.src = src;
+      gsap.to(preview, { opacity: 1, scale: 1, duration: DUR.micro, ease: EASE_INOUT });
+    }
+    function jurLeave(){ gsap.to(preview, { opacity: 0, scale: 0.96, duration: DUR.micro, ease: EASE_INOUT }); }
+    jurLinks.forEach(function(a){
+      a.addEventListener('mouseenter', jurEnter);
+      a.addEventListener('mouseleave', jurLeave);
+    });
+
+    return function cleanup(){
+      magnetHandlers.forEach(function(h){
+        h.btn.removeEventListener('mousemove', h.move);
+        h.btn.removeEventListener('mouseleave', h.leave);
+        gsap.set(h.btn, { clearProps: 'transform' });
+      });
+      window.removeEventListener('mousemove', cursorMove);
+      document.body.classList.remove('has-custom-cursor');
+      gsap.set(cursor, { opacity: 0 });
+      cursorTargets.forEach(function(el){
+        el.removeEventListener('mouseenter', cursorEnter);
+        el.removeEventListener('mouseleave', cursorLeave);
+      });
+      window.removeEventListener('mousemove', previewMove);
+      gsap.set(preview, { opacity: 0 });
+      jurLinks.forEach(function(a){
+        a.removeEventListener('mouseenter', jurEnter);
+        a.removeEventListener('mouseleave', jurLeave);
+      });
+    };
+  });
+
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>
