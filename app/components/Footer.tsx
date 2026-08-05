@@ -25,15 +25,16 @@ export default function Footer() {
         <div className="foot-col">
           <p className="foot-h">Our Services</p>
           <nav className="foot-nav">
-            <a href="/#formation">Business Setup</a>
-            <a href="/#translation">Legal Translation</a>
-            <a href="/#notary">Notary Services</a>
-            <a href="/#vat">VAT Registration</a>
-            <a href="/#family-visa">Family Visa Services</a>
-            <a href="/#attestation">Attestation Services</a>
-            <a href="/#pro-services">PRO Services</a>
-            <a href="/#golden-visa">Golden Visa Services</a>
-            <a href="/#branding">Branding &amp; Marketing</a>
+            <a href="/business-setup-dubai">Business Setup</a>
+            <a href="/legal-translation-dubai">Legal Translation</a>
+            <a href="/notary-services">Notary Services</a>
+            <a href="/vat-registration">VAT Registration</a>
+            <a href="/family-visa-services">Family Visa Services</a>
+            <a href="/document-attestation">Attestation Services</a>
+            <a href="/pro-services-dubai">PRO Services</a>
+            <a href="/golden-visa-services">Golden Visa Services</a>
+            <a href="/typing-services">Typing Services</a>
+            <a href="/branding-marketing">Branding &amp; Marketing</a>
           </nav>
         </div>
         <div className="foot-col">

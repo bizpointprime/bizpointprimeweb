@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 const services = [
   {
     id: "formation",
+    slug: "business-setup-dubai",
     title: "Business Setup",
     image: "https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Launching a company in the UAE means choosing between mainland, free zone, and offshore structures — each with its own ownership rules, visa quotas, and cost profile. We help you pick the right one and carry it through from trade name to licence issuance.",
@@ -19,6 +20,7 @@ const services = [
   },
   {
     id: "vat",
+    slug: "vat-registration",
     title: "VAT Registration",
     image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Whether you're registering for the first time, amending an existing registration, or need help staying compliant, our team keeps your VAT status accurate and your filings on schedule.",
@@ -26,6 +28,7 @@ const services = [
   },
   {
     id: "golden-visa",
+    slug: "golden-visa-services",
     title: "Golden Visa Services",
     image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "The UAE Golden Visa opens up long-term residency for investors, entrepreneurs, and specialists — but eligibility and documentation requirements vary by category. We assess your case and manage the application from start to finish.",
@@ -33,6 +36,7 @@ const services = [
   },
   {
     id: "translation",
+    slug: "legal-translation-dubai",
     title: "Legal Translation",
     image: "https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Contracts, court filings, and certificates need translation that holds up with the authorities that receive them. Our translators are certified to produce documents accepted by UAE Courts, government departments, and embassies.",
@@ -40,6 +44,7 @@ const services = [
   },
   {
     id: "notary",
+    slug: "notary-services",
     title: "Notary Services",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Powers of attorney, affidavits, and corporate agreements often need notarization before they're valid in the UAE. We prepare and notarize these documents so they're recognized by every authority that needs to see them.",
@@ -47,6 +52,7 @@ const services = [
   },
   {
     id: "attestation",
+    slug: "document-attestation",
     title: "Attestation Services",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Educational, commercial, and personal documents often need to be attested before they're valid for use in the UAE or abroad. We coordinate with MOFA, embassies, and the relevant ministries to get it done.",
@@ -54,6 +60,7 @@ const services = [
   },
   {
     id: "typing",
+    slug: "typing-services",
     title: "Typing Services",
     image: "https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Government forms have to be filled exactly to specification, in the format each department expects. Our typing centre prepares official forms, immigration paperwork, and legal filings so they're accepted on the first submission.",
@@ -61,6 +68,7 @@ const services = [
   },
   {
     id: "family-visa",
+    slug: "family-visa-services",
     title: "Family Visa Services",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Bringing family to the UAE involves sponsorship applications, medical and Emirates ID steps, and periodic renewals. We manage the process end to end so nothing falls through the cracks.",
@@ -68,6 +76,7 @@ const services = [
   },
   {
     id: "pro-services",
+    slug: "pro-services-dubai",
     title: "PRO Services",
     image: "https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Government paperwork is a constant in the UAE — labour cards, licence renewals, immigration filings. Our PRO team handles the counter visits and follow-ups so your business doesn't have to.",
@@ -75,6 +84,7 @@ const services = [
   },
   {
     id: "branding",
+    slug: "branding-marketing",
     title: "Branding & Marketing",
     image: "https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "A licence gets you open for business — a brand gets you customers. We build identities, run digital marketing campaigns, and design websites that help new and growing businesses stand out.",
@@ -176,6 +186,11 @@ export default function ServicesPage() {
                           {point}
                         </div>
                       ))}
+                    </div>
+                    <div className="reveal" style={{ marginTop: 24 }}>
+                      <a href={`/${svc.slug}`} className="btn outline sm">
+                        <span>Learn More</span>
+                      </a>
                     </div>
                   </div>
                 </div>

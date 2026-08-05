@@ -71,16 +71,18 @@ export default function BlogsPage() {
       <section>
         <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 64 }}>
           <p className="kicker reveal">Latest</p>
-          <article className="blog-feat reveal" style={{ marginTop: 24 }}>
-            <div className="img">
+          <article className="svc-row reveal" style={{ marginTop: 24 }}>
+            <div className="svc-row-photo">
               <img src={featured.image} alt="" />
             </div>
-            <span className="tag reveal">{featured.category}</span>
-            <p className="meta">
-              {featured.date} <span className="sep">/</span> {featured.read}
-            </p>
-            <h3>{featured.title}</h3>
-            <p>{featured.excerpt}</p>
+            <div className="svc-row-text">
+              <span className="tag">{featured.category}</span>
+              <p className="meta" style={{ marginTop: 12 }}>
+                {featured.date} <span className="sep">/</span> {featured.read}
+              </p>
+              <h3 style={{ marginTop: 10 }}>{featured.title}</h3>
+              <p>{featured.excerpt}</p>
+            </div>
           </article>
         </div>
       </section>

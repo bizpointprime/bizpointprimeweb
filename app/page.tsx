@@ -186,7 +186,7 @@ export default function Home() {
             </div>
           </div>
           <div className="svc-cards">
-            <a href="#formation" id="formation" className="card reveal">
+            <a href="/business-setup-dubai" id="formation" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=1200&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Business Setup"
@@ -200,7 +200,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#translation" id="translation" className="card reveal">
+            <a href="/legal-translation-dubai" id="translation" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Legal Translation"
@@ -214,7 +214,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#notary" id="notary" className="card reveal">
+            <a href="/notary-services" id="notary" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Notary Services"
@@ -228,7 +228,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#vat" id="vat" className="card reveal">
+            <a href="/vat-registration" id="vat" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="VAT Registration"
@@ -242,7 +242,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#family-visa" id="family-visa" className="card reveal">
+            <a href="/family-visa-services" id="family-visa" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Family Visa Services"
@@ -256,7 +256,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#attestation" id="attestation" className="card reveal">
+            <a href="/document-attestation" id="attestation" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Attestation Services"
@@ -270,7 +270,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#pro-services" id="pro-services" className="card reveal">
+            <a href="/pro-services-dubai" id="pro-services" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="PRO Services"
@@ -284,7 +284,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#golden-visa" id="golden-visa" className="card reveal">
+            <a href="/golden-visa-services" id="golden-visa" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Golden Visa Services"
@@ -298,7 +298,7 @@ export default function Home() {
                 </span>
               </div>
             </a>
-            <a href="#branding" id="branding" className="card reveal">
+            <a href="/branding-marketing" id="branding" className="card reveal">
               <img
                 src="https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Branding & Marketing"
@@ -312,24 +312,6 @@ export default function Home() {
                 </span>
               </div>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* SHOWCASE */}
-      <section className="showcase" id="showcase">
-        <img
-          className="bg"
-          id="showcase-bg"
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&q=80&fm=jpg&fit=crop&auto=format"
-          alt="Bizpoint Prime advisors in conversation"
-        />
-        <div className="overlay"></div>
-        <div className="cap">
-          <div className="inner">
-            <h2>
-              Real advisors. In Dubai. <span className="accent">On your side.</span>
-            </h2>
           </div>
         </div>
       </section>
