@@ -40,10 +40,13 @@ export default function Footer() {
           <p className="foot-h">Contact Us</p>
           <div className="foot-contact">
             <div>
-              <span className="dot"></span>Dubai, United Arab Emirates
+              <span className="dot"></span>Office No: A1-3, Unique Business World, Metha Plaza
+              Building, Block A, Oud Metha, Dubai, UAE
             </div>
-            <a href="tel:+97140000000">+971 4 000 0000</a>
-            <a href="mailto:hello@bizpointprime.ae">hello@bizpointprime.ae</a>
+            <a href="tel:+971543084251">+971 54 308 4251</a>
+            <a href="tel:+971509207769">+971 50 920 7769</a>
+            <a href="tel:+97142522092">+971 4 252 2092 (Landline)</a>
+            <a href="mailto:bizpointprime@gmail.com">bizpointprime@gmail.com</a>
           </div>
           <p className="foot-h" style={{ marginTop: 24 }}>
             Follow Us

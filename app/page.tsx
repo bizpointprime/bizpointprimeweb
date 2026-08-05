@@ -34,6 +34,22 @@ export default function Home() {
               <span className="line">Together, we</span>
               <span className="line accent">make it happen.</span>
             </h1>
+            <p
+              style={{
+                marginTop: 20,
+                maxWidth: "46ch",
+                fontSize: 15.5,
+                lineHeight: 1.6,
+                color: "rgba(250,250,247,.75)",
+              }}
+            >
+              Bizpoint Prime Business Solutions LLC is a trusted business solutions and corporate
+              services provider in the UAE. We support individuals, entrepreneurs, and companies
+              with business setup, legal translation, government services, notary services, visa
+              assistance, VAT registration, attestation, PRO services, and branding and marketing
+              solutions. Our experienced team is committed to making every process clear,
+              efficient, and stress-free.
+            </p>
             <div className="hero-cta" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
               <a href="#contact" className="btn">
                 <span>Get Started</span>
@@ -516,45 +532,38 @@ export default function Home() {
           <div className="team-grid">
             <div className="member reveal">
               <div className="ph">
-                <img src="https://i.pravatar.cc/700?img=12" alt="Rashid Al Marzooqi" />
+                <img src="/assets/team/umarul-farook.jpg" alt="Umarul Farook" />
               </div>
-              <p className="nm">Rashid Al Marzooqi</p>
-              <p className="ro">Managing Partner</p>
+              <p className="nm">Umarul Farook</p>
+              <p className="ro">Business Development Manager</p>
             </div>
             <div className="member reveal">
               <div className="ph">
-                <img src="https://i.pravatar.cc/700?img=47" alt="Priya Nair" />
+                <img src="/assets/team/abdul-sanad.jpg" alt="Abdul Sanad" />
               </div>
-              <p className="nm">Priya Nair</p>
-              <p className="ro">Head of Company Formation</p>
+              <p className="nm">Abdul Sanad</p>
+              <p className="ro">Operation Manager</p>
             </div>
             <div className="member reveal">
               <div className="ph">
-                <img src="https://i.pravatar.cc/700?img=32" alt="Omar Haddad" />
+                <img src="/assets/team/meera-krishna.jpg" alt="Meera Krishna K" />
               </div>
-              <p className="nm">Omar Haddad</p>
-              <p className="ro">Senior Legal Consultant</p>
+              <p className="nm">Meera Krishna K</p>
+              <p className="ro">Digital Marketing Specialist</p>
             </div>
             <div className="member reveal">
               <div className="ph">
-                <img src="https://i.pravatar.cc/700?img=45" alt="Fatima El-Sayed" />
+                <img src="/assets/team/ali-afaq.jpg" alt="Ali Afaq" />
               </div>
-              <p className="nm">Fatima El-Sayed</p>
-              <p className="ro">Certified Legal Translator</p>
+              <p className="nm">Ali Afaq</p>
+              <p className="ro">Typist</p>
             </div>
             <div className="member reveal">
               <div className="ph">
-                <img src="https://i.pravatar.cc/700?img=65" alt="Arjun Mehta" />
+                <img src="/assets/team/abdul-samed-murshid.jpg" alt="Abdul Samed Murshid" />
               </div>
-              <p className="nm">Arjun Mehta</p>
-              <p className="ro">PRO Services Manager</p>
-            </div>
-            <div className="member reveal">
-              <div className="ph">
-                <img src="https://i.pravatar.cc/700?img=44" alt="Sana Qureshi" />
-              </div>
-              <p className="nm">Sana Qureshi</p>
-              <p className="ro">Business Setup Advisor</p>
+              <p className="nm">Abdul Samed Murshid</p>
+              <p className="ro">Translator</p>
             </div>
           </div>
         </div>
@@ -827,14 +836,20 @@ export default function Home() {
               </p>
               <div className="contact-info">
                 <div>
-                  <span className="dot"></span>Office 1402, Latifa Tower, Sheikh Zayed Road,
-                  Dubai, UAE
+                  <span className="dot"></span>Office No: A1-3, Unique Business World, Metha
+                  Plaza Building, Block A, Oud Metha, Dubai, UAE
                 </div>
-                <a href="tel:+97140000000">
-                  <span className="dot"></span>+971 4 000 0000
+                <a href="tel:+971543084251">
+                  <span className="dot"></span>+971 54 308 4251
                 </a>
-                <a href="mailto:hello@bizpointprime.ae">
-                  <span className="dot"></span>hello@bizpointprime.ae
+                <a href="tel:+971509207769">
+                  <span className="dot"></span>+971 50 920 7769
+                </a>
+                <a href="tel:+97142522092">
+                  <span className="dot"></span>+971 4 252 2092 (Landline)
+                </a>
+                <a href="mailto:bizpointprime@gmail.com">
+                  <span className="dot"></span>bizpointprime@gmail.com
                 </a>
               </div>
             </div>

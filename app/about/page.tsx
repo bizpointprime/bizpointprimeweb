@@ -59,6 +59,16 @@ const whyChoose = [
   },
 ];
 
+const team = [
+  { name: "Umarul Farook", role: "Business Development Manager", img: "/assets/team/umarul-farook.jpg" },
+  { name: "Abdul Sanad", role: "Operation Manager", img: "/assets/team/abdul-sanad.jpg" },
+  { name: "Meera Krishna K", role: "Digital Marketing Specialist", img: "/assets/team/meera-krishna.jpg" },
+  { name: "Ali Afaq", role: "Typist", img: "/assets/team/ali-afaq.jpg" },
+  { name: "Abdul Samed Murshid", role: "Translator", img: "/assets/team/abdul-samed-murshid.jpg" },
+];
+
+const num = (i: number) => String(i + 1).padStart(2, "0");
+
 export default function AboutPage() {
   return (
     <>
@@ -68,7 +78,7 @@ export default function AboutPage() {
       <section className="page-hero">
         <img
           className="bg"
-          src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1920&q=80&fm=jpg&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
         />
@@ -86,42 +96,90 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* INTRO */}
+      {/* STATS */}
       <section>
-        <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 96 }}>
-          <p
-            className="reveal"
-            style={{ maxWidth: "70ch", fontSize: "15.5px", lineHeight: 1.6, color: "var(--fg-muted)" }}
-          >
-            That&rsquo;s why we provide complete business and corporate solutions under one roof,
-            helping individuals, entrepreneurs, startups, SMEs, and established companies navigate
-            every stage of their business journey in the UAE.
-          </p>
-          <p
-            className="reveal"
-            style={{ marginTop: 20, maxWidth: "70ch", fontSize: "15.5px", lineHeight: 1.6, color: "var(--fg-muted)" }}
-          >
-            From business setup and company licensing to legal translation, notary services,
-            visas, VAT registration, document attestation, PRO services, branding, and digital
-            marketing, our experienced team takes care of the essential support services that keep
-            your business moving forward.
-          </p>
-          <p
-            className="reveal"
-            style={{ marginTop: 20, maxWidth: "70ch", fontSize: "15.5px", lineHeight: 1.6, color: "var(--fg-muted)" }}
-          >
-            We simplify complex processes, ensure compliance, and deliver reliable solutions that
-            save you time, reduce unnecessary costs, and allow you to focus on what truly
-            matters — growing your business.
-          </p>
-          <p className="reveal h-sec" style={{ marginTop: 24 }}>
-            Prime. Made. Easy.
-          </p>
+        <div className="wrapc" style={{ paddingTop: 64, paddingBottom: 64 }}>
+          <div className="stats-grid">
+            <div className="stat reveal">
+              <div className="num" data-count="120" data-suffix="+">
+                0+
+              </div>
+              <p>Company formations completed</p>
+            </div>
+            <div className="stat reveal">
+              <div className="num" data-count="300" data-suffix="+">
+                0+
+              </div>
+              <p>Clients served across the UAE</p>
+            </div>
+            <div className="stat reveal">
+              <div className="num" data-count="50" data-suffix="+">
+                0+
+              </div>
+              <p>Language pairs translated</p>
+            </div>
+            <div className="stat reveal">
+              <div className="num" data-count="24" data-suffix="h">
+                0h
+              </div>
+              <p>Standard document turnaround</p>
+            </div>
+            <div className="stat reveal">
+              <div className="num" data-count="5" data-suffix="+">
+                0+
+              </div>
+              <p>Years operating in Dubai</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INTRO */}
+      <section style={{ background: "var(--bg-raised)" }}>
+        <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 112 }}>
+          <div className="why-layout">
+            <div className="why-photo reveal">
+              <img
+                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&q=80&fm=jpg&fit=crop&auto=format"
+                alt="Bizpoint Prime consultants at work"
+              />
+            </div>
+            <div>
+              <p
+                className="reveal"
+                style={{ fontSize: "15.5px", lineHeight: 1.6, color: "var(--fg-muted)" }}
+              >
+                That&rsquo;s why we provide complete business and corporate solutions under one
+                roof, helping individuals, entrepreneurs, startups, SMEs, and established companies
+                navigate every stage of their business journey in the UAE.
+              </p>
+              <p
+                className="reveal"
+                style={{ marginTop: 20, fontSize: "15.5px", lineHeight: 1.6, color: "var(--fg-muted)" }}
+              >
+                From business setup and company licensing to legal translation, notary services,
+                visas, VAT registration, document attestation, PRO services, branding, and digital
+                marketing, our experienced team takes care of the essential support services that
+                keep your business moving forward.
+              </p>
+              <p
+                className="reveal"
+                style={{ marginTop: 20, fontSize: "15.5px", lineHeight: 1.6, color: "var(--fg-muted)" }}
+              >
+                We simplify complex processes, ensure compliance, and deliver reliable solutions
+                that save you time, reduce unnecessary costs, and allow you to focus on what truly
+                matters — growing your business.
+              </p>
+              <p className="reveal h-sec" style={{ marginTop: 24 }}>
+                Prime. Made. Easy.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* VISION & MISSION */}
-      <section style={{ background: "var(--bg-raised)" }}>
+      <section>
         <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 112 }}>
           <p className="kicker reveal">What drives us</p>
           <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "44ch" }}>
@@ -129,6 +187,7 @@ export default function AboutPage() {
           </h2>
           <div className="vm-grid">
             <div className="vm-card reveal">
+              <span className="value-num">01</span>
               <h3>Our Vision</h3>
               <p>
                 To become the UAE&rsquo;s most trusted one-stop business solutions partner by
@@ -147,6 +206,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="vm-card reveal">
+              <span className="value-num">02</span>
               <h3>Our Mission</h3>
               <p>
                 Our mission is to simplify the business journey by delivering reliable,
@@ -168,15 +228,16 @@ export default function AboutPage() {
       </section>
 
       {/* CORE VALUES */}
-      <section>
+      <section style={{ background: "var(--bg-raised)" }}>
         <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 112 }}>
           <p className="kicker reveal">Our Core Values</p>
           <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "52ch" }}>
             The principles behind every engagement.
           </h2>
           <div className="values-grid">
-            {coreValues.map((v) => (
+            {coreValues.map((v, i) => (
               <div className="value-card reveal" key={v.title}>
+                <span className="value-num">{num(i)}</span>
                 <h3>{v.title}</h3>
                 <p>{v.body}</p>
               </div>
@@ -186,7 +247,7 @@ export default function AboutPage() {
       </section>
 
       {/* WHY CHOOSE BIZPOINT PRIME */}
-      <section style={{ background: "var(--bg-raised)" }}>
+      <section>
         <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 128 }}>
           <p className="kicker reveal">Why Bizpoint Prime</p>
           <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "56ch" }}>
@@ -202,10 +263,32 @@ export default function AboutPage() {
             business.
           </p>
           <div className="values-grid cols-3">
-            {whyChoose.map((v) => (
+            {whyChoose.map((v, i) => (
               <div className="value-card reveal" key={v.title}>
+                <span className="value-num">{num(i)}</span>
                 <h3>{v.title}</h3>
                 <p>{v.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TEAM */}
+      <section className="team" style={{ background: "var(--bg-raised)" }}>
+        <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 112 }}>
+          <p className="kicker reveal">Our Team</p>
+          <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "52ch" }}>
+            The people behind Bizpoint Prime.
+          </h2>
+          <div className="team-grid">
+            {team.map((member) => (
+              <div className="member reveal" key={member.name}>
+                <div className="ph">
+                  <img src={member.img} alt={member.name} />
+                </div>
+                <p className="nm">{member.name}</p>
+                <p className="ro">{member.role}</p>
               </div>
             ))}
           </div>

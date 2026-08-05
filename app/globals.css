@@ -243,6 +243,7 @@ header.nav.scrolled nav.links a:hover{color:var(--bg);}
 .value-card{border-top:1px solid var(--border); padding-top:24px;}
 .value-card h3{font-family:var(--display); font-weight:600; font-size:1.375rem; letter-spacing:-.02em;}
 .value-card p{margin-top:12px; font-size:14.5px; line-height:1.55; color:var(--fg-muted);}
+.value-num{display:block; font-family:var(--display); font-weight:500; font-size:13px; color:var(--accent); letter-spacing:.04em; margin-bottom:10px;}
 
 /* ---------- VISION / MISSION SPLIT ---------- */
 .vm-grid{margin-top:56px; display:grid; grid-template-columns:1fr; gap:40px;}
@@ -262,6 +263,10 @@ header.nav.scrolled nav.links a:hover{color:var(--bg);}
 .post-card h3{margin-top:16px; font-family:var(--display); font-weight:600; font-size:1.25rem; line-height:1.25; letter-spacing:-.02em;}
 .post-card p{margin-top:8px; font-size:14px; line-height:1.55; color:var(--fg-muted);}
 
+/* ---------- TAG (Blogs page) ---------- */
+.tag{display:inline-block; font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--accent); border:1px solid var(--border); border-radius:999px; padding:5px 12px;}
+
 /* ---------- SERVICE DETAIL ROWS (Services page) ---------- */
 .svc-row{margin-top:56px; padding-top:56px; border-top:1px solid var(--border); display:grid; grid-template-columns:1fr; gap:32px; align-items:center;}
 @media(min-width:1024px){ .svc-row{grid-template-columns:1fr 1fr; gap:64px;} }
@@ -273,6 +278,15 @@ header.nav.scrolled nav.links a:hover{color:var(--bg);}
 .svc-row-text p{margin-top:14px; font-size:15px; line-height:1.6; color:var(--fg-muted);}
 .svc-row-list{margin-top:20px; display:flex; flex-direction:column; gap:10px;}
 .svc-row-list div{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--fg-muted);}
+
+/* ---------- SERVICE INDEX NAV (Services page) ---------- */
+.svc-index{margin-top:32px; display:flex; flex-wrap:wrap; gap:10px;}
+.svc-index a{font-size:13px; font-weight:500; padding:9px 18px; border:1px solid var(--border); border-radius:999px; color:var(--fg-muted); transition:border-color .3s, color .3s;}
+.svc-index a:hover{border-color:var(--accent); color:var(--fg);}
+
+/* ---------- SERVICE CATEGORY HEADER (Services page) ---------- */
+.svc-cat-head{max-width:60ch;}
+.svc-cat-head p{margin-top:10px; font-size:14.5px; line-height:1.55; color:var(--fg-muted);}
 
 /* ---------- GALLERY (Gallery page) ---------- */
 .gallery-grid{margin-top:56px; display:grid; grid-template-columns:1fr 1fr; gap:20px;}

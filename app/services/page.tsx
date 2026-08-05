@@ -18,6 +18,20 @@ const services = [
     points: ["Trade name reservation & initial approval", "Mainland, Free Zone & Offshore structuring", "Licence issuance and annual renewal"],
   },
   {
+    id: "vat",
+    title: "VAT Registration",
+    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1000&q=80&fm=jpg&fit=crop&auto=format",
+    body: "Whether you're registering for the first time, amending an existing registration, or need help staying compliant, our team keeps your VAT status accurate and your filings on schedule.",
+    points: ["New VAT registration", "Amendments & deregistration", "Ongoing return-filing support"],
+  },
+  {
+    id: "golden-visa",
+    title: "Golden Visa Services",
+    image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1000&q=80&fm=jpg&fit=crop&auto=format",
+    body: "The UAE Golden Visa opens up long-term residency for investors, entrepreneurs, and specialists — but eligibility and documentation requirements vary by category. We assess your case and manage the application from start to finish.",
+    points: ["Eligibility assessment", "Document preparation & review", "End-to-end application handling"],
+  },
+  {
     id: "translation",
     title: "Legal Translation",
     image: "https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=1000&q=80&fm=jpg&fit=crop&auto=format",
@@ -32,11 +46,18 @@ const services = [
     points: ["Power of Attorney drafting & notarization", "Declarations and affidavits", "Corporate agreement notarization"],
   },
   {
-    id: "vat",
-    title: "VAT Registration",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1000&q=80&fm=jpg&fit=crop&auto=format",
-    body: "Whether you're registering for the first time, amending an existing registration, or need help staying compliant, our team keeps your VAT status accurate and your filings on schedule.",
-    points: ["New VAT registration", "Amendments & deregistration", "Ongoing return-filing support"],
+    id: "attestation",
+    title: "Attestation Services",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=80&fm=jpg&fit=crop&auto=format",
+    body: "Educational, commercial, and personal documents often need to be attested before they're valid for use in the UAE or abroad. We coordinate with MOFA, embassies, and the relevant ministries to get it done.",
+    points: ["Educational certificate attestation", "Commercial document legalisation", "MOFA & embassy coordination"],
+  },
+  {
+    id: "typing",
+    title: "Typing Services",
+    image: "https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=1000&q=80&fm=jpg&fit=crop&auto=format",
+    body: "Government forms have to be filled exactly to specification, in the format each department expects. Our typing centre prepares official forms, immigration paperwork, and legal filings so they're accepted on the first submission.",
+    points: ["Official government form preparation", "Immigration paperwork", "Legal filing & documentation typing"],
   },
   {
     id: "family-visa",
@@ -46,25 +67,11 @@ const services = [
     points: ["Family sponsorship applications", "Residence visa renewals", "Status changes and amendments"],
   },
   {
-    id: "attestation",
-    title: "Attestation Services",
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=80&fm=jpg&fit=crop&auto=format",
-    body: "Educational, commercial, and personal documents often need to be attested before they're valid for use in the UAE or abroad. We coordinate with MOFA, embassies, and the relevant ministries to get it done.",
-    points: ["Educational certificate attestation", "Commercial document legalisation", "MOFA & embassy coordination"],
-  },
-  {
     id: "pro-services",
     title: "PRO Services",
     image: "https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=1000&q=80&fm=jpg&fit=crop&auto=format",
     body: "Government paperwork is a constant in the UAE — labour cards, licence renewals, immigration filings. Our PRO team handles the counter visits and follow-ups so your business doesn't have to.",
     points: ["Labour card processing", "Trade licence renewals", "Immigration & visa liaison"],
-  },
-  {
-    id: "golden-visa",
-    title: "Golden Visa Services",
-    image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1000&q=80&fm=jpg&fit=crop&auto=format",
-    body: "The UAE Golden Visa opens up long-term residency for investors, entrepreneurs, and specialists — but eligibility and documentation requirements vary by category. We assess your case and manage the application from start to finish.",
-    points: ["Eligibility assessment", "Document preparation & review", "End-to-end application handling"],
   },
   {
     id: "branding",
@@ -73,16 +80,36 @@ const services = [
     body: "A licence gets you open for business — a brand gets you customers. We build identities, run digital marketing campaigns, and design websites that help new and growing businesses stand out.",
     points: ["Brand identity & visual design", "Digital marketing campaigns", "Website design & development"],
   },
+];
+
+const categories = [
   {
-    id: "typing",
-    title: "Typing Services",
-    image: "https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=1000&q=80&fm=jpg&fit=crop&auto=format",
-    body: "Government forms have to be filled exactly to specification, in the format each department expects. Our typing centre prepares official forms, immigration paperwork, and legal filings so they're accepted on the first submission.",
-    points: ["Official government form preparation", "Immigration paperwork", "Legal filing & documentation typing"],
+    name: "Business & Licensing",
+    blurb: "Get your company registered, tax-compliant, and set up for long-term residency.",
+    ids: ["formation", "vat", "golden-visa"],
+  },
+  {
+    name: "Legal & Documentation",
+    blurb: "Certified translation, notarization, attestation, and government-ready paperwork.",
+    ids: ["translation", "notary", "attestation", "typing"],
+  },
+  {
+    name: "Visas & Government Liaison",
+    blurb: "Sponsorship, renewals, and the government counter visits handled for you.",
+    ids: ["family-visa", "pro-services"],
+  },
+  {
+    name: "Growth & Branding",
+    blurb: "Build the brand and marketing presence that turns a licence into a business.",
+    ids: ["branding"],
   },
 ];
 
+const byId = Object.fromEntries(services.map((s) => [s.id, s]));
+
 export default function ServicesPage() {
+  let rowIndex = 0;
+
   return (
     <>
       <Header />
@@ -91,7 +118,7 @@ export default function ServicesPage() {
       <section className="page-hero">
         <img
           className="bg"
-          src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1920&q=80&fm=jpg&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
         />
@@ -108,30 +135,55 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* SERVICE ROWS */}
+      {/* SERVICE INDEX */}
       <section>
-        <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 128 }}>
-          {services.map((svc, i) => (
-            <div className={`svc-row reveal${i % 2 === 1 ? " reverse" : ""}`} id={svc.id} key={svc.id}>
-              <div className="svc-row-photo">
-                <img src={svc.image} alt={svc.title} />
-              </div>
-              <div className="svc-row-text">
-                <h3>{svc.title}</h3>
-                <p>{svc.body}</p>
-                <div className="svc-row-list">
-                  {svc.points.map((point) => (
-                    <div key={point}>
-                      <span className="check" aria-hidden="true">✓</span>
-                      {point}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="wrapc" style={{ paddingTop: 56, paddingBottom: 56 }}>
+          <p className="kicker reveal">Jump to a service</p>
+          <div className="svc-index reveal">
+            {categories.flatMap((cat) => cat.ids).map((id) => (
+              <a key={id} href={`#${id}`}>
+                {byId[id].title}
+              </a>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* SERVICE CATEGORIES */}
+      {categories.map((cat, ci) => (
+        <section key={cat.name} style={{ background: ci % 2 === 1 ? "var(--bg-raised)" : undefined }}>
+          <div className="wrapc" style={{ paddingTop: 80, paddingBottom: 96 }}>
+            <div className="svc-cat-head">
+              <p className="kicker reveal">{cat.name}</p>
+              <p className="reveal">{cat.blurb}</p>
+            </div>
+            {cat.ids.map((id) => {
+              const svc = byId[id];
+              const reverse = rowIndex % 2 === 1;
+              rowIndex += 1;
+              return (
+                <div className={`svc-row reveal${reverse ? " reverse" : ""}`} id={svc.id} key={svc.id}>
+                  <div className="svc-row-photo">
+                    <img src={svc.image} alt={svc.title} />
+                  </div>
+                  <div className="svc-row-text">
+                    <h3>{svc.title}</h3>
+                    <p>{svc.body}</p>
+                    <div className="svc-row-list">
+                      {svc.points.map((point) => (
+                        <div key={point}>
+                          <span className="check" aria-hidden="true">✓</span>
+                          {point}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ))}
 
       {/* FINAL CTA */}
       <section className="final-cta">
