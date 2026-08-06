@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SiteAnimations from "./components/SiteAnimations";
+import WhatsAppButton from "./components/WhatsAppButton";
 
-const bricolageGrotesque = Bricolage_Grotesque({
+const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -24,9 +31,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={bricolageGrotesque.variable}>
+    <html lang="en" className={`${cormorantGaramond.variable} ${plusJakartaSans.variable}`}>
       <body>
         {children}
+        <WhatsAppButton />
         <SiteAnimations />
       </body>
     </html>

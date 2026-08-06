@@ -59,14 +59,6 @@ const whyChoose = [
   },
 ];
 
-const team = [
-  { name: "Umarul Farook", role: "Business Development Manager", img: "/assets/team/umarul-farook.jpg" },
-  { name: "Abdul Sanad", role: "Operation Manager", img: "/assets/team/abdul-sanad.jpg" },
-  { name: "Meera Krishna K", role: "Digital Marketing Specialist", img: "/assets/team/meera-krishna.jpg" },
-  { name: "Ali Afaq", role: "Typist", img: "/assets/team/ali-afaq.jpg" },
-  { name: "Abdul Samed Murshid", role: "Translator", img: "/assets/team/abdul-samed-murshid.jpg" },
-];
-
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 export default function AboutPage() {
@@ -268,27 +260,6 @@ export default function AboutPage() {
                 <span className="value-num">{num(i)}</span>
                 <h3>{v.title}</h3>
                 <p>{v.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section className="team" style={{ background: "var(--bg-raised)" }}>
-        <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 112 }}>
-          <p className="kicker reveal">Our Team</p>
-          <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "52ch" }}>
-            The people behind Bizpoint Prime.
-          </h2>
-          <div className="team-grid">
-            {team.map((member) => (
-              <div className="member reveal" key={member.name}>
-                <div className="ph">
-                  <img src={member.img} alt={member.name} />
-                </div>
-                <p className="nm">{member.name}</p>
-                <p className="ro">{member.role}</p>
               </div>
             ))}
           </div>

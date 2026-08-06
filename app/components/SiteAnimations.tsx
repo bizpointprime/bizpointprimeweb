@@ -73,23 +73,15 @@ export default function SiteAnimations() {
           const heroKicker = document.querySelector(".hero-kicker");
           const heroCta = document.querySelector(".hero-cta");
           const heroTrustRow = document.querySelector(".hero-trust-row");
-          const tiles = gsap.utils.toArray<HTMLElement>(".tile");
-          const heroCard = document.querySelector(".hero-card");
+          const chips = gsap.utils.toArray<HTMLElement>(".hero-chip");
           const navEl = document.getElementById("nav");
-          if (!heroCard) return;
 
-          const curtain = document.createElement("div");
-          curtain.className = "wipe-overlay wipe-overlay--card";
-          curtain.setAttribute("aria-hidden", "true");
-          heroCard.appendChild(curtain);
-
-          gsap.set([groundline, heroCard, gridLines], { willChange: "transform" });
+          gsap.set([groundline, gridLines], { willChange: "transform" });
 
           const tl = gsap.timeline({
             defaults: { ease: EASE_OUT },
             onComplete: function () {
-              curtain.remove();
-              gsap.set([groundline, heroCard, gridLines], { willChange: "auto" });
+              gsap.set([groundline, gridLines], { willChange: "auto" });
             },
           });
 
@@ -108,15 +100,15 @@ export default function SiteAnimations() {
             )
             .from(heroKicker, { opacity: 0, y: 24, duration: DUR.standard }, 0)
             .from(lines, { yPercent: 110, duration: DUR.statement, stagger: STAGGER.max }, 0.15)
-            .from(tiles, { opacity: 0, scale: 0.96, duration: DUR.standard, stagger: STAGGER.max }, 0.45)
+            .from(chips, { opacity: 0, scale: 0.96, duration: DUR.standard, stagger: STAGGER.min }, 0.45)
             .from(heroCta, { opacity: 0, y: 24, duration: DUR.standard }, 0.5)
-            .from(heroTrustRow, { opacity: 0, y: 24, duration: DUR.standard }, 0.55)
-            .fromTo(curtain, { scaleY: 1 }, { scaleY: 0, duration: DUR.standard, transformOrigin: "top" }, 0.6);
+            .from(heroTrustRow, { opacity: 0, y: 24, duration: DUR.standard }, 0.55);
 
           [
+            { sel: ".hero-bg-wrap", y: -2 },
             { sel: ".hero-grid-lines", y: -6 },
-            { sel: ".hero-left", y: -4 },
-            { sel: ".hero-right", y: -10 },
+            { sel: ".hero-content", y: -4 },
+            { sel: ".hero-trust-corner", y: -10 },
           ].forEach((layer) => {
             gsap.to(layer.sel, {
               yPercent: layer.y,

@@ -12,97 +12,68 @@ export default function Home() {
 
       {/* HERO */}
       <section id="top" className="hero">
-        <img
-          className="hero-bg"
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80&fm=jpg&fit=crop&auto=format"
-          alt=""
-          aria-hidden="true"
-        />
+        <div className="hero-bg-wrap" aria-hidden="true">
+          <img
+            className="hero-bg"
+            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80&fm=jpg&fit=crop&auto=format"
+            alt=""
+          />
+        </div>
         <div className="hero-overlay" aria-hidden="true"></div>
+        <div className="hero-vignette" aria-hidden="true"></div>
+        <div className="hero-grain" aria-hidden="true"></div>
         <div className="hero-groundline" aria-hidden="true"></div>
         <div className="hero-grid-lines" aria-hidden="true">
           <span className="v" style={{ left: "20%" }}></span>
           <span className="v" style={{ left: "50%" }}></span>
           <span className="v" style={{ left: "80%" }}></span>
         </div>
-        <div className="wrap hero-grid">
-          <div className="hero-left">
-            <span className="hero-kicker">
-              <span className="dot" aria-hidden="true"></span>Prime. Made. Easy.
-            </span>
-            <h1 className="display">
-              <span className="line">Together, we</span>
-              <span className="line accent">make it happen.</span>
-            </h1>
-            <p
-              style={{
-                marginTop: 20,
-                maxWidth: "46ch",
-                fontSize: 15.5,
-                lineHeight: 1.6,
-                color: "rgba(250,250,247,.75)",
-              }}
-            >
-              Bizpoint Prime Business Solutions LLC is a trusted business solutions and corporate
-              services provider in the UAE. We support individuals, entrepreneurs, and companies
-              with business setup, legal translation, government services, notary services, visa
-              assistance, VAT registration, attestation, PRO services, and branding and marketing
-              solutions. Our experienced team is committed to making every process clear,
-              efficient, and stress-free.
-            </p>
-            <div className="hero-cta" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-              <a href="#contact" className="btn">
-                <span>Get Started</span>
-              </a>
-              <a href="#contact" className="btn outline-light">
-                <span>Contact Us</span>
-              </a>
-            </div>
-            <div className="hero-trust-row">
-              <div className="hero-avatars" aria-hidden="true">
-                <span>UF</span>
-                <span>AS</span>
-                <span>MK</span>
-                <span>AA</span>
-                <span>AM</span>
-              </div>
-              <p className="hero-trust">
-                Trusted by 300+ businesses across the UAE — from company formation to legal
-                translation and beyond.
-              </p>
-            </div>
-          </div>
-          <div className="hero-right">
-            <div className="tiles">
-              <a href="#formation" className="tile brand">
-                <span className="badge">↗</span>
-                <span className="label">Business Setup</span>
-              </a>
-              <a href="#translation" className="tile dark">
-                <span className="badge">↗</span>
-                <span className="label">Legal Translation</span>
-              </a>
-            </div>
-            <a href="#formation" className="hero-card">
-              <div className="img">
-                <img
-                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80&fm=jpg&fit=crop&auto=format"
-                  alt="Bizpoint Prime advisors with a client"
-                />
-                <div className="hero-stat-chip hero-stat-chip--a">
-                  <strong>24h</strong>
-                  <span>Standard turnaround</span>
-                </div>
-                <div className="hero-stat-chip hero-stat-chip--b">
-                  <strong>120+</strong>
-                  <span>Companies set up</span>
-                </div>
-              </div>
-              <div className="txt">
-                <p>Business setup is where we start — not where we stop.</p>
-              </div>
+        <div className="wrap hero-content">
+          <span className="hero-kicker">
+            <span className="dot" aria-hidden="true"></span>Prime. Made. Easy.
+          </span>
+          <h1 className="display">
+            <span className="line">Together, we</span>
+            <span className="line accent">make it happen.</span>
+          </h1>
+          <p className="hero-desc">
+            Bizpoint Prime Business Solutions LLC is a trusted business solutions and corporate
+            services provider in the UAE — supporting individuals, entrepreneurs, and companies
+            with business setup, legal translation, government services, visa assistance, and
+            more.
+          </p>
+          <div className="hero-cta" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <a href="#contact" className="btn">
+              <span>Get Started</span>
+            </a>
+            <a href="#contact" className="btn outline-light">
+              <span>Contact Us</span>
             </a>
           </div>
+          <div className="hero-chips">
+            <a href="/business-setup-dubai" className="hero-chip">
+              Business Setup
+            </a>
+            <a href="/legal-translation-dubai" className="hero-chip">
+              Legal Translation
+            </a>
+            <a href="/family-visa-services" className="hero-chip">
+              Family Visa Services
+            </a>
+            <a href="/vat-registration" className="hero-chip">
+              VAT Registration
+            </a>
+          </div>
+        </div>
+        <div className="hero-trust-row hero-trust-corner">
+          <div className="hero-avatars" aria-hidden="true">
+            <span>UF</span>
+            <span>AS</span>
+            <span>MK</span>
+            <span>AA</span>
+            <span>AM</span>
+          </div>
+          <p className="hero-trust">Trusted by 300+ businesses across the UAE.</p>
         </div>
       </section>
 
@@ -496,56 +467,6 @@ export default function Home() {
             <div className="proc reveal">
               <h3>Success</h3>
               <p>Your business is established, compliant, and ready for growth.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section className="team">
-        <div className="wrapc" style={{ paddingTop: 80, paddingBottom: 112 }}>
-          <p className="kicker reveal">Team</p>
-          <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "52ch" }}>
-            The people handling your{" "}
-            <span className="accent" style={{ fontStyle: "italic" }}>
-              business setup.
-            </span>
-          </h2>
-          <div className="team-grid">
-            <div className="member reveal">
-              <div className="ph">
-                <img src="/assets/team/umarul-farook.jpg" alt="Umarul Farook" />
-              </div>
-              <p className="nm">Umarul Farook</p>
-              <p className="ro">Business Development Manager</p>
-            </div>
-            <div className="member reveal">
-              <div className="ph">
-                <img src="/assets/team/abdul-sanad.jpg" alt="Abdul Sanad" />
-              </div>
-              <p className="nm">Abdul Sanad</p>
-              <p className="ro">Operation Manager</p>
-            </div>
-            <div className="member reveal">
-              <div className="ph">
-                <img src="/assets/team/meera-krishna.jpg" alt="Meera Krishna K" />
-              </div>
-              <p className="nm">Meera Krishna K</p>
-              <p className="ro">Digital Marketing Specialist</p>
-            </div>
-            <div className="member reveal">
-              <div className="ph">
-                <img src="/assets/team/ali-afaq.jpg" alt="Ali Afaq" />
-              </div>
-              <p className="nm">Ali Afaq</p>
-              <p className="ro">Typist</p>
-            </div>
-            <div className="member reveal">
-              <div className="ph">
-                <img src="/assets/team/abdul-samed-murshid.jpg" alt="Abdul Samed Murshid" />
-              </div>
-              <p className="nm">Abdul Samed Murshid</p>
-              <p className="ro">Translator</p>
             </div>
           </div>
         </div>
