@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { getGalleryImages, getMediaUrl } from "../lib/payload";
 
 export const metadata: Metadata = {
   title: "Gallery | Bizpoint Prime Business Solutions LLC",
@@ -9,18 +10,9 @@ export const metadata: Metadata = {
     "A look inside Bizpoint Prime Business Solutions LLC — our team, our office, and the work we do for businesses across the UAE.",
 };
 
-const photoIds = [
-  "photo-1454165804606-c3d57bc86b40",
-  "photo-1450101499163-c8848c66ca85",
-  "photo-1521791136064-7986c2920216",
-  "photo-1589829545856-d10d557cf95f",
-  "photo-1507842217343-583bb7270b66",
-  "photo-1423592707957-3b212afa6733",
-  "photo-1521737604893-d14cc237f11d",
-  "photo-1600880292089-90a7e086ee0c",
-];
+export default async function GalleryPage() {
+  const images = await getGalleryImages();
 
-export default function GalleryPage() {
   return (
     <>
       <Header />
@@ -46,13 +38,22 @@ export default function GalleryPage() {
       {/* GALLERY GRID */}
       <section>
         <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 128 }}>
-          <div className="gallery-grid">
-            {photoIds.map((id, i) => (
-              <div className="gallery-item reveal" key={i}>
-                <img src={`https://images.unsplash.com/${id}?w=700&q=80&fm=jpg&fit=crop&auto=format`} alt="" />
-              </div>
-            ))}
-          </div>
+          {images.length > 0 ? (
+            <div className="gallery-grid">
+              {images.map((item) => (
+                <div className="gallery-item reveal" key={item.id}>
+                  <img
+                    src={getMediaUrl(item.image)}
+                    alt={item.caption || "Bizpoint Prime gallery"}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="reveal" style={{ color: "var(--fg-muted)" }}>
+              Gallery photos are being prepared. Check back soon.
+            </p>
+          )}
         </div>
       </section>
 

@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { formatPostDate, getBlogPosts, getMediaUrl } from "../lib/payload";
 
 export const metadata: Metadata = {
   title: "Blogs | Bizpoint Prime Business Solutions LLC",
@@ -9,39 +11,10 @@ export const metadata: Metadata = {
     "Insights on business setup, legal translation, VAT, and compliance for companies operating in the UAE — from Bizpoint Prime Business Solutions LLC.",
 };
 
-const posts = [
-  {
-    image: "https://images.unsplash.com/photo-1768069794826-a31af289449f?w=1200&q=80&fm=jpg&fit=crop&auto=format",
-    category: "Tax & Compliance",
-    date: "June 2026",
-    read: "7 min read",
-    title: "UAE Corporate Tax: What New Businesses Need to Register For",
-    excerpt:
-      "A practical breakdown of registration deadlines, exemptions, and what free zone entities specifically need to file in their first year.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1523270918669-1fd17ac1742d?w=900&q=80&fm=jpg&fit=crop&auto=format",
-    category: "Business Setup",
-    date: "May 2026",
-    read: "5 min read",
-    title: "Mainland or Free Zone: How to Choose the Right Licence",
-    excerpt:
-      "Ownership rules, visa quotas, and cost differences that actually decide the right structure for your business.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=900&q=80&fm=jpg&fit=crop&auto=format",
-    category: "Legal Translation",
-    date: "April 2026",
-    read: "4 min read",
-    title: "Why Court-Ready Translation Is Different From Standard Translation",
-    excerpt:
-      "What MOJ certification actually checks for, and why an uncertified translation gets rejected at the counter.",
-  },
-];
+export default async function BlogsPage() {
+  const posts = await getBlogPosts();
+  const [featured, ...rest] = posts;
 
-const [featured, ...rest] = posts;
-
-export default function BlogsPage() {
   return (
     <>
       <Header />
@@ -67,49 +40,71 @@ export default function BlogsPage() {
         </div>
       </section>
 
-      {/* FEATURED POST */}
-      <section>
-        <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 64 }}>
-          <p className="kicker reveal">Latest</p>
-          <article className="svc-row reveal" style={{ marginTop: 24 }}>
-            <div className="svc-row-photo">
-              <img src={featured.image} alt="" />
-            </div>
-            <div className="svc-row-text">
-              <span className="tag">{featured.category}</span>
-              <p className="meta" style={{ marginTop: 12 }}>
-                {featured.date} <span className="sep">/</span> {featured.read}
-              </p>
-              <h3 style={{ marginTop: 10 }}>{featured.title}</h3>
-              <p>{featured.excerpt}</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      {/* MORE POSTS */}
-      <section style={{ background: "var(--bg-raised)" }}>
-        <div className="wrapc" style={{ paddingTop: 80, paddingBottom: 128 }}>
-          <p className="kicker reveal">More insights</p>
-          <div className="post-grid">
-            {rest.map((post) => (
-              <article className="post-card reveal" key={post.title}>
-                <div className="img">
-                  <img src={post.image} alt="" />
-                </div>
-                <span className="tag" style={{ marginTop: 16 }}>
-                  {post.category}
-                </span>
+      {featured ? (
+        <section>
+          <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 64 }}>
+            <p className="kicker reveal">Latest</p>
+            <Link href={`/blogs/${featured.slug}`} className="svc-row reveal" style={{ marginTop: 24 }}>
+              <div className="svc-row-photo">
+                <img src={getMediaUrl(featured.featuredImage)} alt={featured.title} />
+              </div>
+              <div className="svc-row-text">
+                <span className="tag">{featured.category}</span>
                 <p className="meta" style={{ marginTop: 12 }}>
-                  {post.date} <span className="sep">/</span> {post.read}
+                  {formatPostDate(featured.publishedDate)}
+                  {featured.readTime ? (
+                    <>
+                      {" "}
+                      <span className="sep">/</span> {featured.readTime}
+                    </>
+                  ) : null}
                 </p>
-                <h3>{post.title}</h3>
-                <p>{post.excerpt}</p>
-              </article>
-            ))}
+                <h3 style={{ marginTop: 10 }}>{featured.title}</h3>
+                <p>{featured.excerpt}</p>
+              </div>
+            </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section>
+          <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 64 }}>
+            <p className="reveal" style={{ color: "var(--fg-muted)" }}>
+              New insights are on the way. Check back soon.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {rest.length > 0 ? (
+        <section style={{ background: "var(--bg-raised)" }}>
+          <div className="wrapc" style={{ paddingTop: 80, paddingBottom: 128 }}>
+            <p className="kicker reveal">More insights</p>
+            <div className="post-grid">
+              {rest.map((post) => (
+                <Link className="post-card reveal" href={`/blogs/${post.slug}`} key={post.id}>
+                  <div className="img">
+                    <img src={getMediaUrl(post.featuredImage)} alt={post.title} />
+                  </div>
+                  <span className="tag" style={{ marginTop: 16 }}>
+                    {post.category}
+                  </span>
+                  <p className="meta" style={{ marginTop: 12 }}>
+                    {formatPostDate(post.publishedDate)}
+                    {post.readTime ? (
+                      <>
+                        {" "}
+                        <span className="sep">/</span> {post.readTime}
+                      </>
+                    ) : null}
+                  </p>
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* FINAL CTA */}
       <section className="final-cta">
