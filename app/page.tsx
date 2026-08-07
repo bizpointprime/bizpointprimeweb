@@ -2,6 +2,7 @@
 import type { CSSProperties } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import HeroSequence from "./components/HeroSequence";
 
 const padTop96Bottom128: CSSProperties = { paddingTop: 96, paddingBottom: 128 };
 
@@ -12,16 +13,7 @@ export default function Home() {
 
       {/* HERO */}
       <section id="top" className="hero">
-        <div className="hero-bg-wrap" aria-hidden="true">
-          <img
-            className="hero-bg"
-            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80&fm=jpg&fit=crop&auto=format"
-            alt=""
-          />
-        </div>
-        <div className="hero-overlay" aria-hidden="true"></div>
-        <div className="hero-vignette" aria-hidden="true"></div>
-        <div className="hero-grain" aria-hidden="true"></div>
+        <HeroSequence />
         <div className="hero-groundline" aria-hidden="true"></div>
         <div className="hero-grid-lines" aria-hidden="true">
           <span className="v" style={{ left: "20%" }}></span>

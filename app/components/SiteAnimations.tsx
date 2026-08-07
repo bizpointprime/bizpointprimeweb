@@ -40,7 +40,6 @@ export default function SiteAnimations() {
 
     let lenis: Lenis | null = null;
     let ctx: gsap.Context | null = null;
-    let heroSplit: SplitText | null = null;
     let manifestoSplit: SplitText | null = null;
     let tickerCallback: ((time: number) => void) | null = null;
     let onWindowLoadBatches: (() => void) | null = null;
@@ -66,81 +65,11 @@ export default function SiteAnimations() {
         gsap.ticker.lagSmoothing(0);
 
         // ---- HERO ----
-        let heroEntered = false;
-        function buildHeroTimeline(lines: Element[]) {
-          const groundline = document.querySelector(".hero-groundline");
-          const gridLines = gsap.utils.toArray<HTMLElement>(".hero-grid-lines .v");
-          const heroKicker = document.querySelector(".hero-kicker");
-          const heroCta = document.querySelector(".hero-cta");
-          const heroTrustRow = document.querySelector(".hero-trust-row");
-          const chips = gsap.utils.toArray<HTMLElement>(".hero-chip");
-          const navEl = document.getElementById("nav");
-
-          gsap.set([groundline, gridLines], { willChange: "transform" });
-
-          const tl = gsap.timeline({
-            defaults: { ease: EASE_OUT },
-            onComplete: function () {
-              gsap.set([groundline, gridLines], { willChange: "auto" });
-            },
-          });
-
-          tl.from(navEl, { opacity: 0, y: -8, duration: DUR.micro }, 0)
-            .fromTo(
-              groundline,
-              { scaleX: 0 },
-              { scaleX: 1, duration: DUR.standard, transformOrigin: "left center" },
-              0
-            )
-            .fromTo(
-              gridLines,
-              { scaleY: 0 },
-              { scaleY: 1, duration: DUR.standard, stagger: STAGGER.min, transformOrigin: "top" },
-              0
-            )
-            .from(heroKicker, { opacity: 0, y: 24, duration: DUR.standard }, 0)
-            .from(lines, { yPercent: 110, duration: DUR.statement, stagger: STAGGER.max }, 0.15)
-            .from(chips, { opacity: 0, scale: 0.96, duration: DUR.standard, stagger: STAGGER.min }, 0.45)
-            .from(heroCta, { opacity: 0, y: 24, duration: DUR.standard }, 0.5)
-            .from(heroTrustRow, { opacity: 0, y: 24, duration: DUR.standard }, 0.55);
-
-          [
-            { sel: ".hero-bg-wrap", y: -2 },
-            { sel: ".hero-grid-lines", y: -6 },
-            { sel: ".hero-content", y: -4 },
-            { sel: ".hero-trust-corner", y: -10 },
-          ].forEach((layer) => {
-            gsap.to(layer.sel, {
-              yPercent: layer.y,
-              ease: "none",
-              scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-                onToggle: (self) => gsap.set(layer.sel, { willChange: self.isActive ? "transform" : "auto" }),
-              },
-            });
-          });
-
-          return tl;
-        }
-
-        if (document.querySelector(".hero")) {
-          heroSplit = SplitText.create(".hero h1 .line", {
-            type: "lines",
-            mask: "lines",
-            autoSplit: true,
-            onSplit: (self) => {
-              if (!heroEntered) {
-                heroEntered = true;
-                buildHeroTimeline(self.lines);
-                return;
-              }
-              gsap.set(self.lines, { yPercent: 0 });
-            },
-          });
-        }
+        // The hero's entrance is owned entirely by <HeroSequence>: it pins the
+        // section, scrubs the canvas flight-in, and stages the copy against
+        // that same scroll. Nothing here may animate hero content, or the two
+        // would fight over the same transforms.
+        gsap.from("#nav", { opacity: 0, y: -8, duration: DUR.micro, ease: EASE_OUT });
 
         // ---- MANIFESTO ----
         let manifestoTrigger: gsap.core.Tween | null = null;
@@ -405,7 +334,6 @@ export default function SiteAnimations() {
       if (tickerCallback) gsap.ticker.remove(tickerCallback);
       lenis?.destroy();
       ctx?.revert();
-      heroSplit?.revert();
       manifestoSplit?.revert();
     };
   }, []);
