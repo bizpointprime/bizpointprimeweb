@@ -244,12 +244,32 @@ export default function HeroSequence({
           { opacity: 0, y: 18 },
           { opacity: 1, y: 0, duration: 1.2, ease: "power2.out", delay: 0.15 }
         );
+        // Rise is clamped to the title's actual clearance above the sticky
+        // nav, not a fixed guess: on a tall desktop hero -140px reads as a
+        // graceful recede, but that same distance on a short mobile viewport
+        // drove the title up behind the (by then solid) nav bar mid-scroll.
+        // "power2.in" keeps opacity near its start value for most of the
+        // tween's length, so the two must be capped together — fading out
+        // faster while still rising the full distance would still show it
+        // sliding under the nav.
+        // Measured from .hero-seq__brand-inner, not `brand` itself: the outer
+        // element is `inset:0` on the full hero box, so its top always equals
+        // the nav's bottom exactly — that measured a permanent -20px "clearance"
+        // no matter where the padding actually placed the visible text, and
+        // silently floored every rise at 24px.
+        const nav = document.getElementById("nav");
+        const inner = brand.querySelector<HTMLElement>(".hero-seq__brand-inner");
+        const clearance =
+          nav && inner
+            ? Math.max(24, inner.getBoundingClientRect().top - nav.getBoundingClientRect().bottom - 20)
+            : 140;
+        const rise = Math.min(140, clearance);
         // Travels up and shrinks as it goes, so it reads as receding toward
         // the hero copy rather than simply dissolving in place. Clears well
         // before the copy starts landing at 0.58.
         tl.to(
           brand,
-          { opacity: 0, y: -140, scale: 0.88, ease: "power2.in", duration: 0.26 },
+          { opacity: 0, y: -rise, scale: 0.88, ease: "power2.in", duration: 0.26 },
           0.14
         );
       }
@@ -354,13 +374,22 @@ export default function HeroSequence({
         /* Purely typographic — no plaque. Cream reads ~18:1 straight over the
            night footage, so the plate the green lockup needed would only be
            clutter here.
-           padding-bottom, not a transform, lifts the block clear of the lit
-           hotel facade mid-frame: GSAP owns this element's transform.
+           padding-top guarantees clearance from the sticky nav, mirroring
+           .hero-content's own padding-top for the same reason: with only
+           flex-centering and no reserved top space, a short (content-driven,
+           not min-height-forced) mobile hero centers this close enough to the
+           nav to sit nearly underneath it — not just during the scroll-out,
+           but at rest, before any scroll happens at all.
+           padding-bottom (smaller than padding-top) still biases the block
+           toward the lower-center, over the darker part of the footage, and
+           lifts it clear of the lit hotel facade mid-frame — GSAP owns this
+           element's transform, so this stays padding, never a transform.
            Starts hidden and is revealed only by the fade-in tween, so with
            reduced motion or no JS it never appears stranded over the copy. */
         .hero-seq__brand{position:absolute; inset:0; display:flex;
           align-items:center; justify-content:center; pointer-events:none;
-          opacity:0; text-align:center; padding:0 24px 12%;}
+          opacity:0; text-align:center; padding:88px 24px 10%;}
+        @media(min-width:1024px){ .hero-seq__brand{padding-top:104px;} }
         .hero-seq__brand-inner{position:relative; display:flex; flex-direction:column;
           align-items:center;}
         /* Feathered field, not a panel: the ellipse reaches full transparency
