@@ -282,49 +282,61 @@ export default function Home() {
       {/* ABOUT */}
       <section id="about">
         <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 112 }}>
-          <p className="kicker reveal">Welcome to Bizpoint Prime</p>
-          <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "44ch" }}>
-            Smart Business Starts Here.
-          </h2>
-          <p
-            className="reveal"
-            style={{
-              marginTop: 20,
-              maxWidth: "60ch",
-              fontSize: "15.5px",
-              lineHeight: 1.6,
-              color: "var(--fg-muted)",
-            }}
-          >
-            Starting or managing a business in the UAE involves numerous legal, administrative,
-            and regulatory requirements. At Bizpoint Prime Business Solutions LLC, we simplify
-            every step by offering comprehensive business and corporate solutions under one roof.
-            From company formation and government approvals to legal documentation, visa
-            services, branding, and marketing, our experienced team is committed to delivering
-            reliable, transparent, and efficient services tailored to your business goals. Our
-            mission is simple: Prime. Made. Easy.
-          </p>
-          <div className="about-checklist">
-            <div className="reveal">
-              <span className="check" aria-hidden="true">✓</span>Company formation &amp; government approvals
+          <div className="about-grid">
+            <div>
+              <p className="kicker reveal">Welcome to Bizpoint Prime</p>
+              <h2 className="h-sec reveal" style={{ marginTop: 12, maxWidth: "44ch" }}>
+                Smart Business Starts Here.
+              </h2>
+              <p
+                className="reveal"
+                style={{
+                  marginTop: 20,
+                  maxWidth: "52ch",
+                  fontSize: "15.5px",
+                  lineHeight: 1.6,
+                  color: "var(--fg-muted)",
+                }}
+              >
+                Starting or managing a business in the UAE involves numerous legal,
+                administrative, and regulatory requirements. At Bizpoint Prime Business
+                Solutions LLC, we simplify every step by offering comprehensive business and
+                corporate solutions under one roof. From company formation and government
+                approvals to legal documentation, visa services, branding, and marketing, our
+                experienced team is committed to delivering reliable, transparent, and efficient
+                services tailored to your business goals. Our mission is simple: Prime. Made.
+                Easy.
+              </p>
+              <div
+                className="reveal"
+                style={{ marginTop: 32, display: "flex", gap: 16, flexWrap: "wrap" }}
+              >
+                <a href="#contact" className="btn">
+                  <span>Get Started</span>
+                </a>
+                <a href="#legal" className="btn outline">
+                  <span>See our services</span>
+                </a>
+              </div>
             </div>
-            <div className="reveal">
-              <span className="check" aria-hidden="true">✓</span>Legal documentation &amp; notarization
+            <div className="about-mosaic reveal">
+              <div className="about-tile">
+                <span className="chk" aria-hidden="true">✓</span>
+                <p>Company formation &amp; government approvals</p>
+              </div>
+              <div className="about-tile">
+                <span className="chk" aria-hidden="true">✓</span>
+                <p>Legal documentation &amp; notarization</p>
+              </div>
+              <div className="about-tile">
+                <span className="chk" aria-hidden="true">✓</span>
+                <p>Visa services, VAT registration &amp; attestation</p>
+              </div>
+              <div className="about-tile">
+                <span className="chk" aria-hidden="true">✓</span>
+                <p>Branding, marketing &amp; business growth support</p>
+              </div>
             </div>
-            <div className="reveal">
-              <span className="check" aria-hidden="true">✓</span>Visa services, VAT registration &amp; attestation
-            </div>
-            <div className="reveal">
-              <span className="check" aria-hidden="true">✓</span>Branding, marketing &amp; business growth support
-            </div>
-          </div>
-          <div className="reveal" style={{ marginTop: 32, display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href="#contact" className="btn">
-              <span>Get Started</span>
-            </a>
-            <a href="#legal" className="btn outline">
-              <span>See our services</span>
-            </a>
           </div>
         </div>
       </section>
