@@ -785,6 +785,11 @@ export default function Home() {
                     placeholder="Mainland setup, contract translation, PRO services..."
                   ></textarea>
                 </div>
+                <p
+                  className="form-error"
+                  role="alert"
+                  style={{ color: "#c0392b", fontSize: "13.5px", margin: 0, minHeight: 18 }}
+                ></p>
                 <button type="submit" className="btn" style={{ alignSelf: "flex-start", marginTop: 8 }}>
                   <span>Book a Consultation</span>
                 </button>

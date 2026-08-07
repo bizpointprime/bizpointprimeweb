@@ -24,12 +24,46 @@ export default function SiteAnimations() {
 
     // ---- Contact form (functional, not motion) ----
     const form = document.getElementById("contact-form") as HTMLFormElement | null;
-    function onSubmit(e: Event) {
+    async function onSubmit(e: Event) {
       e.preventDefault();
-      const wrap = form?.parentNode as HTMLElement | null;
-      if (wrap) {
-        wrap.innerHTML =
-          '<div class="thanks"><h3>Request received.</h3><p>A consultant will reach out within one business day. Thank you for getting in touch with Bizpoint Prime.</p></div>';
+      if (!form) return;
+
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      const errorEl = form.querySelector(".form-error") as HTMLElement | null;
+      if (errorEl) errorEl.textContent = "";
+      if (submitBtn) submitBtn.disabled = true;
+
+      const data = new FormData(form);
+      const payload = {
+        name: String(data.get("name") ?? ""),
+        email: String(data.get("email") ?? ""),
+        service: String(data.get("service") ?? ""),
+        message: String(data.get("message") ?? ""),
+      };
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}) as { error?: string });
+          throw new Error(body.error || "Failed to send message");
+        }
+
+        const wrap = form.parentNode as HTMLElement | null;
+        if (wrap) {
+          wrap.innerHTML =
+            '<div class="thanks"><h3>Request received.</h3><p>A consultant will reach out within one business day. Thank you for getting in touch with Bizpoint Prime.</p></div>';
+        }
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent =
+            err instanceof Error ? err.message : "Something went wrong. Please try again.";
+        }
+        if (submitBtn) submitBtn.disabled = false;
       }
     }
     form?.addEventListener("submit", onSubmit);
