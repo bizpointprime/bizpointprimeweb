@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -28,11 +28,14 @@ export default function GoldenVisaServicesPage() {
 
       {/* PAGE HERO */}
       <section className="page-hero">
-        <img
+        <Image
           className="bg"
           src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className="overlay" aria-hidden="true"></div>
         <div className="wrap inner">

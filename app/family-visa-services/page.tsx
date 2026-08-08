@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -28,11 +28,14 @@ export default function FamilyVisaServicesPage() {
 
       {/* PAGE HERO */}
       <section className="page-hero">
-        <img
+        <Image
           className="bg"
           src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className="overlay" aria-hidden="true"></div>
         <div className="wrap inner">

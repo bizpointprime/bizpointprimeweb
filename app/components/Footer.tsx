@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -5,7 +7,13 @@ export default function Footer() {
     <footer>
       <div className="wrapc foot-top">
         <div className="foot-brand">
-          <img className="logo" src="/assets/logo-footer.png" alt="Bizpoint Prime Business Solutions LLC" />
+          <Image
+            className="logo"
+            src="/assets/logo-footer.png"
+            alt="Bizpoint Prime Business Solutions LLC"
+            width={1193}
+            height={759}
+          />
           <p>
             Prime. Made. Easy. — a trusted business solutions and corporate services provider in
             the UAE, supporting individuals, entrepreneurs, and companies under one roof.

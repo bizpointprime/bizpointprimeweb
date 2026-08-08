@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -21,11 +21,14 @@ export default async function BlogsPage() {
 
       {/* PAGE HERO */}
       <section className="page-hero">
-        <img
+        <Image
           className="bg"
           src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className="overlay" aria-hidden="true"></div>
         <div className="wrap inner">
@@ -46,7 +49,12 @@ export default async function BlogsPage() {
             <p className="kicker reveal">Latest</p>
             <Link href={`/blogs/${featured.slug}`} className="svc-row reveal" style={{ marginTop: 24 }}>
               <div className="svc-row-photo">
-                <img src={getMediaUrl(featured.featuredImage)} alt={featured.title} />
+                <Image
+                  src={getMediaUrl(featured.featuredImage)}
+                  alt={featured.title}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 480px"
+                />
               </div>
               <div className="svc-row-text">
                 <span className="tag">{featured.category}</span>
@@ -83,7 +91,12 @@ export default async function BlogsPage() {
               {rest.map((post) => (
                 <Link className="post-card reveal" href={`/blogs/${post.slug}`} key={post.id}>
                   <div className="img">
-                    <img src={getMediaUrl(post.featuredImage)} alt={post.title} />
+                    <Image
+                      src={getMediaUrl(post.featuredImage)}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 700px) 100vw, 33vw"
+                    />
                   </div>
                   <span className="tag" style={{ marginTop: 16 }}>
                     {post.category}

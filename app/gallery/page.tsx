@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getGalleryImages, getMediaUrl } from "../lib/payload";
@@ -19,11 +19,14 @@ export default async function GalleryPage() {
 
       {/* PAGE HERO */}
       <section className="page-hero">
-        <img
+        <Image
           className="bg"
           src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className="overlay" aria-hidden="true"></div>
         <div className="wrap inner">
@@ -42,9 +45,11 @@ export default async function GalleryPage() {
             <div className="gallery-grid">
               {images.map((item) => (
                 <div className="gallery-item reveal" key={item.id}>
-                  <img
+                  <Image
                     src={getMediaUrl(item.image)}
                     alt={item.caption || "Bizpoint Prime gallery"}
+                    fill
+                    sizes="(max-width: 700px) 50vw, 25vw"
                   />
                 </div>
               ))}

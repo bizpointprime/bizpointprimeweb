@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -126,11 +126,14 @@ export default function ServicesPage() {
 
       {/* PAGE HERO */}
       <section className="page-hero">
-        <img
+        <Image
           className="bg"
           src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className="overlay" aria-hidden="true"></div>
         <div className="wrap inner">
@@ -174,7 +177,7 @@ export default function ServicesPage() {
               return (
                 <div className={`svc-row reveal${reverse ? " reverse" : ""}`} id={svc.id} key={svc.id}>
                   <div className="svc-row-photo">
-                    <img src={svc.image} alt={svc.title} />
+                    <Image src={svc.image} alt={svc.title} fill sizes="(max-width: 900px) 100vw, 480px" />
                   </div>
                   <div className="svc-row-text">
                     <h3>{svc.title}</h3>

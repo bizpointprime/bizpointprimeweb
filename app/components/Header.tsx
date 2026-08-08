@@ -1,9 +1,11 @@
+import Image from "next/image";
+
 export default function Header() {
   return (
     <header className="nav" id="nav">
       <div className="wrap nav-inner">
         <a href="/" className="brand">
-          <img className="logo" src="/assets/logo-nav.png" alt="Bizpoint Prime" />
+          <Image className="logo" src="/assets/logo-nav.png" alt="Bizpoint Prime" width={1193} height={650} priority />
         </a>
         <nav className="links">
           <a href="/">Home</a>

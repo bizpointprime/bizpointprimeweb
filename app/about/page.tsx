@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -68,11 +68,14 @@ export default function AboutPage() {
 
       {/* PAGE HERO */}
       <section className="page-hero">
-        <img
+        <Image
           className="bg"
           src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&q=80&fm=jpg&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className="overlay" aria-hidden="true"></div>
         <div className="wrap inner">
@@ -131,9 +134,11 @@ export default function AboutPage() {
         <div className="wrapc" style={{ paddingTop: 96, paddingBottom: 112 }}>
           <div className="why-layout">
             <div className="why-photo reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Bizpoint Prime consultants at work"
+                fill
+                sizes="(max-width: 900px) 100vw, 480px"
               />
             </div>
             <div>

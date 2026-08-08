@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HeroSequence from "./components/HeroSequence";
@@ -127,9 +127,11 @@ export default function Home() {
           <div className="svc-intro" id="svc-intro">
             <div className="svc-side" id="svc-left">
               <div className="box">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&fm=jpg&fit=crop&auto=format"
                   alt=""
+                  fill
+                  sizes="(min-width: 1024px) 30vw, 0px"
                 />
               </div>
             </div>
@@ -141,18 +143,22 @@ export default function Home() {
             </div>
             <div className="svc-side" id="svc-right">
               <div className="box">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80&fm=jpg&fit=crop&auto=format"
                   alt=""
+                  fill
+                  sizes="(min-width: 1024px) 30vw, 0px"
                 />
               </div>
             </div>
           </div>
           <div className="svc-cards">
             <a href="/business-setup-dubai" id="formation" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=1200&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Business Setup"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -164,9 +170,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/legal-translation-dubai" id="translation" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Legal Translation"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -178,9 +186,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/notary-services" id="notary" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Notary Services"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -192,9 +202,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/vat-registration" id="vat" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="VAT Registration"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -206,9 +218,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/family-visa-services" id="family-visa" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Family Visa Services"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -220,9 +234,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/document-attestation" id="attestation" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Attestation Services"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -234,9 +250,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/pro-services-dubai" id="pro-services" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="PRO Services"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -248,9 +266,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/golden-visa-services" id="golden-visa" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Golden Visa Services"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -262,9 +282,11 @@ export default function Home() {
               </div>
             </a>
             <a href="/branding-marketing" id="branding" className="card reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Branding & Marketing"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               />
               <div className="grad"></div>
               <div className="body">
@@ -346,9 +368,11 @@ export default function Home() {
         <div className="wrapc" style={padTop96Bottom128}>
           <div className="why-layout">
             <div className="why-photo reveal">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Bizpoint Prime consultants at work"
+                fill
+                sizes="(max-width: 900px) 100vw, 480px"
               />
             </div>
             <div>
@@ -573,9 +597,11 @@ export default function Home() {
             "photo-1423592707957-3b212afa6733",
           ].map((id, i) => (
             <div className="cell" key={i}>
-              <img
+              <Image
                 src={`https://images.unsplash.com/${id}?w=600&q=80&fm=jpg&fit=crop&auto=format`}
                 alt=""
+                fill
+                sizes="320px"
               />
             </div>
           ))}
@@ -591,9 +617,11 @@ export default function Home() {
           <div className="blog-grid">
             <article className="blog-feat reveal">
               <div className="img">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1768069794826-a31af289449f?w=1200&q=80&fm=jpg&fit=crop&auto=format"
                   alt=""
+                  fill
+                  sizes="(max-width: 900px) 100vw, 600px"
                 />
               </div>
               <p className="meta">
@@ -608,9 +636,11 @@ export default function Home() {
             <div className="blog-col">
               <article className="blog-sec reveal">
                 <div className="img">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1523270918669-1fd17ac1742d?w=900&q=80&fm=jpg&fit=crop&auto=format"
                     alt=""
+                    fill
+                    sizes="(max-width: 700px) 100vw, 320px"
                   />
                 </div>
                 <div>
@@ -626,9 +656,11 @@ export default function Home() {
               </article>
               <article className="blog-sec reveal">
                 <div className="img">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=900&q=80&fm=jpg&fit=crop&auto=format"
                     alt=""
+                    fill
+                    sizes="(max-width: 700px) 100vw, 320px"
                   />
                 </div>
                 <div>
@@ -796,6 +828,16 @@ export default function Home() {
               </form>
             </div>
           </div>
+
+          <div className="map-embed reveal">
+            <iframe
+              src="https://www.google.com/maps?q=Unique+Business+World+Metha+Plaza+Building+Oud+Metha+Dubai+UAE&output=embed"
+              title="Bizpoint Prime Business Solutions LLC location"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </section>
 
@@ -807,6 +849,7 @@ export default function Home() {
         <span>View ↗</span>
       </div>
       <div id="jur-preview" aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element -- src is mutated imperatively by SiteAnimations' cursor-follow script; not next/image compatible */}
         <img alt="" />
       </div>
     </>

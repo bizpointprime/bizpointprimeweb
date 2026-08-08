@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 type ContactPayload = {
   name?: string;
@@ -18,12 +18,12 @@ function escapeHtml(value: string): string {
 }
 
 export async function POST(request: Request) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
   const to = process.env.CONTACT_TO_EMAIL;
-  const from = process.env.CONTACT_FROM_EMAIL;
 
-  if (!apiKey || !to || !from) {
-    console.error("Contact form is missing RESEND_API_KEY, CONTACT_TO_EMAIL, or CONTACT_FROM_EMAIL");
+  if (!gmailUser || !gmailAppPassword || !to) {
+    console.error("Contact form is missing GMAIL_USER, GMAIL_APP_PASSWORD, or CONTACT_TO_EMAIL");
     return NextResponse.json({ error: "Contact form is not configured" }, { status: 500 });
   }
 
@@ -48,24 +48,30 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
   }
 
-  const resend = new Resend(apiKey);
-
-  const { error } = await resend.emails.send({
-    from,
-    to,
-    replyTo: email,
-    subject: `New consultation request from ${name}`,
-    html: `
-      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-      <p><strong>Needs help with:</strong> ${escapeHtml(service) || "—"}</p>
-      <p><strong>Message:</strong></p>
-      <p>${escapeHtml(message).replace(/\n/g, "<br />") || "—"}</p>
-    `,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: gmailUser,
+      pass: gmailAppPassword,
+    },
   });
 
-  if (error) {
-    console.error("Failed to send contact email via Resend", error);
+  try {
+    await transporter.sendMail({
+      from: `Bizpoint Prime Website <${gmailUser}>`,
+      to,
+      replyTo: email,
+      subject: `New consultation request from ${name}`,
+      html: `
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Needs help with:</strong> ${escapeHtml(service) || "—"}</p>
+        <p><strong>Message:</strong></p>
+        <p>${escapeHtml(message).replace(/\n/g, "<br />") || "—"}</p>
+      `,
+    });
+  } catch (error) {
+    console.error("Failed to send contact email via Gmail SMTP", error);
     return NextResponse.json({ error: "Failed to send message" }, { status: 502 });
   }
 

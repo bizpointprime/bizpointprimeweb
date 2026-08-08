@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../components/Header";
@@ -43,11 +43,14 @@ export default async function BlogPostPage({ params }: Props) {
       <Header />
 
       <section className="page-hero page-hero--short">
-        <img
+        <Image
           className="bg"
           src={getMediaUrl(post.featuredImage)}
           alt=""
           aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className="overlay" aria-hidden="true"></div>
         <div className="wrap inner">

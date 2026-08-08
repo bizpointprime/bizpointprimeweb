@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
+import { trackEvent } from "../lib/analytics";
 
 /**
  * Global scroll/entrance choreography for the site — ported 1:1 from the
@@ -53,20 +54,34 @@ export default function SiteAnimations() {
           throw new Error(body.error || "Failed to send message");
         }
 
+        trackEvent("generate_lead", { form_id: "contact-form", service: payload.service || undefined });
+
         const wrap = form.parentNode as HTMLElement | null;
         if (wrap) {
           wrap.innerHTML =
             '<div class="thanks"><h3>Request received.</h3><p>A consultant will reach out within one business day. Thank you for getting in touch with Bizpoint Prime.</p></div>';
         }
       } catch (err) {
-        if (errorEl) {
-          errorEl.textContent =
-            err instanceof Error ? err.message : "Something went wrong. Please try again.";
-        }
+        const message = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+        trackEvent("contact_form_error", { form_id: "contact-form", message });
+        if (errorEl) errorEl.textContent = message;
         if (submitBtn) submitBtn.disabled = false;
       }
     }
     form?.addEventListener("submit", onSubmit);
+
+    // ---- Click-to-call / click-to-email tracking (event delegation) ----
+    function onContactLinkClick(e: MouseEvent) {
+      const link = (e.target as HTMLElement)?.closest("a[href]") as HTMLAnchorElement | null;
+      if (!link) return;
+
+      if (link.href.startsWith("tel:")) {
+        trackEvent("click_to_call", { phone_number: link.href.replace("tel:", "") });
+      } else if (link.href.startsWith("mailto:")) {
+        trackEvent("click_to_email", { email_address: link.href.replace("mailto:", "") });
+      }
+    }
+    document.addEventListener("click", onContactLinkClick);
 
     // ASSUMPTION: prefers-reduced-motion is read once at mount rather than
     // tracked live, matching the original build.
@@ -363,6 +378,7 @@ export default function SiteAnimations() {
     return () => {
       window.removeEventListener("scroll", onNavScroll);
       form?.removeEventListener("submit", onSubmit);
+      document.removeEventListener("click", onContactLinkClick);
       if (onWindowLoadBatches) window.removeEventListener("load", onWindowLoadBatches);
       window.removeEventListener("load", onWindowLoadRefresh);
       if (tickerCallback) gsap.ticker.remove(tickerCallback);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import NextImage from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -338,10 +339,9 @@ export default function HeroSequence({
 
   return (
     <div className="hero-seq" aria-hidden="true">
-      {/* Poster: the opening frame as a plain <img>. Visible while the
-          sequence loads, and the permanent fallback if canvas/JS never runs. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="hero-seq__poster" src={FRAME_SRC(0)} alt="" />
+      {/* Poster: the opening frame. Visible while the sequence loads, and the
+          permanent fallback if canvas/JS never runs. */}
+      <NextImage className="hero-seq__poster" src={FRAME_SRC(0)} alt="" fill sizes="100vw" priority />
       <canvas ref={canvasRef} className={`hero-seq__canvas${ready ? " is-ready" : ""}`} />
       {/* Contrast scrim. A plain directional gradient — no vignette, no grain,
           no specular bloom, so the footage stays clean behind the copy. */}
