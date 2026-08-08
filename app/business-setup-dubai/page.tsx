@@ -2,11 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "Business Setup in Dubai | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "End-to-end company formation in Dubai Mainland, Free Zones, and Offshore — trade name reservation, MOA drafting, licence issuance, and bank account assistance from Bizpoint Prime Business Solutions LLC.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/business-setup-dubai";
 
 export const metadata: Metadata = {
-  title: "Business Setup in Dubai | Bizpoint Prime Business Solutions LLC",
-  description:
-    "End-to-end company formation in Dubai Mainland, Free Zones, and Offshore — trade name reservation, MOA drafting, licence issuance, and bank account assistance from Bizpoint Prime Business Solutions LLC.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 const otherServices = [

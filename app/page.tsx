@@ -1,12 +1,19 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HeroSequence from "./components/HeroSequence";
+import { formatPostDate, getBlogPosts, getGalleryImages, getMediaUrl } from "./lib/payload";
 
 const padTop96Bottom128: CSSProperties = { paddingTop: 96, paddingBottom: 128 };
 
-export default function Home() {
+export default async function Home() {
+  const [posts, galleryImages] = await Promise.all([getBlogPosts(), getGalleryImages()]);
+  const [featuredPost, ...otherPosts] = posts;
+  const secondaryPosts = otherPosts.slice(0, 2);
+  const marqueeImages = galleryImages.length > 0 ? [...galleryImages, ...galleryImages] : [];
+
   return (
     <>
       <Header />
@@ -25,8 +32,12 @@ export default function Home() {
             <span className="dot" aria-hidden="true"></span>Prime. Made. Easy.
           </span>
           <h1 className="display">
-            <span className="line">Together, we</span>
-            <span className="line accent">make it happen.</span>
+            <span className="line">
+              <span className="hero-seq__line-inner">Together, we</span>
+            </span>
+            <span className="line accent">
+              <span className="hero-seq__line-inner">make it happen.</span>
+            </span>
           </h1>
           <p className="hero-desc">
             Bizpoint Prime Business Solutions LLC is a trusted business solutions and corporate
@@ -419,53 +430,25 @@ export default function Home() {
             Licensed to set up your business across Dubai&rsquo;s jurisdictions.
           </h2>
           <div className="jur-list">
-            <a
-              href="#contact"
-              className="reveal"
-              data-preview="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80&fm=jpg&fit=crop&auto=format"
-            >
+            <a href="#contact" className="reveal">
               Dubai Mainland (DED)<span className="comma">,</span>
             </a>
-            <a
-              href="#contact"
-              className="reveal"
-              data-preview="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&fm=jpg&fit=crop&auto=format"
-            >
+            <a href="#contact" className="reveal">
               DIFC<span className="comma">,</span>
             </a>
-            <a
-              href="#contact"
-              className="reveal"
-              data-preview="https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=600&q=80&fm=jpg&fit=crop&auto=format"
-            >
+            <a href="#contact" className="reveal">
               DMCC<span className="comma">,</span>
             </a>
-            <a
-              href="#contact"
-              className="reveal"
-              data-preview="https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=600&q=80&fm=jpg&fit=crop&auto=format"
-            >
+            <a href="#contact" className="reveal">
               JAFZA<span className="comma">,</span>
             </a>
-            <a
-              href="#contact"
-              className="reveal"
-              data-preview="https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=600&q=80&fm=jpg&fit=crop&auto=format"
-            >
+            <a href="#contact" className="reveal">
               Dubai South<span className="comma">,</span>
             </a>
-            <a
-              href="#contact"
-              className="reveal"
-              data-preview="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&fm=jpg&fit=crop&auto=format"
-            >
+            <a href="#contact" className="reveal">
               Abu Dhabi<span className="comma">,</span>
             </a>
-            <a
-              href="#contact"
-              className="reveal"
-              data-preview="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&q=80&fm=jpg&fit=crop&auto=format"
-            >
+            <a href="#contact" className="reveal">
               Sharjah<span className="comma">,</span>
             </a>
           </div>
@@ -580,139 +563,88 @@ export default function Home() {
       </section>
 
       {/* MARQUEE */}
-      <section className="marquee" id="gallery">
-        <div className="marquee-track">
-          {[
-            "photo-1454165804606-c3d57bc86b40",
-            "photo-1450101499163-c8848c66ca85",
-            "photo-1521791136064-7986c2920216",
-            "photo-1589829545856-d10d557cf95f",
-            "photo-1507842217343-583bb7270b66",
-            "photo-1423592707957-3b212afa6733",
-            "photo-1454165804606-c3d57bc86b40",
-            "photo-1450101499163-c8848c66ca85",
-            "photo-1521791136064-7986c2920216",
-            "photo-1589829545856-d10d557cf95f",
-            "photo-1507842217343-583bb7270b66",
-            "photo-1423592707957-3b212afa6733",
-          ].map((id, i) => (
-            <div className="cell" key={i}>
-              <Image
-                src={`https://images.unsplash.com/${id}?w=600&q=80&fm=jpg&fit=crop&auto=format`}
-                alt=""
-                fill
-                sizes="320px"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+      {marqueeImages.length > 0 ? (
+        <section className="marquee" id="gallery">
+          <div className="marquee-track">
+            {marqueeImages.map((item, i) => (
+              <Link href="/gallery" className="cell" key={`${item.id}-${i}`}>
+                <Image
+                  src={getMediaUrl(item.image)}
+                  alt={item.caption || "Bizpoint Prime gallery"}
+                  fill
+                  sizes="320px"
+                />
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* BLOG */}
-      <section id="insights">
-        <div className="wrapc" style={padTop96Bottom128}>
-          <h2 className="h-sec reveal" style={{ maxWidth: "52ch" }}>
-            Recent insights for businesses setting up in Dubai.
-          </h2>
-          <div className="blog-grid">
-            <article className="blog-feat reveal">
-              <div className="img">
-                <Image
-                  src="https://images.unsplash.com/photo-1768069794826-a31af289449f?w=1200&q=80&fm=jpg&fit=crop&auto=format"
-                  alt=""
-                  fill
-                  sizes="(max-width: 900px) 100vw, 600px"
-                />
+      {featuredPost ? (
+        <section id="insights">
+          <div className="wrapc" style={padTop96Bottom128}>
+            <h2 className="h-sec reveal" style={{ maxWidth: "52ch" }}>
+              Recent insights for businesses setting up in Dubai.
+            </h2>
+            <div className="blog-grid">
+              <Link href={`/blogs/${featuredPost.slug}`} className="blog-feat reveal">
+                <div className="img">
+                  <Image
+                    src={getMediaUrl(featuredPost.featuredImage)}
+                    alt={featuredPost.title}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 600px"
+                  />
+                </div>
+                <p className="meta">
+                  {formatPostDate(featuredPost.publishedDate)}
+                  {featuredPost.readTime ? (
+                    <>
+                      {" "}
+                      <span className="sep">/</span> {featuredPost.readTime}
+                    </>
+                  ) : null}
+                </p>
+                <h3>{featuredPost.title}</h3>
+                <p>{featuredPost.excerpt}</p>
+              </Link>
+              <div className="blog-col">
+                {secondaryPosts.map((post) => (
+                  <Link href={`/blogs/${post.slug}`} className="blog-sec reveal" key={post.id}>
+                    <div className="img">
+                      <Image
+                        src={getMediaUrl(post.featuredImage)}
+                        alt={post.title}
+                        fill
+                        sizes="(max-width: 700px) 100vw, 320px"
+                      />
+                    </div>
+                    <div>
+                      <p className="meta">
+                        {formatPostDate(post.publishedDate)}
+                        {post.readTime ? (
+                          <>
+                            {" "}
+                            <span className="sep">/</span> {post.readTime}
+                          </>
+                        ) : null}
+                      </p>
+                      <h3>{post.title}</h3>
+                      <p className="ex">{post.excerpt}</p>
+                    </div>
+                  </Link>
+                ))}
               </div>
-              <p className="meta">
-                June 2026 <span className="sep">/</span> 7 min read
-              </p>
-              <h3>UAE Corporate Tax: What New Businesses Need to Register For</h3>
-              <p>
-                A practical breakdown of registration deadlines, exemptions, and what free zone
-                entities specifically need to file in their first year.
-              </p>
-            </article>
-            <div className="blog-col">
-              <article className="blog-sec reveal">
-                <div className="img">
-                  <Image
-                    src="https://images.unsplash.com/photo-1523270918669-1fd17ac1742d?w=900&q=80&fm=jpg&fit=crop&auto=format"
-                    alt=""
-                    fill
-                    sizes="(max-width: 700px) 100vw, 320px"
-                  />
-                </div>
-                <div>
-                  <p className="meta">
-                    May 2026 <span className="sep">/</span> 5 min read
-                  </p>
-                  <h3>Mainland or Free Zone: How to Choose the Right Licence</h3>
-                  <p className="ex">
-                    Ownership rules, visa quotas, and cost differences that actually decide the
-                    right structure for your business.
-                  </p>
-                </div>
-              </article>
-              <article className="blog-sec reveal">
-                <div className="img">
-                  <Image
-                    src="https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=900&q=80&fm=jpg&fit=crop&auto=format"
-                    alt=""
-                    fill
-                    sizes="(max-width: 700px) 100vw, 320px"
-                  />
-                </div>
-                <div>
-                  <p className="meta">
-                    April 2026 <span className="sep">/</span> 4 min read
-                  </p>
-                  <h3>Why Court-Ready Translation Is Different From Standard Translation</h3>
-                  <p className="ex">
-                    What MOJ certification actually checks for, and why an uncertified
-                    translation gets rejected at the counter.
-                  </p>
-                </div>
-              </article>
+            </div>
+            <div className="reveal" style={{ marginTop: 48 }}>
+              <Link href="/blogs" className="btn outline">
+                <span>View more</span>
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section>
-        <div className="wrapc" style={padTop96Bottom128}>
-          <div className="quotes">
-            <div className="quote reveal">
-              <p className="q">
-                &ldquo;Bizpoint Prime handled our free zone license and the translation of every
-                contract in under three weeks. Nothing got lost between English and Arabic.&rdquo;
-              </p>
-              <p className="by">
-                Layla Haddad <span className="sep">/</span> Founder, Haddad Consulting
-              </p>
-            </div>
-            <div className="quote reveal">
-              <p className="q">
-                &ldquo;We refer clients to Bizpoint Prime whenever a translation has to hold up in
-                court. Their MOJ certification has never once been questioned.&rdquo;
-              </p>
-              <p className="by">
-                Marco Bellini <span className="sep">/</span> Partner, Bellini &amp; Reyes Law
-              </p>
-            </div>
-            <div className="quote reveal">
-              <p className="q">
-                &ldquo;Mainland setup, trade licence, and PRO services all moved in parallel
-                instead of one after another. That alone saved us a month.&rdquo;
-              </p>
-              <p className="by">
-                Rohan Sethi <span className="sep">/</span> Director, Sethi Freight Holdings
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       {/* FINAL CTA */}
       <section className="final-cta">
@@ -775,7 +707,7 @@ export default function Home() {
               </p>
               <div className="contact-info">
                 <div>
-                  <span className="dot"></span>Office No: A1-3, Unique Business World, Metha
+                  <span className="dot"></span>Office No: A1-3, inside Unique Business World, Metha
                   Plaza Building, Block A, Oud Metha, Dubai, UAE
                 </div>
                 <a href="tel:+971543084251">
@@ -831,7 +763,7 @@ export default function Home() {
 
           <div className="map-embed reveal">
             <iframe
-              src="https://www.google.com/maps?q=Unique+Business+World+Metha+Plaza+Building+Oud+Metha+Dubai+UAE&output=embed"
+              src="https://www.google.com/maps?q=Bizpoint+Prime+Translation+and+Business+Solutions,25.2310317,55.3131134&output=embed"
               title="Bizpoint Prime Business Solutions LLC location"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -847,10 +779,6 @@ export default function Home() {
           desktop-only script layer activates it. */}
       <div id="cursor" aria-hidden="true">
         <span>View ↗</span>
-      </div>
-      <div id="jur-preview" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element -- src is mutated imperatively by SiteAnimations' cursor-follow script; not next/image compatible */}
-        <img alt="" />
       </div>
     </>
   );

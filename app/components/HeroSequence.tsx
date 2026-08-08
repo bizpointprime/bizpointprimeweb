@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import NextImage from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onPrepareClientNav } from "../lib/prepareClientNav";
 
 /**
  * Scroll-linked image sequence on a canvas — the technique Apple uses on the
@@ -169,23 +170,35 @@ export default function HeroSequence({
     watchDpr();
 
     // ---- mask the H1 lines so they can rise out of a clipped box ----
-    // Done here rather than in markup so a no-JS visitor never sees a
-    // clipped headline.
+    // Inners live in React markup so we never reparent React-owned nodes
+    // (that races soft navigations and throws removeChild NotFoundError).
+    // The overflow clip class is applied here so no-JS still sees a full headline.
     const lines = Array.from(section.querySelectorAll<HTMLElement>("h1 .line"));
-    const lineInners = lines.map((line) => {
-      const existing = line.querySelector<HTMLElement>(":scope > .hero-seq__line-inner");
-      if (existing) return existing;
-      const inner = document.createElement("span");
-      inner.className = "hero-seq__line-inner";
-      while (line.firstChild) inner.appendChild(line.firstChild);
-      line.appendChild(inner);
-      return inner;
-    });
+    const lineInners = lines
+      .map((line) => line.querySelector<HTMLElement>(":scope > .hero-seq__line-inner"))
+      .filter((el): el is HTMLElement => Boolean(el));
     lines.forEach((l) => l.classList.add("hero-seq__line"));
 
     // ---- scroll → frames, push, then copy ----
     let tl: gsap.core.Timeline | null = null;
     let brandIn: gsap.core.Tween | null = null;
+
+    function teardownMotion() {
+      brandIn?.kill();
+      brandIn = null;
+      tl?.scrollTrigger?.kill();
+      tl?.kill();
+      tl = null;
+      gsap.set(
+        [".hero-kicker", ".hero-desc", ".hero-cta", ".hero-chip", ".hero-trust-corner"],
+        { clearProps: "all" }
+      );
+      gsap.set(lineInners, { clearProps: "all" });
+      lines.forEach((l) => l.classList.remove("hero-seq__line"));
+    }
+
+    // Unpin before Next.js commits the route change (useEffect cleanup is too late).
+    const stopPrepare = onPrepareClientNav(teardownMotion);
 
     if (!reduceMotion) {
       gsap.registerPlugin(ScrollTrigger);
@@ -323,17 +336,10 @@ export default function HeroSequence({
 
     return () => {
       disposed = true;
+      stopPrepare();
       ro.disconnect();
       dprQuery?.removeEventListener("change", onDprChange);
-      brandIn?.kill();
-      tl?.scrollTrigger?.kill();
-      tl?.kill();
-      // Hand the copy back to CSS so a remount never leaves it stuck hidden.
-      gsap.set(
-        [".hero-kicker", ".hero-desc", ".hero-cta", ".hero-chip", ".hero-trust-corner"],
-        { clearProps: "all" }
-      );
-      gsap.set(lineInners, { clearProps: "all" });
+      teardownMotion();
     };
   }, [pinTarget, scrollDistance]);
 

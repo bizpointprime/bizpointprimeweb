@@ -2,11 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "Golden Visa Services in Dubai | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "Eligibility assessment, document preparation, and end-to-end application handling for the UAE Golden Visa — from Bizpoint Prime Business Solutions LLC.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/golden-visa-services";
 
 export const metadata: Metadata = {
-  title: "Golden Visa Services in Dubai | Bizpoint Prime Business Solutions LLC",
-  description:
-    "Eligibility assessment, document preparation, and end-to-end application handling for the UAE Golden Visa — from Bizpoint Prime Business Solutions LLC.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 const otherServices = [

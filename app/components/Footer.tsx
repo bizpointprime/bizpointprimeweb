@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -18,58 +19,61 @@ export default function Footer() {
             Prime. Made. Easy. — a trusted business solutions and corporate services provider in
             the UAE, supporting individuals, entrepreneurs, and companies under one roof.
           </p>
-        </div>
-        <div className="foot-col">
-          <p className="foot-h">Quick Links</p>
-          <nav className="foot-nav">
-            <a href="/">Home</a>
-            <a href="/about">About Us</a>
-            <a href="/services">Services</a>
-            <a href="/blogs">Blogs</a>
-            <a href="/gallery">Gallery</a>
-            <a href="/#contact">Contact Us</a>
-          </nav>
-        </div>
-        <div className="foot-col">
-          <p className="foot-h">Our Services</p>
-          <nav className="foot-nav">
-            <a href="/business-setup-dubai">Business Setup</a>
-            <a href="/legal-translation-dubai">Legal Translation</a>
-            <a href="/notary-services">Notary Services</a>
-            <a href="/vat-registration">VAT Registration</a>
-            <a href="/family-visa-services">Family Visa Services</a>
-            <a href="/document-attestation">Attestation Services</a>
-            <a href="/pro-services-dubai">PRO Services</a>
-            <a href="/golden-visa-services">Golden Visa Services</a>
-            <a href="/typing-services">Typing Services</a>
-            <a href="/branding-marketing">Branding &amp; Marketing</a>
-          </nav>
-        </div>
-        <div className="foot-col">
-          <p className="foot-h">Contact Us</p>
-          <div className="foot-contact">
-            <div>
-              <span className="dot"></span>Office No: A1-3, Unique Business World, Metha Plaza
-              Building, Block A, Oud Metha, Dubai, UAE
-            </div>
-            <a href="tel:+971543084251">+971 54 308 4251</a>
-            <a href="tel:+971509207769">+971 50 920 7769</a>
-            <a href="tel:+97142522092">+971 4 252 2092 (Landline)</a>
-            <a href="mailto:bizpointprime@gmail.com">bizpointprime@gmail.com</a>
+          <div className="foot-social">
+            <a
+              href="https://www.instagram.com/bizpointprime.ae/"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bizpoint Prime on Instagram"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+              </svg>
+            </a>
           </div>
-          <p className="foot-h" style={{ marginTop: 24 }}>
-            Follow Us
-          </p>
-          <div className="foot-contact" style={{ flexDirection: "row", gap: 16 }}>
-            <a href="#" target="_blank" rel="noopener">
-              Facebook
-            </a>
-            <a href="#" target="_blank" rel="noopener">
-              Instagram
-            </a>
-            <a href="#" target="_blank" rel="noopener">
-              LinkedIn
-            </a>
+        </div>
+
+        <div className="foot-links">
+          <div className="foot-col">
+            <p className="foot-h">Quick Links</p>
+            <nav className="foot-nav">
+              <Link href="/">Home</Link>
+              <Link href="/about">About Us</Link>
+              <Link href="/services">Services</Link>
+              <Link href="/blogs">Blogs</Link>
+              <Link href="/gallery">Gallery</Link>
+              <Link href="/contact-us">Contact Us</Link>
+            </nav>
+          </div>
+          <div className="foot-col foot-col-services">
+            <p className="foot-h">Our Services</p>
+            <nav className="foot-nav foot-nav-cols">
+              <Link href="/business-setup-dubai">Business Setup</Link>
+              <Link href="/legal-translation-dubai">Legal Translation</Link>
+              <Link href="/notary-services">Notary Services</Link>
+              <Link href="/vat-registration">VAT Registration</Link>
+              <Link href="/family-visa-services">Family Visa Services</Link>
+              <Link href="/document-attestation">Attestation Services</Link>
+              <Link href="/pro-services-dubai">PRO Services</Link>
+              <Link href="/golden-visa-services">Golden Visa Services</Link>
+              <Link href="/typing-services">Typing Services</Link>
+              <Link href="/branding-marketing">Branding &amp; Marketing</Link>
+            </nav>
+          </div>
+          <div className="foot-col">
+            <p className="foot-h">Contact Us</p>
+            <div className="foot-contact">
+              <div>
+                <span className="dot"></span>Office No: A1-3, inside Unique Business World, Metha
+                Plaza Building, Block A, Oud Metha, Dubai, UAE
+              </div>
+              <a href="tel:+971543084251">+971 54 308 4251</a>
+              <a href="tel:+971509207769">+971 50 920 7769</a>
+              <a href="tel:+97142522092">+971 4 252 2092 (Landline)</a>
+              <a href="mailto:bizpointprime@gmail.com">bizpointprime@gmail.com</a>
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +84,8 @@ export default function Footer() {
             reserved.
           </span>
           <span>
-            <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a>
+            <Link href="/privacy-policy">Privacy Policy</Link> ·{" "}
+            <Link href="/terms-of-service">Terms of Service</Link>
           </span>
         </div>
       </div>

@@ -2,11 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "Services | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "Business setup, legal translation, notary, VAT registration, family visas, attestation, PRO services, Golden Visa, branding & marketing, and typing services — all under one roof at Bizpoint Prime Business Solutions LLC.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/services";
 
 export const metadata: Metadata = {
-  title: "Services | Bizpoint Prime Business Solutions LLC",
-  description:
-    "Business setup, legal translation, notary, VAT registration, family visas, attestation, PRO services, Golden Visa, branding & marketing, and typing services — all under one roof at Bizpoint Prime Business Solutions LLC.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 const services = [

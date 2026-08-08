@@ -1,30 +1,82 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
 import { trackEvent } from "../lib/analytics";
+import { isSoftNavAnchor, onPrepareClientNav, prepareClientNav } from "../lib/prepareClientNav";
 
 /**
- * Global scroll/entrance choreography for the site — ported 1:1 from the
- * original static build's vanilla script. Runs once from the root layout so
- * it survives client-side navigation between pages instead of re-firing on
- * every route.
+ * Global scroll/entrance choreography for the site — ported from the original
+ * static build. Re-binds on App Router pathname changes, and restores any
+ * GSAP DOM mutations (pin spacers, SplitText wrappers) synchronously before
+ * soft navigations so React never removeChild's a node that was reparented.
  */
 export default function SiteAnimations() {
-  useEffect(() => {
-    // ---- Nav fill on scroll ----
-    const nav = document.getElementById("nav");
-    function onNavScroll() {
-      nav?.classList.toggle("scrolled", window.scrollY > window.innerHeight * 0.55);
-    }
-    window.addEventListener("scroll", onNavScroll, { passive: true });
-    onNavScroll();
+  const pathname = usePathname();
 
-    // ---- Contact form (functional, not motion) ----
+  // Header is rendered per-page, so soft nav remounts `#nav`. Always resolve
+  // it fresh — a captured node from the previous route is detached and useless.
+  function syncNavScrolled() {
+    const nav = document.getElementById("nav");
+    nav?.classList.toggle("scrolled", window.scrollY > window.innerHeight * 0.55);
+  }
+
+  // ---- Lifetime listeners: nav fill, analytics, soft-nav prep ----
+  useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    window.addEventListener("scroll", syncNavScrolled, { passive: true });
+    syncNavScrolled();
+
+    function onContactLinkClick(e: MouseEvent) {
+      const link = (e.target as HTMLElement)?.closest("a[href]") as HTMLAnchorElement | null;
+      if (!link) return;
+
+      if (link.href.startsWith("tel:")) {
+        trackEvent("click_to_call", { phone_number: link.href.replace("tel:", "") });
+      } else if (link.href.startsWith("mailto:")) {
+        trackEvent("click_to_email", { email_address: link.href.replace("mailto:", "") });
+      }
+    }
+    document.addEventListener("click", onContactLinkClick);
+
+    function onSoftNavClick(e: MouseEvent) {
+      const anchor = (e.target as Element | null)?.closest?.("a[href]");
+      if (!(anchor instanceof HTMLAnchorElement)) return;
+      if (!isSoftNavAnchor(anchor, e)) return;
+      prepareClientNav();
+    }
+    document.addEventListener("click", onSoftNavClick, true);
+
+    return () => {
+      window.removeEventListener("scroll", syncNavScrolled);
+      document.removeEventListener("click", onContactLinkClick);
+      document.removeEventListener("click", onSoftNavClick, true);
+    };
+  }, []);
+
+  // Reset scroll + nav fill after route change (Lenis/pins can leave scroll mid-page).
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    syncNavScrolled();
+    const id = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      syncNavScrolled();
+    });
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
+
+  // Re-bind contact form when the route changes (homepage / contact pages).
+  useEffect(() => {
     const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    if (!form) return;
+
     async function onSubmit(e: Event) {
       e.preventDefault();
       if (!form) return;
@@ -68,22 +120,14 @@ export default function SiteAnimations() {
         if (submitBtn) submitBtn.disabled = false;
       }
     }
-    form?.addEventListener("submit", onSubmit);
 
-    // ---- Click-to-call / click-to-email tracking (event delegation) ----
-    function onContactLinkClick(e: MouseEvent) {
-      const link = (e.target as HTMLElement)?.closest("a[href]") as HTMLAnchorElement | null;
-      if (!link) return;
+    form.addEventListener("submit", onSubmit);
+    return () => form.removeEventListener("submit", onSubmit);
+  }, [pathname]);
 
-      if (link.href.startsWith("tel:")) {
-        trackEvent("click_to_call", { phone_number: link.href.replace("tel:", "") });
-      } else if (link.href.startsWith("mailto:")) {
-        trackEvent("click_to_email", { email_address: link.href.replace("mailto:", "") });
-      }
-    }
-    document.addEventListener("click", onContactLinkClick);
-
-    // ASSUMPTION: prefers-reduced-motion is read once at mount rather than
+  // ---- Per-route motion ----
+  useEffect(() => {
+    // ASSUMPTION: prefers-reduced-motion is read once per route rather than
     // tracked live, matching the original build.
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -93,6 +137,13 @@ export default function SiteAnimations() {
     let tickerCallback: ((time: number) => void) | null = null;
     let onWindowLoadBatches: (() => void) | null = null;
     const onWindowLoadRefresh = () => ScrollTrigger.refresh();
+
+    function teardownSplit() {
+      manifestoSplit?.revert();
+      manifestoSplit = null;
+    }
+
+    const stopPrepare = onPrepareClientNav(teardownSplit);
 
     if (!reduceMotion) {
       gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -108,6 +159,7 @@ export default function SiteAnimations() {
       ctx = gsap.context(() => {
         // ---- LENIS ----
         lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+        lenis.scrollTo(0, { immediate: true });
         lenis.on("scroll", ScrollTrigger.update);
         tickerCallback = (time: number) => lenis?.raf(time * 1000);
         gsap.ticker.add(tickerCallback);
@@ -318,33 +370,6 @@ export default function SiteAnimations() {
             });
           }
 
-          const preview = document.getElementById("jur-preview");
-          const previewImg = preview?.querySelector("img");
-          const jurLinks = gsap.utils.toArray<HTMLElement>(".jur-list a");
-          let previewMove: ((e: MouseEvent) => void) | null = null;
-          function jurEnter(e: MouseEvent) {
-            const src = (e.currentTarget as HTMLElement).getAttribute("data-preview");
-            if (src && previewImg) previewImg.setAttribute("src", src);
-            gsap.to(preview, { opacity: 1, scale: 1, duration: DUR.micro, ease: EASE_INOUT });
-          }
-          function jurLeave() {
-            gsap.to(preview, { opacity: 0, scale: 0.96, duration: DUR.micro, ease: EASE_INOUT });
-          }
-          if (preview && jurLinks.length) {
-            gsap.set(preview, { scale: 0.96 });
-            const px = gsap.quickTo(preview, "x", { duration: 0.5, ease: EASE_FOLLOW });
-            const py = gsap.quickTo(preview, "y", { duration: 0.5, ease: EASE_FOLLOW });
-            previewMove = (e: MouseEvent) => {
-              px(e.clientX + 24);
-              py(e.clientY - 90);
-            };
-            window.addEventListener("mousemove", previewMove);
-            jurLinks.forEach((a) => {
-              a.addEventListener("mouseenter", jurEnter);
-              a.addEventListener("mouseleave", jurLeave);
-            });
-          }
-
           return function cleanup() {
             magnetHandlers.forEach((h) => {
               h.btn.removeEventListener("mousemove", h.move);
@@ -360,33 +385,26 @@ export default function SiteAnimations() {
                 el.removeEventListener("mouseleave", cursorLeave);
               });
             }
-            if (previewMove) {
-              window.removeEventListener("mousemove", previewMove);
-              gsap.set(preview, { opacity: 0 });
-              jurLinks.forEach((a) => {
-                a.removeEventListener("mouseenter", jurEnter);
-                a.removeEventListener("mouseleave", jurLeave);
-              });
-            }
           };
         });
       });
 
       window.addEventListener("load", onWindowLoadRefresh);
+      // Soft nav lands with images/fonts already warm — refresh after paint.
+      requestAnimationFrame(() => ScrollTrigger.refresh());
     }
 
     return () => {
-      window.removeEventListener("scroll", onNavScroll);
-      form?.removeEventListener("submit", onSubmit);
-      document.removeEventListener("click", onContactLinkClick);
+      stopPrepare();
       if (onWindowLoadBatches) window.removeEventListener("load", onWindowLoadBatches);
       window.removeEventListener("load", onWindowLoadRefresh);
+      teardownSplit();
       if (tickerCallback) gsap.ticker.remove(tickerCallback);
       lenis?.destroy();
       ctx?.revert();
-      manifestoSplit?.revert();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

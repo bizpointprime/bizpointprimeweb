@@ -449,15 +449,6 @@ a.svc-row,a.post-card{text-decoration:none; color:inherit;}
 .blog-sec .ex{margin-top:10px; font-size:13.5px; line-height:1.5; color:var(--fg-muted); display:none;}
 @media(min-width:640px){ .blog-sec .ex{display:block;} }
 
-/* ---------- TESTIMONIALS ---------- */
-.quotes{max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:48px;}
-.quote{border-top:1px solid var(--border); padding-top:40px;}
-.quote:first-child{border-top:none; padding-top:0;}
-.quote p.q{font-family:var(--display); font-weight:500; font-style:italic; font-size:1.25rem; line-height:1.5; letter-spacing:-.02em; padding-bottom:4px;}
-@media(min-width:1024px){ .quote p.q{font-size:1.5rem;} }
-.quote .by{margin-top:20px; font-size:14px; color:var(--fg-muted);}
-.quote .by .sep{color:var(--border);}
-
 /* ---------- CONTACT ---------- */
 .contact-grid{display:grid; grid-template-columns:1fr; gap:56px;}
 @media(min-width:1024px){ .contact-grid{grid-template-columns:.85fr 1fr; gap:80px;} }
@@ -485,17 +476,29 @@ form{display:flex; flex-direction:column; gap:20px;}
 /* Deliberately un-animated throughout — the footer is a filing cabinet,
    not a stage. No .reveal classes appear anywhere below. */
 footer{border-top:1px solid var(--border);}
-.foot-top{display:flex; flex-direction:column; gap:40px; padding-top:56px; padding-bottom:56px;}
-@media(min-width:1024px){ .foot-top{flex-direction:row; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;} }
+.foot-top{display:grid; grid-template-columns:1fr; gap:40px; padding-top:64px; padding-bottom:56px;}
+@media(min-width:768px){ .foot-top{grid-template-columns:minmax(200px,280px) 1fr; align-items:start;} }
 .foot-brand{max-width:280px;}
 .foot-brand .logo{height:64px; width:auto;}
 .foot-brand p{margin-top:16px; max-width:32ch; font-size:13.5px; line-height:1.5; color:var(--fg-muted);}
-.foot-col{min-width:160px;}
+.foot-social{display:flex; gap:12px; margin-top:20px;}
+.foot-social a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:999px; border:1px solid var(--border);
+  color:var(--fg-muted); transition:color .2s ease, border-color .2s ease;
+}
+.foot-social a:hover{color:var(--fg); border-color:var(--fg-muted);}
+.foot-social svg{width:16px; height:16px;}
+.foot-links{display:grid; grid-template-columns:1fr; gap:32px;}
+@media(min-width:560px){ .foot-links{grid-template-columns:repeat(2,1fr);} }
+@media(min-width:1024px){ .foot-links{grid-template-columns:repeat(3,1fr); gap:24px;} }
+.foot-col{min-width:0;}
 .foot-h{font-family:var(--display); font-weight:600; font-size:14px; letter-spacing:-.01em; margin-bottom:16px;}
-.foot-nav{display:flex; flex-wrap:wrap; gap:12px 32px;}
+.foot-nav{display:flex; flex-direction:column; gap:10px;}
 .foot-nav a{font-size:13.5px; color:var(--fg-muted); transition:color .2s;}
 .foot-nav a:hover{color:var(--fg);}
-.foot-col .foot-nav{flex-direction:column; flex-wrap:nowrap; gap:10px;}
+.foot-nav-cols{display:block; column-count:2; column-gap:20px;}
+.foot-nav-cols a{display:block; margin-bottom:10px; break-inside:avoid;}
 .foot-contact{display:flex; flex-direction:column; gap:10px;}
 .foot-contact a,.foot-contact div{display:flex; gap:10px; font-size:13.5px; color:var(--fg-muted); transition:color .2s;}
 .foot-contact a:hover{color:var(--fg);}
@@ -514,10 +517,6 @@ footer{border-top:1px solid var(--border);}
   pointer-events:none; z-index:999; opacity:0;}
 #cursor span{opacity:0; text-align:center; line-height:1.2;}
 .has-custom-cursor, .has-custom-cursor a, .has-custom-cursor button{cursor:none;}
-#jur-preview{position:fixed; top:0; left:0; width:220px; height:160px; border-radius:10px;
-  overflow:hidden; pointer-events:none; z-index:998; opacity:0;
-  box-shadow:0 20px 40px -14px rgba(29,28,26,.35);}
-#jur-preview img{width:100%; height:100%; object-fit:cover;}
 
 /* ---------- WHATSAPP FAB (all pages) ---------- */
 .whatsapp-fab{position:fixed; right:20px; bottom:20px; z-index:60; display:flex; align-items:center;

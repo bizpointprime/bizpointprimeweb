@@ -4,11 +4,33 @@ import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { formatPostDate, getBlogPosts, getMediaUrl } from "../lib/payload";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "Blogs | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "Insights on business setup, legal translation, VAT, and compliance for companies operating in the UAE — from Bizpoint Prime Business Solutions LLC.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/blogs";
 
 export const metadata: Metadata = {
-  title: "Blogs | Bizpoint Prime Business Solutions LLC",
-  description:
-    "Insights on business setup, legal translation, VAT, and compliance for companies operating in the UAE — from Bizpoint Prime Business Solutions LLC.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 export default async function BlogsPage() {

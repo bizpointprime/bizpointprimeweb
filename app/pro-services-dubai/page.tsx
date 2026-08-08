@@ -2,11 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "PRO Services in Dubai | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "Government liaison, visa processing, labour cards, and licence renewals handled by Bizpoint Prime Business Solutions LLC's dedicated PRO team.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/pro-services-dubai";
 
 export const metadata: Metadata = {
-  title: "PRO Services in Dubai | Bizpoint Prime Business Solutions LLC",
-  description:
-    "Government liaison, visa processing, labour cards, and licence renewals handled by Bizpoint Prime Business Solutions LLC's dedicated PRO team.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 const otherServices = [

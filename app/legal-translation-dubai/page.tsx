@@ -2,11 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "Legal Translation in Dubai | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "MOJ-certified legal translation in Dubai for contracts, court documents, and certificates in 120+ language pairs — accepted by UAE Courts, MOFA, and embassies.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/legal-translation-dubai";
 
 export const metadata: Metadata = {
-  title: "Legal Translation in Dubai | Bizpoint Prime Business Solutions LLC",
-  description:
-    "MOJ-certified legal translation in Dubai for contracts, court documents, and certificates in 120+ language pairs — accepted by UAE Courts, MOFA, and embassies.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 const otherServices = [

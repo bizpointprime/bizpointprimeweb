@@ -11,6 +11,7 @@ import {
   getBlogPosts,
   getMediaUrl,
 } from "../../lib/payload";
+import { BUSINESS, SITE_URL } from "../../lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -27,9 +28,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) {
     return { title: "Post not found | Bizpoint Prime" };
   }
+  const title = `${post.seoTitle || post.title} | Bizpoint Prime`;
+  const description = post.seoDescription || post.excerpt;
+  const image = getMediaUrl(post.featuredImage);
+  const url = `${SITE_URL}/blogs/${post.slug}`;
   return {
-    title: `${post.seoTitle || post.title} | Bizpoint Prime`,
-    description: post.seoDescription || post.excerpt,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      siteName: BUSINESS.shortName,
+      title,
+      description,
+      images: image ? [{ url: image, alt: post.title }] : undefined,
+      publishedTime: post.publishedDate,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: image ? [image] : undefined,
+    },
   };
 }
 

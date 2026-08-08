@@ -2,11 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "Family Visa Services in Dubai | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "Family sponsorship applications, residence visa renewals, and status changes managed end to end by Bizpoint Prime Business Solutions LLC.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/family-visa-services";
 
 export const metadata: Metadata = {
-  title: "Family Visa Services in Dubai | Bizpoint Prime Business Solutions LLC",
-  description:
-    "Family sponsorship applications, residence visa renewals, and status changes managed end to end by Bizpoint Prime Business Solutions LLC.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 const otherServices = [

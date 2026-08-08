@@ -2,11 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "About Us | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "Bizpoint Prime Business Solutions LLC — our vision, mission, core values, and why businesses across the UAE trust us as their one-stop corporate solutions partner. Prime. Made. Easy.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/about";
 
 export const metadata: Metadata = {
-  title: "About Us | Bizpoint Prime Business Solutions LLC",
-  description:
-    "Bizpoint Prime Business Solutions LLC — our vision, mission, core values, and why businesses across the UAE trust us as their one-stop corporate solutions partner. Prime. Made. Easy.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 const coreValues = [

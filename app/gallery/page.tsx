@@ -3,11 +3,33 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getGalleryImages, getMediaUrl } from "../lib/payload";
+import { BUSINESS, SITE_URL } from "../lib/site";
+
+const TITLE = "Gallery | Bizpoint Prime Business Solutions LLC";
+const DESCRIPTION =
+  "A look inside Bizpoint Prime Business Solutions LLC — our team, our office, and the work we do for businesses across the UAE.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&q=80&fm=jpg&fit=crop&auto=format";
+const PATH = "/gallery";
 
 export const metadata: Metadata = {
-  title: "Gallery | Bizpoint Prime Business Solutions LLC",
-  description:
-    "A look inside Bizpoint Prime Business Solutions LLC — our team, our office, and the work we do for businesses across the UAE.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: `${SITE_URL}${PATH}` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}${PATH}`,
+    siteName: BUSINESS.shortName,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 export default async function GalleryPage() {
