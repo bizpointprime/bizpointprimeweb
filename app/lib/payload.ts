@@ -66,12 +66,52 @@ type PayloadListResponse<T> = {
   totalDocs: number;
 };
 
+/** Strip Payload's "-N" duplicate suffix: foo-1.jpg → foo.jpg */
+function baseMediaFilename(filename: string): string {
+  return filename.replace(/-\d+(\.[^.]+)$/, "$1");
+}
+
+/**
+ * Seeded CMS media files are lost on Vercel (ephemeral disk, no S3).
+ * Map known seed filenames to durable Unsplash sources so gallery/blogs render.
+ */
+const DURABLE_MEDIA_BY_BASE: Record<string, string> = {
+  "uae-corporate-tax.jpg":
+    "https://images.unsplash.com/photo-1768069794826-a31af289449f?w=1200&q=80&fm=jpg&fit=crop&auto=format",
+  "mainland-free-zone.jpg":
+    "https://images.unsplash.com/photo-1523270918669-1fd17ac1742d?w=900&q=80&fm=jpg&fit=crop&auto=format",
+  "legal-translation.jpg":
+    "https://images.unsplash.com/photo-1664575262619-b28fef7a40a4?w=900&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1454165804606-c3d57bc86b40.jpg":
+    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1450101499163-c8848c66ca85.jpg":
+    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1521791136064-7986c2920216.jpg":
+    "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1589829545856-d10d557cf95f.jpg":
+    "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=700&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1507842217343-583bb7270b66.jpg":
+    "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=700&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1423592707957-3b212afa6733.jpg":
+    "https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=700&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1521737604893-d14cc237f11d.jpg":
+    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&q=80&fm=jpg&fit=crop&auto=format",
+  "photo-1600880292089-90a7e086ee0c.jpg":
+    "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=700&q=80&fm=jpg&fit=crop&auto=format",
+};
+
+function durableMediaUrl(url: string): string {
+  const filename = url.split("/").pop()?.split("?")[0];
+  if (!filename) return url;
+  return DURABLE_MEDIA_BY_BASE[baseMediaFilename(filename)] ?? url;
+}
+
 function mediaUrl(media: string | PayloadMedia | null | undefined): string {
   if (!media) return "";
-  if (typeof media === "string") return media;
+  if (typeof media === "string") return durableMediaUrl(media);
   if (!media.url) return "";
-  if (media.url.startsWith("http")) return media.url;
-  return `${PAYLOAD_URL}${media.url}`;
+  if (media.url.startsWith("http")) return durableMediaUrl(media.url);
+  return durableMediaUrl(`${PAYLOAD_URL}${media.url}`);
 }
 
 export function getMediaUrl(media: string | PayloadMedia | null | undefined): string {
