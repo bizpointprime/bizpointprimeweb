@@ -375,11 +375,16 @@ export default function AboutPage() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="/#contact" className="btn on-brand">
+            <a href="/contact-us" className="btn on-brand">
               <span>Request a Free Consultation</span>
             </a>
-            <a href="/#contact" className="btn outline-light">
-              <span>Contact Us Today</span>
+            <a
+              href="https://wa.me/971543084251?text=Hi%20Bizpoint%20Prime%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
+              className="btn outline-light"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>WhatsApp Us</span>
             </a>
           </div>
         </div>

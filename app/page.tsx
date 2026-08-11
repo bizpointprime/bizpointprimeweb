@@ -46,10 +46,10 @@ export default async function Home() {
             more.
           </p>
           <div className="hero-cta" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href="#contact" className="btn">
+            <a href="/services" className="btn">
               <span>Get Started</span>
             </a>
-            <a href="#contact" className="btn outline-light">
+            <a href="/contact-us" className="btn outline-light">
               <span>Contact Us</span>
             </a>
           </div>
@@ -125,8 +125,8 @@ export default async function Home() {
             Prime. Made. Easy. <em>Together, we make it happen.</em>
           </p>
           <div className="reveal" style={{ marginTop: 40 }}>
-            <a href="#formation" className="btn">
-              <span>See how we work</span>
+            <a href="/about" className="btn">
+              <span>About Us</span>
             </a>
           </div>
         </div>
@@ -344,7 +344,7 @@ export default async function Home() {
                 className="reveal"
                 style={{ marginTop: 32, display: "flex", gap: 16, flexWrap: "wrap" }}
               >
-                <a href="#contact" className="btn">
+                <a href="/contact-us" className="btn">
                   <span>Get Started</span>
                 </a>
                 <a href="#legal" className="btn outline">
@@ -430,25 +430,25 @@ export default async function Home() {
             Licensed to set up your business across Dubai&rsquo;s jurisdictions.
           </h2>
           <div className="jur-list">
-            <a href="#contact" className="reveal">
+            <a href="/contact-us" className="reveal">
               Dubai Mainland (DED)<span className="comma">,</span>
             </a>
-            <a href="#contact" className="reveal">
+            <a href="/contact-us" className="reveal">
               DIFC<span className="comma">,</span>
             </a>
-            <a href="#contact" className="reveal">
+            <a href="/contact-us" className="reveal">
               DMCC<span className="comma">,</span>
             </a>
-            <a href="#contact" className="reveal">
+            <a href="/contact-us" className="reveal">
               JAFZA<span className="comma">,</span>
             </a>
-            <a href="#contact" className="reveal">
+            <a href="/contact-us" className="reveal">
               Dubai South<span className="comma">,</span>
             </a>
-            <a href="#contact" className="reveal">
+            <a href="/contact-us" className="reveal">
               Abu Dhabi<span className="comma">,</span>
             </a>
-            <a href="#contact" className="reveal">
+            <a href="/contact-us" className="reveal">
               Sharjah<span className="comma">,</span>
             </a>
           </div>
@@ -685,11 +685,16 @@ export default async function Home() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="#contact" className="btn on-brand">
+            <a href="/contact-us" className="btn on-brand">
               <span>Request a Free Consultation</span>
             </a>
-            <a href="#contact" className="btn outline-light">
-              <span>Contact Us Today</span>
+            <a
+              href="https://wa.me/971543084251?text=Hi%20Bizpoint%20Prime%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
+              className="btn outline-light"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>WhatsApp Us</span>
             </a>
           </div>
         </div>

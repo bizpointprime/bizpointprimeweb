@@ -105,7 +105,7 @@ export default function TypingServicesPage() {
             </div>
           </div>
           <div className="reveal" style={{ marginTop: 32, display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href="/#contact" className="btn">
+            <a href="/contact-us" className="btn">
               <span>Get Help With Your Forms</span>
             </a>
             <a href="/services" className="btn outline">
@@ -262,10 +262,10 @@ export default function TypingServicesPage() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="/#contact" className="btn on-brand">
+            <a href="/contact-us" className="btn on-brand">
               <span>Contact Us</span>
             </a>
-            <a href="/#contact" className="btn outline-light">
+            <a href="/contact-us" className="btn outline-light">
               <span>Request a Free Consultation</span>
             </a>
           </div>
