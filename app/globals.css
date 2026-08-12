@@ -5,7 +5,12 @@
   --display:var(--font-display), ui-sans-serif, system-ui, sans-serif;
   --body:var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --max:1800px; --maxc:1400px;
+  /* Nav geometry as tokens so the hero can pull itself up by exactly the
+     nav's height (see .hero). --nav-h includes the 1px border-bottom that
+     header.nav adds on top of .nav-inner's box. */
+  --nav-inner-h:64px; --nav-h:calc(var(--nav-inner-h) + 1px);
 }
+@media(min-width:1024px){ :root{ --nav-inner-h:78px; } }
 *{box-sizing:border-box; margin:0; padding:0;}
 /* scroll-behavior:smooth removed deliberately — Lenis owns smoothed scroll
    when JS runs; when it doesn't (reduced motion / no-JS), plain instant
@@ -30,8 +35,7 @@ header.nav{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--bor
   background:rgba(250,250,247,.85); backdrop-filter:blur(8px); color:var(--fg);
   transition:background-color .5s ease, color .5s ease, border-color .5s ease;}
 header.nav.scrolled{background:var(--brand); color:var(--bg); border-color:transparent;}
-.nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px;}
-@media(min-width:1024px){ .nav-inner{height:78px;} }
+.nav-inner{display:flex; align-items:center; justify-content:space-between; height:var(--nav-inner-h);}
 .brand{display:flex; align-items:center;}
 .brand .logo{height:40px; width:auto; transition:filter .5s ease;}
 /* Raster logo, so the scrolled-nav "recolour to cream" trick from the old
@@ -117,7 +121,21 @@ header.nav.scrolled .nav-mobile__cta:hover span{color:var(--bg);}
 .btn.outline-light:hover span{color:var(--accent-on);}
 
 /* ---------- HERO ---------- */
-.hero{position:relative; overflow:hidden; background:var(--fg); border-top:none;}
+/* Pulled up by exactly the sticky nav's height so the hero starts at the very
+   top of the viewport with the (translucent, backdrop-blurred) nav floating
+   over it — which is what that nav's rgba background + blur were built for,
+   and what .hero-content/.hero-seq__brand's padding-top already reserve
+   clearance for.
+   This is also what makes the pinned sequence sit still: ScrollTrigger pins at
+   "top top", so while the nav occupied 65px of flow the hero's top started
+   *below* the fold and the whole section had to slide up ~65px before the pin
+   could engage — a visible drift on the first flick of the wheel. Starting at
+   top:0 means the pin engages at scroll 0 and the hero never moves.
+   min-height pairs with it: without it the section would be 65px short of the
+   fold and the next section would peek in underneath. */
+.hero{position:relative; overflow:hidden; background:var(--fg); border-top:none;
+  margin-top:calc(-1 * var(--nav-h)); min-height:100svh;
+  display:flex; flex-direction:column;}
 
 /* Background is the scroll-linked canvas sequence (HeroSequence.tsx), which
    carries its own cover-fit, camera push and contrast scrim. The old
@@ -130,9 +148,24 @@ header.nav.scrolled .nav-mobile__cta:hover span{color:var(--bg);}
    forced height, in the media query below, because the trust row there is
    corner-pinned by position:absolute and doesn't depend on this box's
    height at all — nothing to break by leaving it as-is. */
+/* flex:1 makes this absorb the hero's leftover height instead of leaving it
+   as dead space below the trust row. On mobile the hero is now a full 100svh
+   while this column is only as tall as its content, so without it the copy
+   stacked at the top and ~60px of empty footage sat under everything. Growing
+   the box lets its own justify-content:center actually centre the copy, and
+   pushes .hero-trust-corner onto the hero's bottom edge where it belongs.
+   padding-bottom is 32px rather than the old 72px for the same reason: that
+   larger value existed only to open the gap above the trust row back when the
+   two were simply stacked, and combined with the trust row's own fab
+   clearance it overran the 100svh hero by 20px on a 375x812 screen. */
 .hero-content{position:relative; display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
-  text-align:left; margin:0; max-width:640px; padding-top:64px; padding-bottom:72px;}
-@media(min-width:1024px){ .hero-content{max-width:720px; min-height:calc(100svh - 78px); padding-top:80px; padding-bottom:88px;} }
+  text-align:left; margin:0; max-width:640px; padding-top:64px; padding-bottom:32px; flex:1 1 auto;}
+/* Full 100svh, not 100svh minus the nav: the hero now spans the whole
+   viewport (it's pulled up under the nav, see .hero), so subtracting the nav
+   height again would leave the copy centred against a box a nav-height short
+   of the fold and ride visibly high. padding-top (80px) still clears the
+   79px nav, so the copy never sits under it. */
+@media(min-width:1024px){ .hero-content{max-width:720px; min-height:100svh; padding-top:80px; padding-bottom:88px;} }
 .hero h1{max-width:44rem; padding-bottom:4px; font-size:3rem; line-height:.95; font-weight:500; color:var(--bg);}
 @media(min-width:640px){ .hero h1{font-size:4.25rem;} }
 @media(min-width:1024px){ .hero h1{font-size:5.5rem;} }
@@ -144,28 +177,37 @@ header.nav.scrolled .nav-mobile__cta:hover span{color:var(--bg);}
   border:1px solid rgba(250,250,247,.22); color:var(--bg); font-size:13.5px; font-weight:500;
   transition:background-color .3s, border-color .3s;}
 .hero-chip:hover{background:rgba(250,250,247,.16); border-color:rgba(250,250,247,.4);}
-/* Below 1024px this sits in normal flow, right after .hero-content: pinned
-   to the hero's bottom-right corner it landed in the same 56px zone the
-   fixed WhatsApp fab always occupies (bottom:20px/right:20px, every page,
-   every scroll position), text and button overlapping. No margin-top of its
-   own — .hero-content's existing padding-bottom already opens the gap above
-   it, so adding another margin here would just double that spacing. It's a
-   sibling of .wrap, not a child of it, so it carries no horizontal inset of
-   its own — give it .wrap's padding directly or it sits flush against the
-   viewport edge while the column above it doesn't.
-   padding-right is bigger than the left side on purpose: 20px alignment +
-   84px reserved for the fab's own footprint (56px circle + 20px fixed inset
-   + a small gap). Flow position moves with content length and viewport
-   height, so it isn't reliably clear of the fab vertically — reserving the
-   fab's column horizontally means the two can never overlap regardless of
-   exactly where this row's text wraps to. Desktop keeps the floating
-   corner, where the hero-card layout actually leaves room for it, and
-   reverts padding to 0 since position:absolute there is offset from .hero
-   itself, not from this padding box. */
-.hero-trust-corner{padding-left:20px; padding-right:84px;}
+/* Below 1024px this sits in normal flow, right after .hero-content. Because
+   .hero is a flex column and .hero-content grows to fill it, this row is
+   pushed onto the hero's bottom edge — and the hero being exactly 100svh and
+   pinned from scroll 0, that edge *is* the viewport's bottom edge, at every
+   scroll position.
+   That reliability is what lets the fixed WhatsApp fab be cleared vertically:
+   padding-bottom reserves the fab's whole footprint (56px circle + 20px fixed
+   inset) plus an 8px breathing gap, lifting this row's content clear of the
+   band the fab occupies.
+   It replaces an 84px padding-right that reserved the fab's *column* instead —
+   which was the only safe option while this row's flow position drifted with
+   content length and so couldn't be trusted to clear the fab vertically, but
+   which squeezed the trust line into ~130px beside the avatars and wrapped it
+   to three cramped lines.
+   It's a sibling of .wrap, not a child of it, so it carries no horizontal
+   inset of its own — give it .wrap's padding directly or it sits flush
+   against the viewport edge while the column above it doesn't.
+   Desktop keeps the floating corner, where the hero-card layout actually
+   leaves room for it, and drops padding entirely since position:absolute
+   there is offset from .hero itself, not from this padding box. */
+.hero-trust-corner{padding:0 20px 84px;}
 @media(min-width:1024px){
-  .hero-trust-corner{position:absolute; right:48px; bottom:28px; z-index:1;
-    padding-left:0; padding-right:0;}
+  /* right clears the fab's column rather than its band: on desktop the fab is
+     right:32px and 56px wide, so anything ending nearer than 88px from the
+     edge runs underneath it — at the previous right:48px the trust line's last
+     word ("UAE.") sat behind the button. 104px is that 88px plus a 16px gap.
+     The clearance has to be horizontal here because the two genuinely share a
+     vertical band (fab bottom:32px, this bottom:28px); the mobile rule solves
+     the same collision the other way round, where this row spans the full
+     width and there is room below instead. */
+  .hero-trust-corner{position:absolute; right:104px; bottom:28px; z-index:1; padding:0;}
 }
 
 /* eyebrow badge above the H1 — keyword-carrying, real content, so (per
@@ -573,6 +615,40 @@ footer{border-top:1px solid var(--border);}
 .whatsapp-fab:hover{transform:scale(1.08);}
 .whatsapp-fab svg{width:30px; height:30px;}
 @media(min-width:1024px){ .whatsapp-fab{right:32px; bottom:32px;} }
+
+/* Real content (reveal blocks, hero copy) still lives in the raw HTML for
+   no-JS visitors and crawlers — nothing here is hidden unconditionally.
+   It's hidden only once `html.js` proves JS actually ran (set synchronously
+   in <head> before body paints, see layout.tsx), and only when motion is
+   allowed — SiteAnimations/HeroSequence skip their whole reveal setup under
+   reduced motion, so nothing would ever animate opacity back to 1 for them.
+   This closes the flash where the un-hidden HTML paints first and JS's own
+   hide-then-reveal happens a beat later, visible on every hard refresh. */
+@media not all and (prefers-reduced-motion: reduce){
+  html.js .reveal,
+  html.js .faq-item,
+  html.js .hero-kicker,
+  html.js .hero-desc,
+  html.js .hero-cta,
+  html.js .hero-chip,
+  html.js .hero-trust-corner{opacity:0;}
+  html.js .hero h1 .line{overflow:hidden;}
+  html.js .hero-seq__line-inner{transform:translateY(110%);}
+}
+
+/* ---------- MOBILE TOUCH TARGETS ----------
+   Every pill-shaped control on the site was sized for a mouse cursor and
+   landed between 39px and 42px tall — under the 44px minimum a fingertip
+   needs, and these are the densest tap zones on the site (ten service-index
+   pills wrap into a block where a mis-tap opens the wrong service). Only the
+   vertical padding grows, so the horizontal rhythm and the desktop look are
+   both untouched; scoped below 1024px to match the breakpoint used
+   throughout rather than shipping chunkier buttons to mouse users. */
+@media(max-width:1023px){
+  .hero-chip{padding-top:12px; padding-bottom:12px;}      /* 40.2 -> 44.2 */
+  .svc-index a{padding-top:12px; padding-bottom:12px;}    /* 39.1 -> 45.1 */
+  .btn.sm{padding-top:12px; padding-bottom:12px;}         /* 41.9 -> 45.9 */
+}
 
 @media(prefers-reduced-motion:reduce){
   /* Defensive fallback only — nothing in this page is hidden by default

@@ -183,12 +183,24 @@ export default function HeroSequence({
     let tl: gsap.core.Timeline | null = null;
     let brandIn: gsap.core.Tween | null = null;
 
-    function teardownMotion() {
+    // Only the pin actually needs to go before React unmounts: ScrollTrigger
+    // wraps the pinned section in a spacer div, and if that's still in place
+    // when React tries to remove the section's children it throws
+    // removeChild NotFoundError. The opacity/transform resets below don't
+    // restructure the DOM, so they must NOT run here — this fires on every
+    // internal link click while the hero is still fully on screen, and
+    // clearProps("all") would instantly reveal the (still hidden, not-yet-
+    // scrolled-to) copy for as long as the route transition takes.
+    function killPin() {
       brandIn?.kill();
       brandIn = null;
       tl?.scrollTrigger?.kill();
       tl?.kill();
       tl = null;
+    }
+
+    function teardownMotion() {
+      killPin();
       gsap.set(
         [".hero-kicker", ".hero-desc", ".hero-cta", ".hero-chip", ".hero-trust-corner"],
         { clearProps: "all" }
@@ -198,7 +210,7 @@ export default function HeroSequence({
     }
 
     // Unpin before Next.js commits the route change (useEffect cleanup is too late).
-    const stopPrepare = onPrepareClientNav(teardownMotion);
+    const stopPrepare = onPrepareClientNav(killPin);
 
     if (!reduceMotion) {
       gsap.registerPlugin(ScrollTrigger);
@@ -249,10 +261,10 @@ export default function HeroSequence({
       // The brand title holds over the opening frames, then lifts away well
       // before the real hero copy starts arriving, so the two never overlap.
       if (brand) {
-        // Entrance is its own tween, not part of the scrub: the title fades up
-        // on load. The scroll-out below sits at position 0.14 in the timeline,
-        // so it renders (and captures its start opacity) only once scrolling
-        // reaches it — by which time this has settled at 1.
+        // Entrance is its own real-time tween, not part of the scrub: the
+        // title fades up on load, with no scrolling required. Ownership of
+        // this element then transfers to the scrubbed tween below — see its
+        // onStart, which is what stops the two fighting over opacity.
         brandIn = gsap.fromTo(
           brand,
           { opacity: 0, y: 18 },
@@ -271,19 +283,46 @@ export default function HeroSequence({
         // the nav's bottom exactly — that measured a permanent -20px "clearance"
         // no matter where the padding actually placed the visible text, and
         // silently floored every rise at 24px.
-        const nav = document.getElementById("nav");
-        const inner = brand.querySelector<HTMLElement>(".hero-seq__brand-inner");
-        const clearance =
-          nav && inner
-            ? Math.max(24, inner.getBoundingClientRect().top - nav.getBoundingClientRect().bottom - 20)
-            : 140;
-        const rise = Math.min(140, clearance);
+        //
+        // offsetTop/offsetHeight rather than getBoundingClientRect(): rects
+        // include ancestor transforms, and this very tween puts a translate +
+        // scale on `brand`. Any re-measure therefore read the title's animated
+        // position instead of its layout position and collapsed the clearance
+        // to the 24px floor again — a barely-perceptible nudge in place of the
+        // intended 140px recede. Offsets are pure layout and ignore transforms.
+        // Kept as a function so invalidateOnRefresh re-runs it once webfonts
+        // have landed and on every resize, instead of freezing whatever the
+        // layout happened to be during mount.
+        const riseFor = () => {
+          const nav = document.getElementById("nav");
+          const inner = brand.querySelector<HTMLElement>(".hero-seq__brand-inner");
+          if (!nav || !inner) return 140;
+          return Math.min(140, Math.max(24, inner.offsetTop - nav.offsetHeight - 20));
+        };
         // Travels up and shrinks as it goes, so it reads as receding toward
         // the hero copy rather than simply dissolving in place. Clears well
         // before the copy starts landing at 0.58.
         tl.to(
           brand,
-          { opacity: 0, y: -rise, scale: 0.88, ease: "power2.in", duration: 0.26 },
+          {
+            opacity: 0,
+            y: () => -riseFor(),
+            scale: 0.88,
+            ease: "power2.in",
+            duration: 0.26,
+            // Hand this element over to the scrub the moment the fade-out
+            // starts. The entrance above runs in real time, so without this it
+            // can finish *after* the scrubbed fade-out has already completed
+            // and write opacity straight back up to 1 — stranding the title at
+            // full strength on top of the hero copy. It used to be masked by
+            // the hero needing ~79px of scroll before it pinned, which reliably
+            // gave the 1.35s entrance time to land first; pinning from scroll 0
+            // removed that grace period and made the race lose.
+            onStart: () => {
+              brandIn?.kill();
+              brandIn = null;
+            },
+          },
           0.14
         );
       }
@@ -291,10 +330,23 @@ export default function HeroSequence({
       // 3. The copy arrives, staged against the same scrub. Every target is
       // optional — the hero's decorative layers come and go, and a missing
       // one must not break the sequence.
+      //
+      // These are fromTo, never from, and that is load-bearing: globals.css
+      // pre-hides this copy (html.js rules) so it can't flash before JS runs,
+      // and a bare .from() would read that opacity:0 as its *end* value and
+      // animate 0 → 0, leaving the hero permanently blank. Stating both ends
+      // keeps the tween independent of whatever the stylesheet starts at.
       const at = 0.58;
       const rise = (sel: string, offset: number, y = 20, duration = 0.14) => {
         const el = q<HTMLElement>(sel);
-        if (el) tl!.from(el, { opacity: 0, y, duration, ease: "power3.out" }, at + offset);
+        if (el) {
+          tl!.fromTo(
+            el,
+            { opacity: 0, y },
+            { opacity: 1, y: 0, duration, ease: "power3.out" },
+            at + offset
+          );
+        }
       };
 
       const groundline = q<HTMLElement>(".hero-groundline");
@@ -316,18 +368,27 @@ export default function HeroSequence({
       }
       rise(".hero-kicker", 0.02);
       if (lineInners.length) {
-        tl.from(
+        // `y: 0` on both ends is required, not decorative. globals.css
+        // pre-hides these with transform:translateY(110%); GSAP parses that
+        // existing transform into its own `y` cache (in px) and then applies
+        // yPercent on top of it — so the start doubles to 220% and, worse,
+        // the parsed y survives after yPercent animates to 0, leaving the
+        // headline stuck one full line below its clip box forever. Stating y
+        // explicitly overwrites that parsed offset.
+        tl.fromTo(
           lineInners,
-          { yPercent: 110, duration: 0.2, ease: "power3.out", stagger: 0.045 },
+          { yPercent: 110, y: 0 },
+          { yPercent: 0, y: 0, duration: 0.2, ease: "power3.out", stagger: 0.045 },
           at + 0.05
         );
       }
       rise(".hero-desc", 0.14, 20, 0.16);
       rise(".hero-cta", 0.18);
       if (chips.length) {
-        tl.from(
+        tl.fromTo(
           chips,
-          { opacity: 0, y: 16, scale: 0.96, duration: 0.14, ease: "power3.out", stagger: 0.035 },
+          { opacity: 0, y: 16, scale: 0.96 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.14, ease: "power3.out", stagger: 0.035 },
           at + 0.22
         );
       }

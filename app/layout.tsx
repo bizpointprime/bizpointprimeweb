@@ -74,8 +74,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorantGaramond.variable} ${plusJakartaSans.variable}`}>
+    <html
+      lang="en"
+      className={`${cormorantGaramond.variable} ${plusJakartaSans.variable}`}
+      suppressHydrationWarning
+    >
       <body>
+        {/* Marks JS as confirmed running, before the body below is parsed or
+            painted, so globals.css can pre-hide scroll-reveal content (hero
+            copy, .reveal, .faq-item) without a no-JS visitor ever losing it —
+            see the `html.js` rules in globals.css.
+            Deliberately a raw inline <script>, NOT next/script: a
+            `beforeInteractive` Script only emits a `__next_s` queue push whose
+            code runs once the framework bundle loads — long after first paint,
+            which defeats the entire purpose. A plain inline script executes
+            synchronously during HTML parsing, before anything below it
+            paints. */}
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
         <GoogleTagManagerNoscript />
         <script
           type="application/ld+json"
