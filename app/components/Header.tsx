@@ -28,6 +28,24 @@ export default function Header() {
     setOpen(false);
   }
 
+  // Whether the bar has scrolled far enough to switch to its solid brand
+  // styling. This has to live in React state rather than being toggled onto
+  // #nav imperatively from outside: the JSX below rewrites className on every
+  // render, so opening the menu wiped an externally-added `scrolled` class and
+  // dropped the bar back to its transparent treatment until the next scroll.
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const sync = () => setScrolled(window.scrollY > window.innerHeight * 0.55);
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    return () => {
+      window.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
+    };
+  }, []);
+
   useEffect(() => {
     if (!open) return;
 
@@ -39,20 +57,29 @@ export default function Header() {
       if (window.matchMedia("(min-width: 1024px)").matches) setOpen(false);
     }
 
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    // Deliberately no background-scroll lock here. The previous
+    // `document.body.style.overflow = "hidden"` did nothing useful and one
+    // very visible harm: the scrolling element on this page is <html>, not
+    // <body>, so it never actually blocked scrolling — but it did turn <body>
+    // into a scroll container, which breaks `position: sticky` on its
+    // children. Opening the menu part-way down a page therefore dropped this
+    // whole bar back to document top, i.e. off-screen, taking the close button
+    // with it. The panel is an inline dropdown under a sticky bar, not a
+    // full-screen overlay, so it stays put on its own and needs no lock.
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("resize", onResize);
 
     return () => {
-      document.body.style.overflow = prevOverflow;
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("resize", onResize);
     };
   }, [open]);
 
   return (
-    <header className={`nav${open ? " menu-open" : ""}`} id="nav">
+    <header
+      className={`nav${scrolled ? " scrolled" : ""}${open ? " menu-open" : ""}`}
+      id="nav"
+    >
       <div className="wrap nav-inner">
         <Link href="/" className="brand">
           <Image className="logo" src="/assets/logo-nav.png" alt="Bizpoint Prime" width={1193} height={650} priority />

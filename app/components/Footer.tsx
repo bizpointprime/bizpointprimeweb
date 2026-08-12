@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
 
         <div className="foot-links">
-          <div className="foot-col">
+          <div className="foot-col foot-col-quick">
             <p className="foot-h">Quick Links</p>
             <nav className="foot-nav">
               <Link href="/">Home</Link>

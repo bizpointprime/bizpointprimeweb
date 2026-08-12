@@ -18,21 +18,17 @@ import { isSoftNavAnchor, onPrepareClientNav, prepareClientNav } from "../lib/pr
 export default function SiteAnimations() {
   const pathname = usePathname();
 
-  // Header is rendered per-page, so soft nav remounts `#nav`. Always resolve
-  // it fresh — a captured node from the previous route is detached and useless.
-  function syncNavScrolled() {
-    const nav = document.getElementById("nav");
-    nav?.classList.toggle("scrolled", window.scrollY > window.innerHeight * 0.55);
-  }
+  // The nav's scrolled state is owned by <Header> itself, in React state.
+  // It used to be toggled onto #nav from here with classList, which fought
+  // Header's own rendering: that component rewrites className wholesale on
+  // every render, so any render triggered while scrolled (opening the mobile
+  // menu, most visibly) stripped the class straight back off.
 
-  // ---- Lifetime listeners: nav fill, analytics, soft-nav prep ----
+  // ---- Lifetime listeners: analytics, soft-nav prep ----
   useEffect(() => {
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
-
-    window.addEventListener("scroll", syncNavScrolled, { passive: true });
-    syncNavScrolled();
 
     function onContactLinkClick(e: MouseEvent) {
       const link = (e.target as HTMLElement)?.closest("a[href]") as HTMLAnchorElement | null;
@@ -55,19 +51,17 @@ export default function SiteAnimations() {
     document.addEventListener("click", onSoftNavClick, true);
 
     return () => {
-      window.removeEventListener("scroll", syncNavScrolled);
       document.removeEventListener("click", onContactLinkClick);
       document.removeEventListener("click", onSoftNavClick, true);
     };
   }, []);
 
-  // Reset scroll + nav fill after route change (Lenis/pins can leave scroll mid-page).
+  // Reset scroll after route change (Lenis/pins can leave scroll mid-page).
+  // Header re-syncs its own scrolled state off the scroll events these fire.
   useEffect(() => {
     window.scrollTo(0, 0);
-    syncNavScrolled();
     const id = requestAnimationFrame(() => {
       window.scrollTo(0, 0);
-      syncNavScrolled();
     });
     return () => cancelAnimationFrame(id);
   }, [pathname]);

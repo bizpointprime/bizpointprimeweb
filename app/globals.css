@@ -589,6 +589,16 @@ footer{border-top:1px solid var(--border);}
 .foot-nav a:hover{color:var(--fg);}
 .foot-nav-cols{display:block; column-count:2; column-gap:20px;}
 .foot-nav-cols a{display:block; margin-bottom:10px; break-inside:avoid;}
+/* Below 560px every footer column goes full-width, which left Quick Links as
+   one tall six-item stack while the far longer Services list directly beneath
+   it was already flowing into two columns — lopsided, and a lot of dead
+   vertical space for six short links. Give it the same two-column treatment
+   at that width only; from 560px up the grid itself splits the columns and
+   the plain stack reads correctly again. */
+@media(max-width:559px){
+  .foot-col-quick .foot-nav{display:block; column-count:2; column-gap:20px;}
+  .foot-col-quick .foot-nav a{display:block; margin-bottom:10px; break-inside:avoid;}
+}
 .foot-contact{display:flex; flex-direction:column; gap:10px;}
 .foot-contact a,.foot-contact div{display:flex; gap:10px; font-size:13.5px; color:var(--fg-muted); transition:color .2s;}
 .foot-contact a:hover{color:var(--fg);}

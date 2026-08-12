@@ -47,11 +47,15 @@ export function prepareClientNav(): void {
     }
   });
 
-  // Unpinning collapses pin-spacers while window.scrollY stays large, so the
-  // next route would mount mid-page. Reset before Next.js commits navigation.
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
+  // Deliberately NO scroll reset here. This runs synchronously on the click,
+  // while the page being navigated away from is still the one on screen — so
+  // resetting scroll now snapped that outgoing page back to its own top and
+  // parked it there for the entire route transition (~900ms measured on a
+  // cold route), which read as "the hero of the page I'm leaving flashes up
+  // before the new page arrives".
+  // The incoming route resets its own scroll when it mounts (SiteAnimations'
+  // pathname effect, plus the App Router's own scroll-to-top), which achieves
+  // the same thing at the only moment it isn't visible to the user.
 }
 
 /** True when this anchor will trigger a same-origin App Router soft navigation. */
