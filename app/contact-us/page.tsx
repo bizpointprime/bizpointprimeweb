@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { BUSINESS, SITE_URL } from "../lib/site";
+import Link from "next/link";
 
 const TITLE = "Contact Us | Bizpoint Prime Business Solutions LLC";
 const DESCRIPTION =
@@ -75,18 +76,18 @@ export default function ContactUsPage() {
                   <span className="dot"></span>Office No: A1-3, inside Unique Business World, Metha
                   Plaza Building, Block A, Oud Metha, Dubai, UAE
                 </div>
-                <a href="tel:+971543084251">
+                <Link href="tel:+971543084251">
                   <span className="dot"></span>+971 54 308 4251
-                </a>
-                <a href="tel:+971509207769">
+                </Link>
+                <Link href="tel:+971509207769">
                   <span className="dot"></span>+971 50 920 7769
-                </a>
-                <a href="tel:+97142522092">
+                </Link>
+                <Link href="tel:+97142522092">
                   <span className="dot"></span>+971 4 252 2092 (Landline)
-                </a>
-                <a href="mailto:bizpointprime@gmail.com">
+                </Link>
+                <Link href="mailto:bizpointprime@gmail.com">
                   <span className="dot"></span>bizpointprime@gmail.com
-                </a>
+                </Link>
               </div>
             </div>
             <div className="reveal">

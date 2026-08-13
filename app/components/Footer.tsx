@@ -20,7 +20,7 @@ export default function Footer() {
             the UAE, supporting individuals, entrepreneurs, and companies under one roof.
           </p>
           <div className="foot-social">
-            <a
+            <Link
               href="https://www.instagram.com/bizpointprime.ae/"
               target="_blank"
               rel="noopener"
@@ -31,7 +31,7 @@ export default function Footer() {
                 <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="1.6" />
                 <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -69,10 +69,10 @@ export default function Footer() {
                 <span className="dot"></span>Office No: A1-3, inside Unique Business World, Metha
                 Plaza Building, Block A, Oud Metha, Dubai, UAE
               </div>
-              <a href="tel:+971543084251">+971 54 308 4251</a>
-              <a href="tel:+971509207769">+971 50 920 7769</a>
-              <a href="tel:+97142522092">+971 4 252 2092 (Landline)</a>
-              <a href="mailto:bizpointprime@gmail.com">bizpointprime@gmail.com</a>
+              <Link href="tel:+971543084251">+971 54 308 4251</Link>
+              <Link href="tel:+971509207769">+971 50 920 7769</Link>
+              <Link href="tel:+97142522092">+971 4 252 2092 (Landline)</Link>
+              <Link href="mailto:bizpointprime@gmail.com">bizpointprime@gmail.com</Link>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { BUSINESS, SITE_URL } from "../lib/site";
+import Link from "next/link";
 
 const TITLE = "VAT Registration in Dubai | Bizpoint Prime Business Solutions LLC";
 const DESCRIPTION =
@@ -110,12 +111,12 @@ export default function VatRegistrationPage() {
             </div>
           </div>
           <div className="reveal" style={{ marginTop: 32, display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href="/contact-us" className="btn">
+            <Link href="/contact-us" className="btn">
               <span>Check Your VAT Status</span>
-            </a>
-            <a href="/services" className="btn outline">
+            </Link>
+            <Link href="/services" className="btn outline">
               <span>Explore All Services</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -219,9 +220,9 @@ export default function VatRegistrationPage() {
           <p className="kicker reveal">Explore other services</p>
           <div className="svc-index reveal">
             {otherServices.map((s) => (
-              <a key={s.slug} href={`/${s.slug}`}>
+              <Link key={s.slug} href={`/${s.slug}`}>
                 {s.title}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -264,17 +265,17 @@ export default function VatRegistrationPage() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="/contact-us" className="btn on-brand">
+            <Link href="/contact-us" className="btn on-brand">
               <span>Request a Free Consultation</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://wa.me/971543084251?text=Hi%20Bizpoint%20Prime%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
               className="btn outline-light"
               target="_blank"
               rel="noopener noreferrer"
             >
               <span>WhatsApp Us</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

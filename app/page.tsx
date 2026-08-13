@@ -46,26 +46,26 @@ export default async function Home() {
             more.
           </p>
           <div className="hero-cta" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href="/services" className="btn">
+            <Link href="/services" className="btn">
               <span>Get Started</span>
-            </a>
-            <a href="/contact-us" className="btn outline-light">
+            </Link>
+            <Link href="/contact-us" className="btn outline-light">
               <span>Contact Us</span>
-            </a>
+            </Link>
           </div>
           <div className="hero-chips">
-            <a href="/business-setup-dubai" className="hero-chip">
+            <Link href="/business-setup-dubai" className="hero-chip">
               Business Setup
-            </a>
-            <a href="/legal-translation-dubai" className="hero-chip">
+            </Link>
+            <Link href="/legal-translation-dubai" className="hero-chip">
               Legal Translation
-            </a>
-            <a href="/family-visa-services" className="hero-chip">
+            </Link>
+            <Link href="/family-visa-services" className="hero-chip">
               Family Visa Services
-            </a>
-            <a href="/vat-registration" className="hero-chip">
+            </Link>
+            <Link href="/vat-registration" className="hero-chip">
               VAT Registration
-            </a>
+            </Link>
           </div>
         </div>
         <div className="hero-trust-row hero-trust-corner">
@@ -125,9 +125,9 @@ export default async function Home() {
             Prime. Made. Easy. <em>Together, we make it happen.</em>
           </p>
           <div className="reveal" style={{ marginTop: 40 }}>
-            <a href="/about" className="btn">
+            <Link href="/about" className="btn">
               <span>About Us</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -164,7 +164,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="svc-cards">
-            <a href="/business-setup-dubai" id="formation" className="card reveal">
+            <Link href="/business-setup-dubai" id="formation" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1574188231145-5f204395d7d5?w=1200&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Business Setup"
@@ -179,8 +179,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/legal-translation-dubai" id="translation" className="card reveal">
+            </Link>
+            <Link href="/legal-translation-dubai" id="translation" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1695238668015-7bc526956af7?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Legal Translation"
@@ -195,8 +195,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/notary-services" id="notary" className="card reveal">
+            </Link>
+            <Link href="/notary-services" id="notary" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Notary Services"
@@ -211,8 +211,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/vat-registration" id="vat" className="card reveal">
+            </Link>
+            <Link href="/vat-registration" id="vat" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="VAT Registration"
@@ -227,8 +227,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/family-visa-services" id="family-visa" className="card reveal">
+            </Link>
+            <Link href="/family-visa-services" id="family-visa" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Family Visa Services"
@@ -243,8 +243,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/document-attestation" id="attestation" className="card reveal">
+            </Link>
+            <Link href="/document-attestation" id="attestation" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Attestation Services"
@@ -259,8 +259,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/pro-services-dubai" id="pro-services" className="card reveal">
+            </Link>
+            <Link href="/pro-services-dubai" id="pro-services" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="PRO Services"
@@ -275,8 +275,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/golden-visa-services" id="golden-visa" className="card reveal">
+            </Link>
+            <Link href="/golden-visa-services" id="golden-visa" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Golden Visa Services"
@@ -291,8 +291,8 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
-            <a href="/branding-marketing" id="branding" className="card reveal">
+            </Link>
+            <Link href="/branding-marketing" id="branding" className="card reveal">
               <Image
                 src="https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=900&q=80&fm=jpg&fit=crop&auto=format"
                 alt="Branding & Marketing"
@@ -307,7 +307,7 @@ export default async function Home() {
                   <span className="ul">View details</span> ↗
                 </span>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -344,12 +344,12 @@ export default async function Home() {
                 className="reveal"
                 style={{ marginTop: 32, display: "flex", gap: 16, flexWrap: "wrap" }}
               >
-                <a href="/contact-us" className="btn">
+                <Link href="/contact-us" className="btn">
                   <span>Get Started</span>
-                </a>
-                <a href="#legal" className="btn outline">
+                </Link>
+                <Link href="#legal" className="btn outline">
                   <span>See our services</span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="about-mosaic reveal">
@@ -430,27 +430,27 @@ export default async function Home() {
             Licensed to set up your business across Dubai&rsquo;s jurisdictions.
           </h2>
           <div className="jur-list">
-            <a href="/contact-us" className="reveal">
+            <Link href="/contact-us" className="reveal">
               Dubai Mainland (DED)<span className="comma">,</span>
-            </a>
-            <a href="/contact-us" className="reveal">
+            </Link>
+            <Link href="/contact-us" className="reveal">
               DIFC<span className="comma">,</span>
-            </a>
-            <a href="/contact-us" className="reveal">
+            </Link>
+            <Link href="/contact-us" className="reveal">
               DMCC<span className="comma">,</span>
-            </a>
-            <a href="/contact-us" className="reveal">
+            </Link>
+            <Link href="/contact-us" className="reveal">
               JAFZA<span className="comma">,</span>
-            </a>
-            <a href="/contact-us" className="reveal">
+            </Link>
+            <Link href="/contact-us" className="reveal">
               Dubai South<span className="comma">,</span>
-            </a>
-            <a href="/contact-us" className="reveal">
+            </Link>
+            <Link href="/contact-us" className="reveal">
               Abu Dhabi<span className="comma">,</span>
-            </a>
-            <a href="/contact-us" className="reveal">
+            </Link>
+            <Link href="/contact-us" className="reveal">
               Sharjah<span className="comma">,</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -685,17 +685,17 @@ export default async function Home() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="/contact-us" className="btn on-brand">
+            <Link href="/contact-us" className="btn on-brand">
               <span>Request a Free Consultation</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://wa.me/971543084251?text=Hi%20Bizpoint%20Prime%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
               className="btn outline-light"
               target="_blank"
               rel="noopener noreferrer"
             >
               <span>WhatsApp Us</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -715,18 +715,18 @@ export default async function Home() {
                   <span className="dot"></span>Office No: A1-3, inside Unique Business World, Metha
                   Plaza Building, Block A, Oud Metha, Dubai, UAE
                 </div>
-                <a href="tel:+971543084251">
+                <Link href="tel:+971543084251">
                   <span className="dot"></span>+971 54 308 4251
-                </a>
-                <a href="tel:+971509207769">
+                </Link>
+                <Link href="tel:+971509207769">
                   <span className="dot"></span>+971 50 920 7769
-                </a>
-                <a href="tel:+97142522092">
+                </Link>
+                <Link href="tel:+97142522092">
                   <span className="dot"></span>+971 4 252 2092 (Landline)
-                </a>
-                <a href="mailto:bizpointprime@gmail.com">
+                </Link>
+                <Link href="mailto:bizpointprime@gmail.com">
                   <span className="dot"></span>bizpointprime@gmail.com
-                </a>
+                </Link>
               </div>
             </div>
             <div className="reveal">

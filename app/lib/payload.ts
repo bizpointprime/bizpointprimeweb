@@ -144,6 +144,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     );
     return data.docs;
   } catch (err) {
+    console.log("err", err);
     console.error("Failed to fetch blog posts from Payload", err);
     return [];
   }

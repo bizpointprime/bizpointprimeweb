@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { BUSINESS, SITE_URL } from "../lib/site";
+import Link from "next/link";
 
 const TITLE = "Privacy Policy | Bizpoint Prime Business Solutions LLC";
 const DESCRIPTION =
@@ -160,7 +161,7 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p>
               To exercise these rights, please contact us at{" "}
-              <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>.
+              <Link href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</Link>.
             </p>
 
             <h2>8. Changes to This Privacy Policy</h2>
@@ -180,9 +181,9 @@ export default function PrivacyPolicyPage() {
               <br />
               {BUSINESS.streetAddress}, {BUSINESS.addressLocality}, United Arab Emirates
               <br />
-              Email: <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+              Email: <Link href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</Link>
               <br />
-              Phone: <a href={`tel:${BUSINESS.telephone}`}>{BUSINESS.telephone}</a>
+              Phone: <Link href={`tel:${BUSINESS.telephone}`}>{BUSINESS.telephone}</Link>
             </p>
           </div>
         </div>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { BUSINESS, SITE_URL } from "../lib/site";
+import Link from "next/link";
 
 const TITLE = "Services | Bizpoint Prime Business Solutions LLC";
 const DESCRIPTION =
@@ -176,9 +177,9 @@ export default function ServicesPage() {
           <p className="kicker reveal">Jump to a service</p>
           <div className="svc-index reveal">
             {categories.flatMap((cat) => cat.ids).map((id) => (
-              <a key={id} href={`#${id}`}>
+              <Link key={id} href={`#${id}`}>
                 {byId[id].title}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -213,9 +214,9 @@ export default function ServicesPage() {
                       ))}
                     </div>
                     <div className="reveal" style={{ marginTop: 24 }}>
-                      <a href={`/${svc.slug}`} className="btn outline sm">
+                      <Link href={`/${svc.slug}`} className="btn outline sm">
                         <span>Learn More</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -262,17 +263,17 @@ export default function ServicesPage() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="/contact-us" className="btn on-brand">
+            <Link href="/contact-us" className="btn on-brand">
               <span>Request a Free Consultation</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://wa.me/971543084251?text=Hi%20Bizpoint%20Prime%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
               className="btn outline-light"
               target="_blank"
               rel="noopener noreferrer"
             >
               <span>WhatsApp Us</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

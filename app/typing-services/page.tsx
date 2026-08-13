@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { BUSINESS, SITE_URL } from "../lib/site";
+import Link from "next/link";
 
 const TITLE = "Typing Services in Dubai | Bizpoint Prime Business Solutions LLC";
 const DESCRIPTION =
@@ -105,12 +106,12 @@ export default function TypingServicesPage() {
             </div>
           </div>
           <div className="reveal" style={{ marginTop: 32, display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href="/contact-us" className="btn">
+            <Link href="/contact-us" className="btn">
               <span>Get Help With Your Forms</span>
-            </a>
-            <a href="/services" className="btn outline">
+            </Link>
+            <Link href="/services" className="btn outline">
               <span>Explore All Services</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -201,9 +202,9 @@ export default function TypingServicesPage() {
               </summary>
               <p>
                 For many forms, yes. Where in-person submission is required, our{" "}
-                <a href="/pro-services-dubai" style={{ textDecoration: "underline" }}>
+                <Link href="/pro-services-dubai" style={{ textDecoration: "underline" }}>
                   PRO team
-                </a>{" "}
+                </Link>{" "}
                 can take it from typing through to filing.
               </p>
             </details>
@@ -217,9 +218,9 @@ export default function TypingServicesPage() {
           <p className="kicker reveal">Explore other services</p>
           <div className="svc-index reveal">
             {otherServices.map((s) => (
-              <a key={s.slug} href={`/${s.slug}`}>
+              <Link key={s.slug} href={`/${s.slug}`}>
                 {s.title}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -262,12 +263,12 @@ export default function TypingServicesPage() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="/contact-us" className="btn on-brand">
+            <Link href="/contact-us" className="btn on-brand">
               <span>Contact Us</span>
-            </a>
-            <a href="/contact-us" className="btn outline-light">
+            </Link>
+            <Link href="/contact-us" className="btn outline-light">
               <span>Request a Free Consultation</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

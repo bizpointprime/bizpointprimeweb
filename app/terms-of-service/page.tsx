@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { BUSINESS, SITE_URL } from "../lib/site";
+import Link from "next/link";
 
 const TITLE = "Terms of Service | Bizpoint Prime Business Solutions LLC";
 const DESCRIPTION =
@@ -148,9 +149,9 @@ export default function TermsOfServicePage() {
               <br />
               {BUSINESS.streetAddress}, {BUSINESS.addressLocality}, United Arab Emirates
               <br />
-              Email: <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+              Email: <Link href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</Link>
               <br />
-              Phone: <a href={`tel:${BUSINESS.telephone}`}>{BUSINESS.telephone}</a>
+              Phone: <Link href={`tel:${BUSINESS.telephone}`}>{BUSINESS.telephone}</Link>
             </p>
           </div>
         </div>

@@ -178,17 +178,17 @@ export default async function BlogsPage() {
             className="reveal"
             style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a href="/contact-us" className="btn on-brand">
+            <Link href="/contact-us" className="btn on-brand">
               <span>Request a Free Consultation</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://wa.me/971543084251?text=Hi%20Bizpoint%20Prime%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
               className="btn outline-light"
               target="_blank"
               rel="noopener noreferrer"
             >
               <span>WhatsApp Us</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

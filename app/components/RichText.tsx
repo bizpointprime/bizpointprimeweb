@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { LexicalContent, LexicalNode } from "../lib/payload";
+import Link from "next/link";
 
 type Props = {
   content: LexicalContent;
@@ -49,14 +50,14 @@ function renderNodes(nodes: LexicalNode[] | undefined): ReactNode[] {
       case "link":
       case "autolink":
         return (
-          <a
+          <Link
             key={i}
             href={linkHref(node)}
             target={node.fields?.newTab ? "_blank" : undefined}
             rel={node.fields?.newTab ? "noopener noreferrer" : undefined}
           >
             {renderNodes(node.children)}
-          </a>
+          </Link>
         );
       default:
         if (node.children?.length) {
