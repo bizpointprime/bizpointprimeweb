@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 type ContactPayload = {
   name?: string;
@@ -47,26 +47,20 @@ async function sendEmail(fields: {
   service: string;
   message: string;
 }): Promise<boolean> {
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.CONTACT_FROM_EMAIL || "Bizpoint Prime Website <onboarding@resend.dev>";
   const to = process.env.CONTACT_TO_EMAIL;
 
-  if (!gmailUser || !gmailAppPassword || !to) {
-    console.warn("Contact email skipped — GMAIL_USER, GMAIL_APP_PASSWORD, or CONTACT_TO_EMAIL not set");
+  if (!apiKey || !to) {
+    console.warn("Contact email skipped — RESEND_API_KEY or CONTACT_TO_EMAIL not set");
     return false;
   }
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: gmailUser,
-      pass: gmailAppPassword,
-    },
-  });
+  const resend = new Resend(apiKey);
 
   try {
-    await transporter.sendMail({
-      from: `Bizpoint Prime Website <${gmailUser}>`,
+    const { error } = await resend.emails.send({
+      from,
       to,
       replyTo: fields.email,
       subject: `New consultation request from ${fields.name}`,
@@ -78,9 +72,14 @@ async function sendEmail(fields: {
         <p>${escapeHtml(fields.message).replace(/\n/g, "<br />") || "—"}</p>
       `,
     });
+
+    if (error) {
+      console.error("Failed to send contact email via Resend", error);
+      return false;
+    }
     return true;
   } catch (error) {
-    console.error("Failed to send contact email via Gmail SMTP", error);
+    console.error("Failed to send contact email via Resend", error);
     return false;
   }
 }
@@ -109,7 +108,7 @@ export async function POST(request: Request) {
 
   const fields = { name, email, service, message };
 
-  // CMS is the source of truth for leads; Gmail is best-effort notification.
+  // CMS is the source of truth for leads; email is best-effort notification.
   const [savedToCms, emailed] = await Promise.all([saveToCms(fields), sendEmail(fields)]);
 
   if (!savedToCms && !emailed) {

@@ -12,6 +12,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "-p", "3001"],
       "port": 3001
+    },
+    {
+      "name": "bizpoint-cms",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/dheerajt/Downloads/bizpoint-cms && PORT=3055 npm run dev"],
+      "port": 3055
     }
   ]
 }
